@@ -49,7 +49,7 @@ The 7 steps are:
 4. **Review** — Critically examine your own code. Check for bugs, edge cases, inconsistencies, and regressions. Verify against requirements.
 5. **Test** — Run relevant tests. Fix failures. Add tests for new behavior. Confirm no regressions.
 6. **Ship** — Summarize changes. Confirm the solution works. Update docs if needed. Leave the codebase clean.
-7. **Reflect** — Assess the outcome. Identify mistakes and improvements. Update mental models for future tasks.
+7. **Reflect** — Assess the outcome. Identify mistakes and improvements. Update mental models for future tasks. Auto-update `.claude/` docs so the system stays accurate without waiting for user instruction.
 
 This workflow is NOT optional. It must be embedded into:
 - Root `CLAUDE.md` (loaded every session)
