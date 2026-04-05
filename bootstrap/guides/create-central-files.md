@@ -2,26 +2,40 @@
 
 ## 1) `CLAUDE.md` — the only auto-loaded file
 
-**CRITICAL: Must be under 200 lines.** Longer files reduce instruction adherence.
+**CRITICAL: Must be under 200 lines.** Re-injected as system-reminder every turn.
 
-**Required structure (in this order):**
-1. **8-step workflow block (INLINE, at top)** — Use the template from `contracts/core-contracts.md`. Do NOT replace with a file reference.
-2. **Project Rules** — Universal rules discovered from repo evidence. One line per rule. Concern-specific rules go in skill files, not here.
-3. **Project Context pointer** — Reference to `context.md`.
+**Required structure:**
+1. **8-step workflow block (INLINE, at top)** — Use the template from `contracts/core-contracts.md`.
+2. **Project Rules** — Universal rules. One line per rule. Scoped rules go in `rules/`.
+3. **`@.claude/context.md`** — imports context directly (native @import, not an instruction to read it).
 4. **Commands** — List available commands.
 
-Write as direct instructions (imperative sentences). No documentation, no explanations.
+Write as direct instructions. No documentation, no explanations.
 
-**Change impact:** When the repo changes, update CLAUDE.md (rules), context.md (knowledge), or relevant skills (concern-specific guidance). If skills are created/renamed/retired, no dispatch table to update — skills auto-trigger by their description.
+## 2) `settings.json` — hooks and permissions
 
-## 2) `context.md` — the project knowledge base
+**MUST generate this file.** Use the template from `contracts/core-contracts.md` section 2.
 
-Referenced from CLAUDE.md. Must include (all backed by evidence):
+Three hooks are required:
+- `SessionStart` — workflow reminder at session start
+- `Stop` — checks for ## Reflect after every response
+- `PostCompact` — re-injects workflow after context compaction
+
+Add project-specific permissions if justified (e.g., deny destructive commands).
+
+## 3) `context.md` — project knowledge base
+
+Imported by CLAUDE.md via `@.claude/context.md`. Must include (all backed by evidence):
 - Project overview, repo state, detected stack
 - Architecture summary, important directories
 - Development/testing/deployment workflows
 - Working conventions, current feature status
 
-## 3) `settings.json`
+## Change impact
 
-Create only if useful. Keep minimal and safe.
+When the repo changes:
+- Universal rules changed → update CLAUDE.md
+- Scoped constraints changed → update `rules/`
+- Concern knowledge changed → update relevant skill
+- Project overview changed → update `context.md`
+- Skills/rules created or retired → no dispatch table (auto-triggered by paths/description)

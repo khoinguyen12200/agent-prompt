@@ -2,7 +2,7 @@
 
 > One prompt to give Claude Code a brain for your repo.
 
-Paste two lines into **Claude Code** and it builds a complete `.claude/` system — skills, commands, and a smart dispatcher — tailored to your codebase. Then it maintains itself.
+Paste two lines into **Claude Code** and it builds a complete `.claude/` system — rules, skills, agents, hooks, and commands — tailored to your codebase. Then it maintains itself.
 
 Enforces an **8-step workflow** on every task: **Think → Load → Plan → Build → Review → Test → Ship → Reflect**
 
@@ -19,12 +19,7 @@ Enforces an **8-step workflow** on every task: **Think → Load → Plan → Bui
    ```
    Read /tmp/agent-prompt-install/install.md and follow its instructions to bootstrap .claude/ in this project.
    ```
-4. Done.
-
-Claude will:
-- Clone the bootstrap + community skill repos
-- Inspect your codebase
-- Generate `.claude/` with workflow, skills, and relevant community skills
+4. **Restart Claude Code** after it finishes.
 
 ---
 
@@ -32,29 +27,29 @@ Claude will:
 
 ```
 .claude/
-  CLAUDE.md              # Auto-loaded every session — workflow + project rules (under 200 lines)
-  context.md             # Project overview, stack, architecture, conventions
-  skills/                # Auto-triggered skill directories (NATIVE)
-    [concern-a]/         # Concern-specific guidance (auto-triggers on matching tasks)
-    [concern-b]/         # ...
-  commands/              # User-invoked via /command-name (NATIVE)
-  settings.json          # Permissions and hooks
+  CLAUDE.md              # Auto-loaded every turn — workflow + universal rules (under 200 lines)
+  settings.json          # Hooks: SessionStart, Stop, PostCompact
+  rules/                 # Scoped constraints with paths: (native, auto-load on file access)
+  skills/                # Concern knowledge with paths: (native, auto-triggered)
+  agents/                # Subagents for isolated specialized tasks (native)
+  commands/              # User-invoked via /command-name (native)
+  context.md             # Project knowledge (@imported by CLAUDE.md)
 ```
 
-### Native vs Convention
+### Enforcement Stack
 
-| Feature | Native? | How it works |
-|---------|---------|---|
-| `CLAUDE.md` | **Yes** — auto-loaded | Read every session, guaranteed |
-| `commands/` | **Yes** — `/name` | User types slash command |
-| `skills/` | **Yes** — auto-triggered | Claude activates based on SKILL.md description matching the task |
-| `context.md` | No — convention | Works because CLAUDE.md tells Claude to read it |
-
-> The old `agents/` and `rules/` directories have been replaced. Agents are now skills (native auto-triggering). Universal rules go in CLAUDE.md directly. Concern-specific rules go inside the relevant skill's SKILL.md.
+| Layer | Mechanism | Reliability |
+|---|---|---|
+| CLAUDE.md | Re-injected every turn | High |
+| `Stop` hook | Checks for ## Reflect after every response | Guaranteed |
+| `PostCompact` hook | Re-injects workflow after context compaction | Guaranteed |
+| `rules/` with `paths:` | Auto-loads when matching files accessed | High (native) |
+| `skills/` with `paths:` | Auto-triggered on file/description match | Medium (~44%) |
+| `agents/` | Isolated context, tool-restricted | High |
 
 ---
 
-## The 7-Step Workflow
+## The 8-Step Workflow
 
 | Step | What Claude Does |
 |------|------------------|
@@ -67,17 +62,17 @@ Claude will:
 | **Ship** | Summarize changes. **STOP — proceed to Reflect.** |
 | **Reflect** | Update `.claude/` docs. State what changed or why not. |
 
-A response is **INCOMPLETE** until `## Reflect` is shown.
+Response is **INCOMPLETE** until `## Reflect` is shown. `Stop` hook enforces this.
 
 ---
 
 ## Key Features
 
-- **Native-first architecture** — uses only Claude Code's native features (CLAUDE.md, skills/, commands/)
-- **Concern-specific skills** — auto-triggered, not "frontend skill" but granular per responsibility area
-- **Rule learning** — user preferences are persisted into CLAUDE.md or skills automatically
-- **Community skills** — installs relevant skills from [anthropics/skills](https://github.com/anthropics/skills) and [awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills)
-- **Post-install activation** — after bootstrapping, the agent reads its own CLAUDE.md to start following it immediately
+- **Native-first** — uses CLAUDE.md, hooks, rules/, skills/, agents/, commands/ (all native)
+- **Three enforcement layers** — CLAUDE.md (every turn) + hooks (guaranteed) + rules (per-file)
+- **Long-conversation fix** — `PostCompact` hook re-injects workflow after context compaction
+- **Concern-specific** — skills/rules decomposed per responsibility area, not generic domains
+- **Community skills** — installs from [anthropics/skills](https://github.com/anthropics/skills) and [awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills)
 - **Self-maintaining** — `.claude/` updates itself after every task
 
 ---
@@ -97,17 +92,19 @@ A response is **INCOMPLETE** until `## Reflect` is shown.
 agent-prompt/
   install.md                    # Installer — the entry point
   bootstrap/
-    overview.md                 # Role, workflow, structure, native vs convention
+    overview.md                 # Role, native features, workflow, structure
     contracts/
-      core-contracts.md         # All behavioral contracts
+      core-contracts.md         # CLAUDE.md template, settings.json template, behavior contracts
     commands/
       update-claude-docs.md
       fpt.md
     guides/
       decision-making.md
       inspect-repo.md
-      create-central-files.md   # CLAUDE.md + context.md
-      create-skills.md          # Concern skills + workflow skills
+      create-central-files.md   # CLAUDE.md + settings.json + context.md
+      create-rules.md           # Scoped rules with paths:
+      create-skills.md          # Concern skills with paths:
+      create-agents.md          # Subagents
       create-commands.md
       install-community-skills.md
       secrets.md

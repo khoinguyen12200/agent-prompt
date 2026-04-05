@@ -21,7 +21,9 @@ Read these files from the clone in order:
 - `/tmp/agent-prompt-install/bootstrap/guides/decision-making.md`
 - `/tmp/agent-prompt-install/bootstrap/guides/inspect-repo.md`
 - `/tmp/agent-prompt-install/bootstrap/guides/create-central-files.md`
+- `/tmp/agent-prompt-install/bootstrap/guides/create-rules.md`
 - `/tmp/agent-prompt-install/bootstrap/guides/create-skills.md`
+- `/tmp/agent-prompt-install/bootstrap/guides/create-agents.md`
 - `/tmp/agent-prompt-install/bootstrap/guides/create-commands.md`
 - `/tmp/agent-prompt-install/bootstrap/guides/install-community-skills.md`
 - `/tmp/agent-prompt-install/bootstrap/guides/secrets.md`
@@ -29,21 +31,28 @@ Read these files from the clone in order:
 
 ## Step 3: Install
 
-1. **Bootstrap `.claude/`** — Inspect the target repo. Create `CLAUDE.md` (with 8-step workflow inline from `contracts/core-contracts.md` template), `context.md`, concern skills, and commands as justified by evidence.
+1. **Bootstrap `.claude/`** — Inspect the target repo. Create:
+   - `CLAUDE.md` (8-step workflow inline from template + universal rules + @import context)
+   - `settings.json` (hooks: SessionStart, Stop, PostCompact)
+   - `context.md` (project knowledge)
+   - Scoped rules in `rules/` (all with `paths:`)
+   - Concern skills in `skills/` (all with `paths:`)
+   - Subagents in `agents/` (only if justified)
+   - Commands in `commands/`
 
-3. **Install community skills** — Browse `/tmp/community-skills/` and `/tmp/awesome-skills/`. Copy relevant skills to `.claude/skills/` based on what the target repo actually contains.
+2. **Install community skills** — Browse `/tmp/community-skills/` and `/tmp/awesome-skills/`. Copy relevant skills to `.claude/skills/`.
 
-4. **CRITICAL: Embed the 8-step workflow inline at the top of `.claude/CLAUDE.md`.** Use the template from `contracts/core-contracts.md`. Universal rules go in CLAUDE.md. Concern-specific rules go in skill files. CLAUDE.md must stay under 200 lines.
+3. **CLAUDE.md must stay under 200 lines.** Universal rules in CLAUDE.md. Scoped constraints in `rules/`. Detailed knowledge in `skills/`.
 
-5. **Clean up** — Remove `/tmp/agent-prompt-install`, `/tmp/community-skills`, `/tmp/awesome-skills`.
+4. **Clean up** — Remove `/tmp/agent-prompt-install`, `/tmp/community-skills`, `/tmp/awesome-skills`.
 
-6. **Tell the user to restart Claude Code.** CLAUDE.md is auto-loaded at session start — it will NOT take effect in the current session. The user must start a new session for the `.claude/` system to activate.
+5. **Tell the user to restart Claude Code.** The system activates on next session start.
 
 ## Output
 
 Provide:
 - The final `.claude/` tree
-- Which skills were created and the evidence for each
+- Which rules/skills/agents were created and the evidence for each
 - Which community skills were installed and why
 - Anything you could not verify
 - **Remind the user: "Restart Claude Code to activate the `.claude/` system."**

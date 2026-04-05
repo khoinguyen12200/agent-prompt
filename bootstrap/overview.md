@@ -9,24 +9,28 @@ You must:
 2. Create only `.claude` files justified by the current repo state.
 3. If the repo is blank/minimal, create a minimal but extensible `.claude` foundation.
 4. On every future task, re-check and maintain `.claude/` as the project evolves.
-5. Learn from user instructions — extract preferences, conventions, constraints into CLAUDE.md or skill files.
+5. Learn from user instructions — extract preferences, conventions, constraints and persist them.
 
 ZERO ASSUMPTIONS — FIRST PRINCIPLES ONLY:
-See `contracts/core-contracts.md` for the full contract. In short: never assume, never guess. Every decision must be grounded in observable repo evidence or explicit user statements.
+See `contracts/core-contracts.md` for the full contract. Never assume, never guess. Every decision must be grounded in observable repo evidence or explicit user statements.
 
 ================================
-NATIVE vs CONVENTION — KNOW THE DIFFERENCE
+NATIVE FEATURES — USE THEM ALL
 ================================
 
-Claude Code natively supports ONLY these:
-- **`CLAUDE.md`** — auto-loaded every session. The ONLY guaranteed-read file.
-- **`commands/`** — user-invoked via `/command-name`.
-- **`skills/`** — auto-triggered via Skill tool based on SKILL.md description matching the task.
-- **`settings.json`** — permissions and hooks.
+Claude Code natively supports these. Use them in order of reliability:
 
-Everything else (agents/, rules/, context.md) is **convention** — it only works if the agent voluntarily reads it. The agent may ignore it.
+| Feature | Reliability | When it fires |
+|---|---|---|
+| `CLAUDE.md` | High — re-injected every turn | Every turn (system-reminder) |
+| `settings.json` hooks | Guaranteed — harness-executed | Per event (SessionStart, Stop, PostCompact) |
+| `rules/` with `paths:` | High — native | When matching files accessed |
+| `skills/` with `paths:` | Medium (~44% auto-trigger) | When description/paths match task |
+| `commands/` | High | When user types `/name` |
+| `agents/` (subagents) | High — isolated context | When Claude delegates |
+| `context.md` via `@import` | High | Imported into CLAUDE.md |
 
-**Architecture principle:** Put critical behaviors in native features. Use CLAUDE.md for universal rules and the 8-step workflow. Use skills/ for concern-specific guidance (replaces the old agents/ concept). Use commands/ for user-invoked workflows. Minimize reliance on convention-only files.
+**Architecture principle:** Critical behaviors go in CLAUDE.md + hooks (guaranteed). Scoped constraints go in `rules/` with `paths:` (native per-file). Detailed knowledge goes in `skills/` (auto-triggered). Specialized tasks go in `agents/` (isolated context).
 
 ================================
 UNIVERSAL TASK EXECUTION WORKFLOW
@@ -34,41 +38,36 @@ UNIVERSAL TASK EXECUTION WORKFLOW
 
 Every task follows: **Think → Load → Plan → Build → Review → Test → Ship → Reflect**
 
-CRITICAL: This workflow MUST be embedded **directly inline** at the top of `CLAUDE.md`. It is the ONLY guaranteed-read enforcement mechanism.
+This workflow MUST be embedded **directly inline** at the top of `CLAUDE.md`. Hooks in `settings.json` enforce it:
+- `SessionStart` — reminds at session start
+- `Stop` — checks for ## Reflect after every response
+- `PostCompact` — re-injects after context compaction
 
-You MUST create:
-1. **The workflow block directly in root `CLAUDE.md`** — full 8 steps inline, before anything else. This is the ONLY place the workflow lives. Do NOT create a separate task-execution skill — it duplicates CLAUDE.md and never gets invoked.
-
-**Visible step labels are mandatory.** A response is INCOMPLETE until ## Reflect is shown.
-
-**Trivial task exception:** Only trivial tasks (typos, simple renames, one-line answers) may abbreviate steps 5-8. Steps 1-4 (Think, Load, Plan, Build) are NEVER skippable.
+**Trivial task exception:** Steps 5-8 may abbreviate for trivial tasks. Steps 1-4 are NEVER skippable.
 
 ================================
 TARGET STRUCTURE
 ================================
 
 .claude/
-├── CLAUDE.md         # under 200 lines — auto-loaded, workflow + project rules + context pointer
-├── settings.json     # permissions, hooks
-├── commands/         # user-invoked via /command-name ← NATIVE
-├── skills/           # auto-triggered skill directories ← NATIVE
-│   ├── [concern-a]/
-│   │   └── SKILL.md  # replaces old "agents" — auto-triggers for matching tasks
-│   └── [concern-b]/
+├── CLAUDE.md         # under 200 lines — workflow + universal rules + @import context
+├── settings.json     # hooks (SessionStart, Stop, PostCompact) + permissions
+├── rules/            # scoped constraints, ALL with paths: frontmatter ← NATIVE
+├── skills/           # concern knowledge, ALL with paths: in frontmatter ← NATIVE
+│   └── [concern]/
 │       └── SKILL.md
-└── context.md        # project knowledge base (convention — referenced from CLAUDE.md)
+├── agents/           # subagents for specialized isolated tasks ← NATIVE
+├── commands/         # user-invoked via /command-name ← NATIVE
+└── context.md        # project knowledge — @imported by CLAUDE.md
 
-**What's native (enforced by Claude Code):**
-- `CLAUDE.md` — auto-loaded every session
-- `commands/*.md` — slash commands
-- `skills/*/SKILL.md` — auto-triggered by description matching
-
-**What's convention (works only if agent reads it):**
-- `context.md` — referenced from CLAUDE.md
-
-**What's been removed:**
-- `agents/` — replaced by skills/ (native auto-triggering is more reliable than dispatch-table convention)
-- `rules/` — universal rules go in CLAUDE.md directly; concern-specific rules go in the relevant skill's SKILL.md
+**What goes where:**
+- **CLAUDE.md** — 8-step workflow + universal rules (re-injected every turn)
+- **settings.json** — hooks for guaranteed enforcement
+- **rules/** — scoped constraints with `paths:` (auto-load on file access)
+- **skills/** — detailed concern knowledge with `paths:` (auto-triggered)
+- **agents/** — isolated specialists (code review, security audit, etc.)
+- **commands/** — user-invoked workflows
+- **context.md** — project overview (@imported, not convention-read)
 
 ================================
 READ THE REST OF THE BOOTSTRAP DOCS
@@ -76,20 +75,22 @@ READ THE REST OF THE BOOTSTRAP DOCS
 
 Before doing any work, read these files in order:
 
-1. `bootstrap/contracts/core-contracts.md` — core behavior and self-maintenance contracts
+1. `bootstrap/contracts/core-contracts.md` — templates, behavior, rules, hooks
 2. `bootstrap/commands/fpt.md` — first-principles thinking command
-4. `bootstrap/commands/update-claude-docs.md` — manual update command
-5. `bootstrap/guides/decision-making.md` — how to decide what to create
-6. `bootstrap/guides/inspect-repo.md` — phase 1: inspect the repository
-7. `bootstrap/guides/create-central-files.md` — phase 2: create CLAUDE.md and context.md
-8. `bootstrap/guides/create-skills.md` — phase 3: create skills (replaces old agents + skills)
-9. `bootstrap/guides/create-commands.md` — phase 4: create commands
-10. `bootstrap/guides/install-community-skills.md` — phase 5: install community skills
-11. `bootstrap/guides/secrets.md` — phase 6: gitignore and secrets
-12. `bootstrap/guides/output-requirements.md` — phase 7: output requirements
+3. `bootstrap/commands/update-claude-docs.md` — manual update command
+4. `bootstrap/guides/decision-making.md` — how to decide what to create
+5. `bootstrap/guides/inspect-repo.md` — phase 1: inspect the repository
+6. `bootstrap/guides/create-central-files.md` — phase 2: CLAUDE.md, settings.json, context.md
+7. `bootstrap/guides/create-rules.md` — phase 3: scoped rules
+8. `bootstrap/guides/create-skills.md` — phase 4: concern skills
+9. `bootstrap/guides/create-agents.md` — phase 5: subagents
+10. `bootstrap/guides/create-commands.md` — phase 6: commands
+11. `bootstrap/guides/install-community-skills.md` — phase 7: community skills
+12. `bootstrap/guides/secrets.md` — phase 8: gitignore and secrets
+13. `bootstrap/guides/output-requirements.md` — phase 9: output requirements
 
 ================================
 FINAL INSTRUCTION
 ================================
 
-Do the actual work now. Inspect the repository. Read files. Verify facts. Create a `.claude` system based on evidence. After installation is complete, **tell the user to restart Claude Code** — CLAUDE.md is auto-loaded at session start and does NOT activate mid-session.
+Do the actual work now. Inspect the repository. Read files. Verify facts. Create a `.claude` system based on evidence. After installation, **tell the user to restart Claude Code**.

@@ -1,89 +1,73 @@
-# Phase 3 — Create Skills
+# Phase 4 — Create Skills
 
-Skills are natively auto-triggered by Claude Code. When a task matches a skill's description or file paths, Claude activates it automatically. This is the primary mechanism for concern-specific guidance.
+Skills provide detailed concern-specific knowledge. They are natively auto-triggered by Claude Code based on description and `paths:` matching. Use skills for knowledge and patterns — use `rules/` for constraints.
 
 ## How auto-triggering works
 
-Claude reads ONLY the `name` and `description` from each SKILL.md frontmatter. If the user's request matches, Claude loads the full skill body. Two mechanisms control triggering:
+Two mechanisms control activation:
+1. **`description`** — Claude matches against the user's request (~44% reliable alone)
+2. **`paths`** — Glob patterns. Auto-activates when task touches matching files (more reliable)
 
-1. **`description`** — Claude matches this against the user's request. This is the #1 trigger.
-2. **`paths`** — Glob patterns. If the task touches files matching these patterns, the skill activates regardless of description matching.
+**Always set both.** Description for intent matching, `paths:` for file-based matching.
 
-**If triggering fails, the description is wrong.** Fix the description first.
+## Writing descriptions that trigger
 
-## Writing descriptions that actually trigger
+Under 250 characters. Be pushy and specific.
 
-The description is under 250 characters. It MUST be specific and pushy. Claude skips vague descriptions.
-
-**Bad descriptions (will NOT trigger):**
-- `"Handles frontend concerns"` — too vague
-- `"Use when working on the API"` — too passive
-- `"Database patterns and conventions"` — describes content, not trigger
-
-**Good descriptions (WILL trigger):**
-- `"MUST be used for any change to files in src/components/ or src/pages/. Covers React component patterns, Tailwind conventions, and accessibility rules for this project."`
-- `"MUST be used when creating, modifying, or debugging API endpoints in src/api/. Covers route structure, error handling, and response format rules."`
-- `"MUST be used for any database schema change, migration, or query in src/models/. Covers ORM patterns, naming conventions, and migration safety rules."`
+**Bad:** `"Handles frontend concerns"` — too vague, will be skipped
+**Good:** `"MUST be used for any change to files in src/components/. Covers React component patterns, Tailwind conventions, and accessibility rules."`
 
 **Pattern:** Start with `"MUST be used for/when [specific trigger]."` Then list what knowledge it provides.
 
-## Using `paths:` for reliable triggering
+## Skill directory format
 
-Always set `paths:` to the files/folders the skill owns. This ensures activation even if the description doesn't match:
+```
+skills/skill-name/
+├── SKILL.md          # required — YAML frontmatter + knowledge
+├── scripts/          # optional
+├── references/       # optional
+└── assets/           # optional
+```
+
+### SKILL.md frontmatter
 
 ```yaml
 ---
 name: api-design
-description: "MUST be used when creating or modifying API endpoints in src/api/. Covers route patterns, error handling, validation, and response format conventions."
+description: "MUST be used when creating or modifying API endpoints in src/api/. Covers route patterns, error handling, and response format conventions."
 paths:
   - src/api/**
   - src/routes/**
 ---
 ```
 
-With `paths:` set, any task touching `src/api/` activates this skill — no description matching needed.
+## Skills vs Rules vs CLAUDE.md
 
-## Skill directory format
+| Content type | Where | Why |
+|---|---|---|
+| Universal rules (all files) | CLAUDE.md | Re-injected every turn |
+| Scoped constraints (specific files) | `rules/` with `paths:` | Native, reliable on file access |
+| Detailed patterns/knowledge | `skills/` with `paths:` | Auto-triggered, detailed guidance |
 
-```
-skills/skill-name/
-├── SKILL.md          # required — YAML frontmatter + instructions
-├── scripts/          # optional
-├── references/       # optional
-└── assets/           # optional
-```
-
-## No task-execution skill
-
-The 8-step workflow lives in **CLAUDE.md directly** (auto-loaded every session). Do NOT create a separate task-execution skill — it duplicates CLAUDE.md and Claude never invokes it anyway.
+Skills provide **knowledge** (patterns, conventions, how-to). Rules enforce **constraints** (must/must-not). Don't put constraints in skills — put them in rules where enforcement is more reliable.
 
 ## How to decompose a repo into skills
 
 1. **Map file tree to responsibilities.** Identify clusters of files serving the same purpose.
 2. **Check for distinct patterns.** Different conventions from other clusters?
 3. **Check for distinct expertise.** Requires knowledge irrelevant elsewhere?
-4. **Set the `paths:` boundary.** Each skill must own specific files via glob patterns.
-
-## Good vs bad
-
-**Good:** Has `paths:` set, pushy description with "MUST be used", repo-specific patterns, embedded rules.
-**Bad:** No `paths:`, vague description, generic advice, no concrete trigger.
+4. **Set the `paths:` boundary.** Each skill must own specific files.
 
 ## Scaling
 
-Minimal repo: 0 skills (workflow is in CLAUDE.md). Small: 1-3. Medium: 3-6. Large: as many as needed. Never create skills for nonexistent concerns.
-
-## Embedding rules in skills
-
-**Universal rules** → CLAUDE.md directly (auto-loaded every task).
-**Concern-specific rules** → inside the relevant skill's SKILL.md (loaded when skill triggers).
+Minimal repo: 0 skills. Small: 1-3. Medium: 3-6. Large: as many as needed. Never create skills for nonexistent concerns.
 
 ## What each SKILL.md body must include
 
 - **Patterns in this repo** — actual conventions observed (not generic advice)
-- **Rules for this concern** — constraints specific to this area
-- **Checklist before finishing** — what to verify for work in this area
+- **How to work in this area** — repo-specific guidance
+- **Checklist before finishing** — what to verify
 
-For **workflow skills** (e.g., deployment, migration):
+For **workflow skills** (deployment, migration, etc.):
 - **Step-by-step execution** — repo-specific sequence
 - **Checks and risks** — what could go wrong
