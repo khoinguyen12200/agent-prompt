@@ -5,6 +5,7 @@ Every task follows: **Think -> Plan -> Build -> Review -> Test -> Ship -> Reflec
 ## Step 1: Think
 Understand the problem before acting.
 - Read and parse the request. Identify core goal, constraints, and success criteria.
+- **Check which skills match this task and invoke them.** Skills contain project-specific rules and patterns you will miss otherwise. Do this BEFORE reading code or planning.
 - Gather context: explore the codebase, read relevant files, understand current state.
 - Identify gaps. Ask clarifying questions if requirements are ambiguous.
 - Do not jump to solutions. Verify assumptions before proceeding.

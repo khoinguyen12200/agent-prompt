@@ -15,7 +15,7 @@ FIRST PRINCIPLES: Every statement must be backed by evidence — code you read, 
 
 **Think → Plan → Build → Review → Test → Ship → Reflect**
 
-1. **Think** — Read the request. Gather context. Ask clarifying questions if ambiguous.
+1. **Think** — Read the request. Gather context. Ask clarifying questions if ambiguous. **Before doing anything else, check which skills match this task and invoke them.** Do not skip this — skills contain project-specific rules you will miss otherwise.
 2. **Plan** — Break into subtasks. Identify affected files. Choose the simplest approach.
 3. **Build** — Implement the plan. Write clean, minimal code following project conventions.
 4. **Review** — Examine your code for bugs, edge cases, regressions.
