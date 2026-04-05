@@ -1,67 +1,64 @@
 # Phase 3 — Create Dynamic Agents
 
-Create the `agents/` folder, but do NOT force a fixed agent list.
+Create the `agents/` folder. Do NOT force a fixed agent list.
 
-Instead:
-- detect the current repository concerns
-- generate agent files only for concerns that are justified now
-- if the repo is blank, create only the minimum useful agent set
-- if the repo is mature, create the agent set needed immediately
+## Core principle: one agent per concern, not per domain
 
-Agent creation rules:
+A "concern" is a specific area of responsibility with its own files, patterns, and expertise. If two things need different knowledge, they are different concerns.
 
-1. Every agent must be concern-based, not trend-based.
-Examples of concerns:
-- project documentation maintenance
-- backend/service architecture
-- frontend/UI architecture
-- database/data integrity
-- security review
-- testing/quality
-- release/deployment
-- library/API design
-- monorepo/package boundaries
-- data pipeline/workflow ownership
-These are examples, not a required list.
+**The test:** If you need "and" to describe an agent's job, it's too broad — split it.
 
-2. Each agent file must include:
-- Purpose
-- Trigger conditions (specific, matchable patterns — e.g., "task touches files in src/api/", "user mentions database", "task involves authentication"). These must be concrete enough for auto-matching, not vague descriptions.
-- When not to use
-- Inputs required
-- What files/folders to inspect first
-- Responsibilities
-- Which `.claude/rules/*` it must enforce (list specific rule files)
-- Which `.claude/skills/*` it should auto-apply when relevant
-- Guardrails
-- Output format
-- Which `.claude` docs it must update when behavior changes
-- How this agent should evolve if the repository grows
+**Wrong:** One agent per tech layer (frontend, backend, database) — vague, covers everything, guides nothing.
+**Right:** One focused agent per actual area of responsibility found in the codebase.
 
-3. Agent naming must match the repo concern.
-Use clear names like:
-- `docs-keeper.md`
-- `backend-architect.md`
-- `frontend-wizard.md`
-- `database-guardian.md`
-- `security-auditor.md`
-- `test-engineer.md`
-- `release-manager.md`
-- `monorepo-governor.md`
-- `sdk-maintainer.md`
-- `cli-architect.md`
-These are only naming examples. Choose what fits the repo.
+## How to decompose a repository into concerns
 
-4. Minimum blank-repo rule
-If the repo is blank or nearly blank:
-- create only the smallest sensible agent set
-- usually at least one maintenance/governance-style agent that ensures future `.claude` expansion
-- do not create agents for concerns that do not yet exist — no placeholders, no speculation
-- agents are created when evidence justifies them, not before
+1. **Map file tree to responsibilities.** Identify clusters of files serving the same purpose — each is a candidate concern.
+2. **Check for distinct patterns.** Does the cluster follow conventions that differ from other clusters?
+3. **Check for distinct expertise.** Would working here require knowledge irrelevant elsewhere?
+4. **Check the boundary.** Can you clearly define which files this concern owns? If not, refine or merge.
+5. **Name by what it governs.** Not a persona — a concern area.
 
-5. Future regeneration rule
-On future tasks:
-- if a new concern appears and no suitable agent exists, create one
-- if an existing agent is too generic, expand it
-- if multiple agents overlap too much, refine or merge them
-- if the architecture changes, update agent routing and responsibilities
+## Good vs bad agents
+
+Good: owns defined files/folders, has repo-specific patterns, concrete trigger conditions, provides guidance beyond generic prompts.
+
+Bad: owns "everything related to [broad domain]", repeats generic advice, vague triggers like "when working on the frontend", replaceable by one sentence in CLAUDE.md.
+
+## Scaling rules
+
+Match agent count to repo complexity: minimal repo (0-1), small (2-4), medium (4-8), large (as many as needed). Never create agents for concerns that don't exist yet.
+
+## What each agent file must include
+
+YAML frontmatter:
+
+```yaml
+---
+name: concern-name
+description: One-line description of what this agent governs
+tools:              # optional
+  - Read
+  - Edit
+  - Bash
+paths:              # optional
+  - src/models/**
+---
+```
+
+Body must include:
+- **Purpose** — one sentence
+- **Owns** — exact files/folders (glob patterns)
+- **Trigger conditions** — specific, matchable (e.g., "task touches files in src/models/")
+- **When not to use** — prevents overlap
+- **Inspect first** — files to read before starting
+- **Patterns in this repo** — actual conventions observed
+- **Rules to enforce** — which `rules/*` apply
+- **Skills to apply** — which `skills/*` are relevant
+- **Guardrails** — what this agent must never do
+- **Checklist before finishing** — verification steps
+- **When to update this agent** — what changes require revision
+
+## Future regeneration
+
+On future tasks: create agents for new concerns, split overly broad agents, refine overlapping boundaries, retire agents for disappeared concerns, update agents when architecture changes.

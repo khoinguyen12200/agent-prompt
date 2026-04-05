@@ -1,51 +1,23 @@
 # How to Decide What to Create
 
-You must detect the current repository state first.
+Detect the current repository state first. Do not assume any repo type in advance.
 
-Classify the repository, for example:
-- blank / nearly blank
-- skeleton / starter
-- frontend-only
-- backend-only
-- full-stack
-- library / SDK
-- CLI tool
-- monorepo
-- package workspace
-- service + worker
-- API + admin panel
-- docs-heavy repo
-- infra / deployment repo
-- data / ETL repo
-- mobile / desktop / browser extension
-- mixed or evolving structure
+## Step 1: Classify the repository
 
-Then decide what `.claude` assets are needed.
+Read the file tree, package manifests, configs, and source code. Determine project type from evidence. Do not force a classification — describe what you observe.
 
-Examples of dynamic outcomes:
-- Blank repo:
-  - minimal `CLAUDE.md` routing table and minimal `context.md`
-  - minimal `rules/` for verified conventions only
-  - a maintenance agent if justified
-  - no content for concerns that do not yet exist — no placeholders, no speculation
+## Step 2: Identify what exists now
 
-- Backend appears later:
-  - create or expand backend-related agent(s)
-  - create or expand API/database/error-handling/security/testing rules as needed
-  - update architecture and stack docs
+From files you read, determine: what distinct areas of responsibility exist, which warrant their own agents/rules/skills, and which are too small to justify dedicated files.
 
-- Frontend appears later:
-  - create or expand frontend-related agent(s)
-  - create or expand UI/style/testing/accessibility/project-structure docs as needed
+## Step 3: Scale `.claude/` to the repo
 
-- Database appears later:
-  - create or expand database-related agent(s) and rules
+**Minimal/blank repo:** Lean `CLAUDE.md` + minimal `context.md` + only verifiable foundational rules. No agents/skills/commands for nonexistent concerns.
 
-- Deployment/CI appears later:
-  - create or expand release/deploy skill and command docs
+**Growing repo:** When new responsibilities emerge (verified by new files/patterns), create agents/rules/skills then. Update dispatch table and `context.md`.
 
-- Existing mature repo:
-  - create the relevant agents/docs immediately based on what is already present
+**Mature repo:** Agents, rules, and skills for every distinct concern. Full dispatch table. Commands for recurring team workflows.
 
-Do not use these examples as a fixed file list.
-Use them only as guidance for dynamic generation.
+## The golden rule
+
+Create only what the repo justifies now. When something new appears — verified by evidence — create it then.

@@ -1,62 +1,36 @@
 # First-Principles Thinking Command
 
-You must create a command file at `.claude/commands/fpt.md`.
+Create a command file at `.claude/commands/fpt.md`.
 
-This command is triggered when the user says `/fpt` followed by their task or research question.
-
-The `/fpt` command forces Claude into deep first-principles thinking mode. This is for important tasks where getting it right matters more than getting it fast. It maps directly to the **Think** step of the universal workflow.
+Triggered via `/fpt` followed by a task or question. Forces deep first-principles thinking — maps to the **Think** step. For important tasks where correctness matters more than speed.
 
 The command must instruct Claude to:
 
-1. STOP before doing anything. Do not write code. Do not make changes. Enter the **Think** step.
+1. **STOP.** Do not write code. Enter the Think step.
 
-2. DECOMPOSE the problem:
-   - What is the user actually asking for? (restate in your own words)
-   - What is the root problem, not the surface symptom?
-   - What are the fundamental truths involved? (verified facts only)
-   - What are the constraints? (technical, business, user-stated)
+2. **DECOMPOSE:** What is the user actually asking? What is the root problem (not surface symptom)? What are the verified fundamental truths? What are the constraints?
 
-3. GATHER EVIDENCE:
-   - Read all relevant files in the repository
-   - Trace the actual code paths involved
-   - Identify the real current behavior vs the desired behavior
-   - List every fact you verified and how you verified it
+3. **GATHER EVIDENCE:** Read all relevant files. Trace actual code paths. Identify real vs desired behavior. List every verified fact with its source.
 
-4. CHALLENGE your own thinking:
-   - What am I tempted to assume here? List it. Then verify or discard each one.
-   - Is there a simpler explanation?
-   - Am I solving the right problem?
-   - What would break if I'm wrong?
+4. **CHALLENGE THINKING:** What am I tempted to assume? Is there a simpler explanation? Am I solving the right problem? What breaks if I'm wrong?
 
-5. BUILD THE SOLUTION from fundamentals:
-   - Start from verified facts only
-   - Each step must follow logically from the previous
-   - No leaps. No "this should work." Prove each step.
-   - Consider edge cases derived from the actual code, not imagined scenarios
+5. **BUILD FROM FUNDAMENTALS:** Start from verified facts only. Each step follows logically. No leaps — prove each step. Consider edge cases from actual code.
 
-6. VALIDATE before executing:
-   - Does the solution address the root cause?
-   - Does it conflict with any existing rules in `.claude/rules/`?
-   - What is the minimal change that solves this?
-   - How will you verify the fix works?
+6. **VALIDATE:** Does it address root cause? Conflicts with existing rules? What's the minimal change? How to verify?
 
-7. PRESENT the analysis to the user:
+7. **PRESENT:**
    ```
    ## First-Principles Analysis
 
-   **Problem:** [root problem, not surface symptom]
-   **Verified facts:** [numbered list with evidence source for each]
+   **Problem:** [root problem]
+   **Verified facts:** [numbered list with evidence sources]
    **Root cause:** [traced from evidence]
    **Proposed solution:** [built from fundamentals]
-   **Why this works:** [logical chain from facts to solution]
-   **Risks:** [what could still go wrong, based on evidence]
-   **Verification plan:** [how to confirm the solution works]
+   **Why this works:** [logical chain]
+   **Risks:** [evidence-based]
+   **Verification plan:** [how to confirm]
    ```
 
-8. WAIT for user confirmation before executing the solution.
+8. **WAIT** for user confirmation before executing.
 
-This command is especially useful for:
-- Debugging complex issues where the obvious answer might be wrong
-- Architectural decisions that are hard to reverse
-- Research tasks where accuracy matters more than speed
-- Any task where the user says "this is important, get it right"
+Best for: complex debugging, irreversible architectural decisions, research tasks, anything where "get it right" trumps "get it fast."

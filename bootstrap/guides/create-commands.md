@@ -1,28 +1,38 @@
 # Phase 5 — Create Dynamic Commands
 
-Create the `commands/` folder with commands justified by the repo or by future recurring work.
+Create the `commands/` folder. Commands are user-invoked workflows triggered via `/command-name` (native Claude Code feature).
 
-You MUST always create these commands:
-- `update-claude-docs.md` — the manual trigger for full `.claude/` audit (see MANUAL UPDATE COMMAND section above)
-- `fpt.md` — first-principles thinking mode for important tasks and research (see FIRST-PRINCIPLES THINKING COMMAND section below)
+## What is a command?
 
-Other commands are dynamic. Examples:
-- deploy
-- fix-issue
-- review
-- bootstrap-module
-- add-feature
-- refactor-safely
-These are examples, not a fixed list.
+An on-demand tool the user explicitly triggers. Unlike skills (auto-triggered), commands run only when the user types `/command-name`.
 
-Each command doc should include:
-- Purpose
-- When to use
-- Inputs required
-- Step-by-step workflow
-- Validation steps
-- Required tests/review
-- Required `.claude` updates before finishing
-- Output format
+**Good:** Recurring workflow with specific steps and checks.
+**Bad:** One-time action or something too simple to document.
 
-If the repo is blank, keep commands minimal and general.
+## Mandatory commands
+
+Always create:
+- **`update-claude-docs.md`** — full `.claude/` audit
+- **`fpt.md`** — first-principles thinking mode
+
+## When to create additional commands
+
+Create when: the repo has a **recurring, multi-step workflow** with repo-specific details easy to forget.
+
+Do NOT create when: the workflow should auto-trigger (that's a skill), is trivial, or the concern doesn't exist yet.
+
+## Command creation principles
+
+- One workflow per command
+- Only for workflows that exist
+- Include repo-specific steps
+- Simple repos: only the two mandatory commands
+
+## What each command file must include
+
+- **Purpose** and **when to use**
+- **Inputs required**
+- **Step-by-step workflow**
+- **Validation steps**
+- **Required `.claude` updates**
+- **Output format**

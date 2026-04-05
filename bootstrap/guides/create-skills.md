@@ -1,28 +1,53 @@
 # Phase 6 — Create Dynamic Skills
 
-Create the `skills/` folder only for repeatable workflows that the repo actually has now or clearly needs as a minimal scaffold.
+Create the `skills/` folder only for repeatable workflows the repo actually needs.
 
-**MANDATORY skill:**
-- `task-execution.md` — defines the Think → Plan → Build → Review → Test → Ship → Reflect workflow. This skill must be referenced in `CLAUDE.md` for "Any task (always)".
+## What is a skill?
 
-Examples of other skills:
-- deploy
-- security-review
-- repo-bootstrap
-- release-check
-- migration-review
-- feature-delivery
-- frontend-design
-These are examples, not a fixed list.
+A step-by-step workflow Claude follows automatically when triggered by the dispatch table. Unlike commands (user-invoked), skills activate based on task matching.
 
-Each skill should include:
-- Purpose
-- Trigger conditions (specific, matchable patterns — e.g., "user asks to deploy", "task adds a new API endpoint", "migration files are created"). Must be concrete enough for auto-matching.
-- Inputs required
-- Step-by-step execution (Claude follows this automatically when the skill triggers — no user invocation needed)
-- Mapping to the 7-step workflow (which steps this skill covers or modifies)
-- Which `.claude/rules/*` must be checked during this workflow
-- Checks
-- Risks
-- Output format
-- `.claude` docs to update if the workflow changes
+**Good skill:** Multi-step workflow with repo-specific checks and patterns.
+**Bad skill:** Generic process restating common sense.
+
+## Skill directory format
+
+```
+skills/skill-name/
+├── SKILL.md          # required — with YAML frontmatter (name, description)
+├── scripts/          # optional
+├── references/       # optional
+└── assets/           # optional
+```
+
+## When to create a skill
+
+Create when: the workflow is a **specific, repeatable sequence** with **repo-specific details** where wrong order or missed steps cause problems.
+
+Do NOT create when: the workflow is obvious, generic, or the concern doesn't exist yet.
+
+## Mandatory skill
+
+**`skills/task-execution/SKILL.md`** — the 7-step workflow. Always referenced in `CLAUDE.md`.
+
+## Skill creation principles
+
+- One workflow per skill
+- Only for workflows that exist — no speculation
+- Include repo-specific details Claude couldn't derive alone
+- Scale with repo: blank = only `task-execution`; mature = one per complex workflow
+- Bundle helper scripts, references, templates alongside SKILL.md
+
+## What each SKILL.md must include
+
+Frontmatter: `name`, `description`
+
+Body:
+- **Purpose** — what workflow this governs
+- **Trigger conditions** — specific, matchable
+- **Inputs required** — what Claude needs before starting
+- **Step-by-step execution** — repo-specific sequence
+- **Mapping to 7-step workflow** — which steps this covers/modifies
+- **Rules to check** — which `rules/*` to validate
+- **Checks and risks** — what to verify, what could go wrong
+- **Output format** — expected result
+- **When to update** — what changes require revision

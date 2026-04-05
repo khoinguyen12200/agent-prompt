@@ -1,42 +1,30 @@
 # Manual Update Command
 
-You must create a command file at `.claude/commands/update-claude-docs.md`.
+Create a command file at `.claude/commands/update-claude-docs.md`.
 
-This command is triggered when the user says `/update-claude-docs`.
+Triggered via `/update-claude-docs`.
 
 The command must instruct Claude to:
 
-1. Scan the full repository:
-   - Package manifests and dependencies
-   - Source tree (all directories under app/ or src/)
-   - Configuration files (tsconfig, eslint, prettier, docker, firebase, CI/CD)
-   - Environment variables (.env.example)
-   - Routes, models, services, repositories, components
-   - Tests (if any)
-   - Infrastructure (Dockerfile, docker-compose, deploy configs)
+1. **Scan the full repository:** package manifests, source tree, configs (tsconfig, eslint, docker, CI/CD), env examples, routes/models/services/components, tests, infrastructure.
 
-2. Compare the repo state against every `.claude/` file:
-   - `.claude/context.md` — is the project overview still accurate?
-   - Root `CLAUDE.md` — does the routing table still point to the right places?
-   - Each agent — does the concern still exist? Are trigger conditions and file references correct?
-   - Each rule — do the patterns match current code?
-   - Each command — are the steps still valid?
-   - Each skill — are trigger conditions and steps still correct?
+2. **Compare repo state against every `.claude/` file:**
+   - `context.md` — still accurate?
+   - `CLAUDE.md` — routing table correct?
+   - Each agent — concern still exists? Triggers and file refs correct?
+   - Each rule — patterns match current code?
+   - Each command/skill — steps still valid?
 
-3. For each `.claude/` file, decide:
-   - KEEP as-is (still accurate)
-   - UPDATE (content is stale)
-   - CREATE (new concern has no doc)
-   - RETIRE (concern no longer exists)
+3. **Decide per file:** KEEP, UPDATE, CREATE (new concern), or RETIRE (gone concern).
 
-4. Execute all updates in a single pass.
+4. **Execute all updates** in a single pass.
 
-5. Output a report:
+5. **Output report:**
    ```
    ## .claude/ Audit Report
 
-   **Updated:** [list files and what changed]
-   **Created:** [list files and why]
-   **Retired:** [list files and why]
-   **Unchanged:** [list files and why they're still accurate]
+   **Updated:** [files and what changed]
+   **Created:** [files and why]
+   **Retired:** [files and why]
+   **Unchanged:** [files and why still accurate]
    ```
