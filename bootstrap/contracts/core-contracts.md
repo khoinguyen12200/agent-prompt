@@ -83,6 +83,6 @@ Scan every user message for implicit preferences, constraints, or conventions.
 
 **User instructions are a source of truth.** When a user expresses a rule, persist it immediately.
 
-## 6. Post-Install Activation
+## 6. Post-Install
 
-After the bootstrap creates the `.claude/` system, the installer MUST read the `CLAUDE.md` it just created and follow it for any remaining tasks in the same session. This bridges the gap between installer mode and user mode — without this step, the `.claude/` system only takes effect in future sessions.
+After the bootstrap completes, **tell the user to restart Claude Code** (start a new session). CLAUDE.md is auto-loaded at session start — it does NOT activate mid-session. The `.claude/` system only takes full effect in the next session.

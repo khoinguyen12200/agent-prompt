@@ -38,9 +38,9 @@ Read these files from the clone in order:
 
 4. **CRITICAL: Embed the 7-step workflow inline at the top of `.claude/CLAUDE.md`.** Use the template from `contracts/core-contracts.md`. Universal rules go in CLAUDE.md. Concern-specific rules go in skill files. CLAUDE.md must stay under 200 lines.
 
-5. **Post-install activation** — Read the `CLAUDE.md` you just created and follow it for any remaining tasks in this session.
+5. **Clean up** — Remove `/tmp/agent-prompt-install`, `/tmp/community-skills`, `/tmp/awesome-skills`.
 
-6. **Clean up** — Remove `/tmp/agent-prompt-install`, `/tmp/community-skills`, `/tmp/awesome-skills`.
+6. **Tell the user to restart Claude Code.** CLAUDE.md is auto-loaded at session start — it will NOT take effect in the current session. The user must start a new session for the `.claude/` system to activate.
 
 ## Output
 
@@ -49,3 +49,4 @@ Provide:
 - Which skills were created and the evidence for each
 - Which community skills were installed and why
 - Anything you could not verify
+- **Remind the user: "Restart Claude Code to activate the `.claude/` system."**

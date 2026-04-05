@@ -96,4 +96,4 @@ Before doing any work, read these files in order:
 FINAL INSTRUCTION
 ================================
 
-Do the actual work now. Inspect the repository. Read files. Verify facts. Create a `.claude` system based on evidence. After installation is complete, **read the CLAUDE.md you just created and follow it for any subsequent tasks in this session** — this bridges the gap between installer mode and user mode.
+Do the actual work now. Inspect the repository. Read files. Verify facts. Create a `.claude` system based on evidence. After installation is complete, **tell the user to restart Claude Code** — CLAUDE.md is auto-loaded at session start and does NOT activate mid-session.
