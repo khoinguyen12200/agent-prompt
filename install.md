@@ -30,11 +30,11 @@ Read these files from the clone in order:
 
 ## Step 3: Install
 
-1. **Bootstrap `.claude/`** — Inspect the target repo. Create `CLAUDE.md` (with 7-step workflow inline from `agent-workflow.md`), `context.md`, concern skills, and commands as justified by evidence. Do NOT create a task-execution skill — the workflow lives in CLAUDE.md only.
+1. **Bootstrap `.claude/`** — Inspect the target repo. Create `CLAUDE.md` (with 8-step workflow inline from `agent-workflow.md`), `context.md`, concern skills, and commands as justified by evidence. Do NOT create a task-execution skill — the workflow lives in CLAUDE.md only.
 
 3. **Install community skills** — Browse `/tmp/community-skills/` and `/tmp/awesome-skills/`. Copy relevant skills to `.claude/skills/` based on what the target repo actually contains.
 
-4. **CRITICAL: Embed the 7-step workflow inline at the top of `.claude/CLAUDE.md`.** Use the template from `contracts/core-contracts.md`. Universal rules go in CLAUDE.md. Concern-specific rules go in skill files. CLAUDE.md must stay under 200 lines.
+4. **CRITICAL: Embed the 8-step workflow inline at the top of `.claude/CLAUDE.md`.** Use the template from `contracts/core-contracts.md`. Universal rules go in CLAUDE.md. Concern-specific rules go in skill files. CLAUDE.md must stay under 200 lines.
 
 5. **Clean up** — Remove `/tmp/agent-prompt-install`, `/tmp/community-skills`, `/tmp/awesome-skills`.
 

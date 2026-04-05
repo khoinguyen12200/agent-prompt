@@ -4,7 +4,7 @@
 
 Paste two lines into **Claude Code** and it builds a complete `.claude/` system — skills, commands, and a smart dispatcher — tailored to your codebase. Then it maintains itself.
 
-Enforces a **7-step workflow** on every task: **Think → Plan → Build → Review → Test → Ship → Reflect**
+Enforces an **8-step workflow** on every task: **Think → Load → Plan → Build → Review → Test → Ship → Reflect**
 
 ---
 
@@ -59,6 +59,7 @@ Claude will:
 | Step | What Claude Does |
 |------|------------------|
 | **Think** | Gather context, read files, ask questions |
+| **Load** | Invoke all matching skills and plugins. List what was loaded. |
 | **Plan** | Break into subtasks, choose simplest approach |
 | **Build** | Implement with clean code following conventions |
 | **Review** | Check for bugs, edge cases, regressions |
@@ -97,7 +98,7 @@ agent-prompt/
   install.md                    # Installer — the entry point
   bootstrap/
     overview.md                 # Role, workflow, structure, native vs convention
-    agent-workflow.md           # The 7-step workflow definitions
+    agent-workflow.md           # The 8-step workflow definitions
     contracts/
       core-contracts.md         # All behavioral contracts
     commands/

@@ -55,7 +55,7 @@ skills/skill-name/
 
 ## No task-execution skill
 
-The 7-step workflow lives in **CLAUDE.md directly** (auto-loaded every session). Do NOT create a separate task-execution skill — it duplicates CLAUDE.md and Claude never invokes it anyway.
+The 8-step workflow lives in **CLAUDE.md directly** (auto-loaded every session). Do NOT create a separate task-execution skill — it duplicates CLAUDE.md and Claude never invokes it anyway.
 
 ## How to decompose a repo into skills
 

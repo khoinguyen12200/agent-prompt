@@ -26,22 +26,22 @@ Claude Code natively supports ONLY these:
 
 Everything else (agents/, rules/, context.md) is **convention** — it only works if the agent voluntarily reads it. The agent may ignore it.
 
-**Architecture principle:** Put critical behaviors in native features. Use CLAUDE.md for universal rules and the 7-step workflow. Use skills/ for concern-specific guidance (replaces the old agents/ concept). Use commands/ for user-invoked workflows. Minimize reliance on convention-only files.
+**Architecture principle:** Put critical behaviors in native features. Use CLAUDE.md for universal rules and the 8-step workflow. Use skills/ for concern-specific guidance (replaces the old agents/ concept). Use commands/ for user-invoked workflows. Minimize reliance on convention-only files.
 
 ================================
 UNIVERSAL TASK EXECUTION WORKFLOW
 ================================
 
-Every task follows: **Think → Plan → Build → Review → Test → Ship → Reflect**
+Every task follows: **Think → Load → Plan → Build → Review → Test → Ship → Reflect**
 
 CRITICAL: This workflow MUST be embedded **directly inline** at the top of `CLAUDE.md`. It is the ONLY guaranteed-read enforcement mechanism.
 
 You MUST create:
-1. **The workflow block directly in root `CLAUDE.md`** — full 7 steps inline, before anything else. This is the ONLY place the workflow lives. Do NOT create a separate task-execution skill — it duplicates CLAUDE.md and never gets invoked.
+1. **The workflow block directly in root `CLAUDE.md`** — full 8 steps inline, before anything else. This is the ONLY place the workflow lives. Do NOT create a separate task-execution skill — it duplicates CLAUDE.md and never gets invoked.
 
 **Visible step labels are mandatory.** A response is INCOMPLETE until ## Reflect is shown.
 
-**Trivial task exception:** Only trivial tasks (typos, simple renames, one-line answers) may abbreviate steps 4-7. Steps 1-3 are NEVER skippable.
+**Trivial task exception:** Only trivial tasks (typos, simple renames, one-line answers) may abbreviate steps 5-8. Steps 1-4 (Think, Load, Plan, Build) are NEVER skippable.
 
 ================================
 TARGET STRUCTURE
@@ -77,7 +77,7 @@ READ THE REST OF THE BOOTSTRAP DOCS
 Before doing any work, read these files in order:
 
 1. `bootstrap/contracts/core-contracts.md` — core behavior and self-maintenance contracts
-2. `bootstrap/agent-workflow.md` — detailed 7-step workflow definitions
+2. `bootstrap/agent-workflow.md` — detailed 8-step workflow definitions
 3. `bootstrap/commands/fpt.md` — first-principles thinking command
 4. `bootstrap/commands/update-claude-docs.md` — manual update command
 5. `bootstrap/guides/decision-making.md` — how to decide what to create

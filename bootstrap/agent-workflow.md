@@ -1,18 +1,26 @@
 # Agent Workflow: 7 Steps
 
-Every task follows: **Think -> Plan -> Build -> Review -> Test -> Ship -> Reflect**. Show each step label in your response. Trivial tasks may abbreviate steps 4-7, but steps 1-3 are never skippable.
+Every task follows: **Think → Load → Plan → Build → Review → Test → Ship → Reflect**. Show each step label in your response. Trivial tasks may abbreviate steps 5-8, but steps 1-4 are NEVER skippable.
 
 ## Step 1: Think
 Understand the problem before acting.
 - Read and parse the request. Identify core goal, constraints, and success criteria.
-- **Check which skills match this task and invoke them.** Skills contain project-specific rules and patterns you will miss otherwise. Do this BEFORE reading code or planning.
 - Gather context: explore the codebase, read relevant files, understand current state.
 - Identify gaps. Ask clarifying questions if requirements are ambiguous.
 - Do not jump to solutions. Verify assumptions before proceeding.
 
 **Rules:** Do not start coding. Be thorough but concise. Escalate ambiguity to the user.
 
-## Step 2: Plan
+## Step 2: Load
+Load all matching skills and plugins BEFORE planning or coding.
+- Check all available skills (in `.claude/skills/`). Invoke every skill whose description or `paths:` matches this task.
+- Check all available plugins. Invoke any plugin relevant to this task.
+- **List what you loaded** in your response (e.g., "Loaded: /ui-components, /shopify-conventions").
+- If no skills or plugins match, state "No matching skills or plugins" and proceed.
+
+**Rules:** This step is MANDATORY. Do NOT skip it. Do NOT proceed to Plan without completing this step. Skills and plugins contain project-specific rules and patterns you will miss otherwise.
+
+## Step 3: Plan
 Design a clear approach before building.
 - Break the task into small, logical subtasks. Identify affected files.
 - Choose the simplest approach. Evaluate trade-offs.
@@ -21,7 +29,7 @@ Design a clear approach before building.
 
 **Rules:** Keep it simple. Minimize blast radius. Follow existing patterns. No coding yet.
 
-## Step 3: Build
+## Step 4: Build
 Implement the plan.
 - Execute subtasks in logical order. Write clean, maintainable code.
 - Follow the project's naming, formatting, and architectural conventions.
@@ -29,7 +37,7 @@ Implement the plan.
 
 **Rules:** Minimal changes only. Do not break existing logic. Write code via tools, don't just describe it.
 
-## Step 4: Review
+## Step 5: Review
 Catch bugs and inconsistencies.
 - Re-read requirements and compare against implementation.
 - Inspect for logic errors, edge cases, security issues, and consistency.
@@ -37,7 +45,7 @@ Catch bugs and inconsistencies.
 
 **Rules:** Assume there is at least one bug. Fix issues before moving to Test.
 
-## Step 5: Test
+## Step 6: Test
 Validate correctness and prevent regressions.
 - Run relevant test suites. Fix any failures.
 - Add tests for new behavior or bug fixes.
@@ -45,7 +53,7 @@ Validate correctness and prevent regressions.
 
 **Rules:** Failing tests are blockers. Untested new logic is unfinished.
 
-## Step 6: Ship
+## Step 7: Ship
 Deliver the user-facing summary. This is NOT the final step.
 - Summarize what was done, why, and how. List key modified files.
 - Confirm the solution works (reference test results or manual verification).
@@ -53,7 +61,7 @@ Deliver the user-facing summary. This is NOT the final step.
 
 **Rules:** Do not ship broken code. Respect git hygiene (no commits unless asked). **STOP — you are not done. Proceed to Reflect.**
 
-## Step 7: Reflect
+## Step 8: Reflect
 Maintain the `.claude/` system. This step is mandatory — your response is INCOMPLETE without it.
 - Check if `.claude/` needs updating: CLAUDE.md, context.md, skills. Update what's stale.
 - Extract user-expressed preferences/constraints into CLAUDE.md (universal) or relevant skill (specific).

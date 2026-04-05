@@ -5,7 +5,7 @@
 **CRITICAL: Must be under 200 lines.** Longer files reduce instruction adherence.
 
 **Required structure (in this order):**
-1. **7-step workflow block (INLINE, at top)** — Use the template from `contracts/core-contracts.md`. Do NOT replace with a file reference.
+1. **8-step workflow block (INLINE, at top)** — Use the template from `contracts/core-contracts.md`. Do NOT replace with a file reference.
 2. **Project Rules** — Universal rules discovered from repo evidence. One line per rule. Concern-specific rules go in skill files, not here.
 3. **Project Context pointer** — Reference to `context.md`.
 4. **Commands** — List available commands.

@@ -9,21 +9,22 @@ Generate root `CLAUDE.md` using this template. Fill in project rules and context
 
 FIRST PRINCIPLES: Every statement must be backed by evidence — code you read, patterns you observed, or explicit user statements.
 
-### MANDATORY 7-STEP WORKFLOW — DO NOT SKIP
+### MANDATORY 8-STEP WORKFLOW — DO NOT SKIP
 
-**Every task MUST follow these 7 steps. This is not optional.**
+**Every task MUST follow these 8 steps. This is not optional.**
 
-**Think → Plan → Build → Review → Test → Ship → Reflect**
+**Think → Load → Plan → Build → Review → Test → Ship → Reflect**
 
-1. **Think** — Read the request. Gather context. Ask clarifying questions if ambiguous. **Before doing anything else, check which skills match this task and invoke them.** Do not skip this — skills contain project-specific rules you will miss otherwise.
-2. **Plan** — Break into subtasks. Identify affected files. Choose the simplest approach.
-3. **Build** — Implement the plan. Write clean, minimal code following project conventions.
-4. **Review** — Examine your code for bugs, edge cases, regressions.
-5. **Test** — Run relevant tests. Fix failures. Add tests for new behavior.
-6. **Ship** — Summarize changes for the user. Confirm the solution works. **STOP — you are not done. Proceed to Reflect.**
-7. **Reflect** — Update `.claude/` docs if needed. State what changed or why nothing needed updating.
+1. **Think** — Read the request. Gather context. Ask clarifying questions if ambiguous.
+2. **Load** — Check all available skills and plugins. Invoke every skill and plugin that matches this task. List what you loaded. Do NOT proceed until this is done.
+3. **Plan** — Break into subtasks. Identify affected files. Choose the simplest approach.
+4. **Build** — Implement the plan. Write clean, minimal code following project conventions.
+5. **Review** — Examine your code for bugs, edge cases, regressions.
+6. **Test** — Run relevant tests. Fix failures. Add tests for new behavior.
+7. **Ship** — Summarize changes for the user. Confirm the solution works. **STOP — you are not done. Proceed to Reflect.**
+8. **Reflect** — Update `.claude/` docs if needed. State what changed or why nothing needed updating.
 
-**Show each step label in your response. Your response is INCOMPLETE until ## Reflect is shown.** Trivial tasks may abbreviate steps 4-7, but steps 1-3 are never skippable.
+**Show each step label in your response. Your response is INCOMPLETE until ## Reflect is shown.** Trivial tasks may abbreviate steps 5-8, but steps 1-4 are NEVER skippable.
 
 ### Project Rules
 
@@ -43,7 +44,7 @@ Read `.claude/context.md` for project overview, stack, architecture, and convent
 ## 2. Per-Task Behavior
 
 Before starting any task:
-1. Read `CLAUDE.md` and follow the 7-step workflow.
+1. Read `CLAUDE.md` and follow the 8-step workflow.
 2. Read relevant sections of `.claude/context.md`.
 3. Claude Code will auto-activate matching skills based on the task.
 
