@@ -28,7 +28,7 @@ You MUST create and maintain:
 2. `skills/task-execution/SKILL.md` — detailed skill with expanded guidance per step.
 3. `rules/workflow-step-enforcement.md` — hard rule requiring every task to follow the 7 steps.
 
-**Visible step labels are mandatory.** Claude must show "## Think", "## Plan", "## Build", etc. in responses.
+**Visible step labels are mandatory.** Claude must show "## Think", "## Plan", "## Build", etc. in responses. **A response is INCOMPLETE until ## Reflect is shown.**
 
 **Trivial task exception:** Only well-known trivial tasks (typos, simple renames, one-line answers) may abbreviate steps 4-7. Steps 1-3 are NEVER skippable.
 

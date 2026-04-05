@@ -45,17 +45,18 @@ Validate correctness and prevent regressions.
 **Rules:** Failing tests are blockers. Untested new logic is unfinished.
 
 ## Step 6: Ship
-Deliver clean, understandable results.
+Deliver the user-facing summary. This is NOT the final step.
 - Summarize what was done, why, and how. List key modified files.
 - Confirm the solution works (reference test results or manual verification).
 - Leave the codebase clean: no temp files, broken builds, or half-finished work.
 
-**Rules:** Do not ship broken code. Respect git hygiene (no commits unless asked). Offer next steps if relevant.
+**Rules:** Do not ship broken code. Respect git hygiene (no commits unless asked). **STOP — you are not done. Proceed to Reflect.**
 
 ## Step 7: Reflect
-Learn and maintain the system.
-- Assess outcome: did it satisfy requirements? Any surprises or mistakes?
+Maintain the `.claude/` system. This step is mandatory — your response is INCOMPLETE without it.
+- Check if `.claude/` needs updating: context.md, rules, agents, skills, dispatch table. Update what's stale.
+- Extract any user-expressed preferences/constraints into `.claude/rules/`.
+- State what `.claude/` files you changed, or explicitly state why none needed updating.
 - Note actionable improvements for future tasks.
-- Auto-update `.claude/` docs: check if context, rules, agents, skills, or the dispatch table need changes. If nothing changed, state why.
 
-**Rules:** Be honest about mistakes. Do not modify source code during reflection. Self-maintenance of `.claude/` is mandatory.
+**Rules:** Self-maintenance of `.claude/` is mandatory. Do not skip this step. Output must include a concrete `.claude/` status (files changed or "no changes needed because [reason]").

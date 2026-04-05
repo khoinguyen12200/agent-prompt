@@ -22,10 +22,10 @@ FIRST PRINCIPLES: Write nothing based on assumptions. Every statement must be ba
 3. **Build** — Implement the plan. Write clean, minimal code following project conventions.
 4. **Review** — Examine your code for bugs, edge cases, regressions.
 5. **Test** — Run relevant tests. Fix failures. Add tests for new behavior.
-6. **Ship** — Summarize changes. Confirm the solution works. Leave the codebase clean.
-7. **Reflect** — Assess the outcome. Auto-update `.claude/` docs.
+6. **Ship** — Summarize changes for the user. Confirm the solution works. **STOP — you are not done. Proceed to Reflect.**
+7. **Reflect** — Update `.claude/` docs (context, rules, agents, dispatch table). State what changed or why nothing needed updating.
 
-**Show each step label in your response.** Trivial tasks may abbreviate steps 4-7, but steps 1-3 are never skippable. For full step details, read `skills/task-execution/SKILL.md`.
+**Show each step label in your response. Your response is INCOMPLETE until ## Reflect is shown.** Trivial tasks may abbreviate steps 4-7, but steps 1-3 are never skippable. For full step details, read `skills/task-execution/SKILL.md`.
 
 ### How to use this file
 
