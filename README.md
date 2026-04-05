@@ -98,7 +98,6 @@ agent-prompt/
   install.md                    # Installer — the entry point
   bootstrap/
     overview.md                 # Role, workflow, structure, native vs convention
-    agent-workflow.md           # The 8-step workflow definitions
     contracts/
       core-contracts.md         # All behavioral contracts
     commands/

@@ -16,7 +16,6 @@ git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp
 Read these files from the clone in order:
 - `/tmp/agent-prompt-install/bootstrap/overview.md`
 - `/tmp/agent-prompt-install/bootstrap/contracts/core-contracts.md`
-- `/tmp/agent-prompt-install/bootstrap/agent-workflow.md`
 - `/tmp/agent-prompt-install/bootstrap/commands/update-claude-docs.md`
 - `/tmp/agent-prompt-install/bootstrap/commands/fpt.md`
 - `/tmp/agent-prompt-install/bootstrap/guides/decision-making.md`
@@ -30,7 +29,7 @@ Read these files from the clone in order:
 
 ## Step 3: Install
 
-1. **Bootstrap `.claude/`** — Inspect the target repo. Create `CLAUDE.md` (with 8-step workflow inline from `agent-workflow.md`), `context.md`, concern skills, and commands as justified by evidence. Do NOT create a task-execution skill — the workflow lives in CLAUDE.md only.
+1. **Bootstrap `.claude/`** — Inspect the target repo. Create `CLAUDE.md` (with 8-step workflow inline from `contracts/core-contracts.md` template), `context.md`, concern skills, and commands as justified by evidence.
 
 3. **Install community skills** — Browse `/tmp/community-skills/` and `/tmp/awesome-skills/`. Copy relevant skills to `.claude/skills/` based on what the target repo actually contains.
 

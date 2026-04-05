@@ -77,8 +77,7 @@ READ THE REST OF THE BOOTSTRAP DOCS
 Before doing any work, read these files in order:
 
 1. `bootstrap/contracts/core-contracts.md` — core behavior and self-maintenance contracts
-2. `bootstrap/agent-workflow.md` — detailed 8-step workflow definitions
-3. `bootstrap/commands/fpt.md` — first-principles thinking command
+2. `bootstrap/commands/fpt.md` — first-principles thinking command
 4. `bootstrap/commands/update-claude-docs.md` — manual update command
 5. `bootstrap/guides/decision-making.md` — how to decide what to create
 6. `bootstrap/guides/inspect-repo.md` — phase 1: inspect the repository

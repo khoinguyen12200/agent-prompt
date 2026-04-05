@@ -15,14 +15,14 @@ FIRST PRINCIPLES: Every statement must be backed by evidence — code you read, 
 
 **Think → Load → Plan → Build → Review → Test → Ship → Reflect**
 
-1. **Think** — Read the request. Gather context. Ask clarifying questions if ambiguous.
-2. **Load** — Check all available skills and plugins. Invoke every skill and plugin that matches this task. List what you loaded. Do NOT proceed until this is done.
-3. **Plan** — Break into subtasks. Identify affected files. Choose the simplest approach.
-4. **Build** — Implement the plan. Write clean, minimal code following project conventions.
-5. **Review** — Examine your code for bugs, edge cases, regressions.
-6. **Test** — Run relevant tests. Fix failures. Add tests for new behavior.
-7. **Ship** — Summarize changes for the user. Confirm the solution works. **STOP — you are not done. Proceed to Reflect.**
-8. **Reflect** — Update `.claude/` docs if needed. State what changed or why nothing needed updating.
+1. **Think** — Read the request. Identify goal, constraints, success criteria. Gather context by reading relevant files. Ask clarifying questions if ambiguous. Do NOT jump to code.
+2. **Load** — Check all available skills and plugins. Invoke every one that matches this task. List what you loaded (e.g., "Loaded: /ui-components, /api-design"). If none match, state "No matching skills." Do NOT proceed without completing this step.
+3. **Plan** — Break into subtasks. Identify affected files. Choose the simplest approach. Consider edge cases and regressions. For significant changes, get user approval first. No coding yet.
+4. **Build** — Execute the plan. Write clean, minimal code following project conventions. Handle blockers by pausing and reassessing.
+5. **Review** — Re-read requirements vs implementation. Check for bugs, edge cases, security issues. Review diffs holistically. Remove debug code. Fix issues before testing.
+6. **Test** — Run relevant tests. Fix failures. Add tests for new behavior. Failing tests are blockers.
+7. **Ship** — Summarize what changed, why, and how. List key files modified. Confirm it works. **STOP — you are not done. Proceed to Reflect.**
+8. **Reflect** — Check if `.claude/` needs updating (CLAUDE.md, context.md, skills). Extract any user-expressed rules. State what `.claude/` files changed or why none needed updating.
 
 **Show each step label in your response. Your response is INCOMPLETE until ## Reflect is shown.** Trivial tasks may abbreviate steps 5-8, but steps 1-4 are NEVER skippable.
 
