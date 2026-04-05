@@ -47,4 +47,6 @@ Provide:
 - Which skills were created and the evidence for each
 - Which community skills were installed and why
 - Anything you could not verify
-- **Remind the user: "Restart Claude Code to activate the `.claude/` system."**
+- **IMPORTANT — End your response with this exact message:**
+
+> ✅ Bootstrap complete! Now **close this session and open Claude Code again**. The `.claude/` system only activates on session start — it will NOT work in this current session.
