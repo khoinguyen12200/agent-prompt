@@ -13,7 +13,7 @@ Enforces a **7-step workflow** on every task: **Think → Plan → Build → Rev
 1. Open your project in Claude Code
 2. Paste this:
    ```
-   ! git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/agent-prompt-install
+   ! rm -rf /tmp/agent-prompt-install && git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/agent-prompt-install
    ```
 3. Then paste:
    ```
