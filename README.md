@@ -2,7 +2,7 @@
 
 > One prompt to give Claude Code a brain for your repo.
 
-Paste two lines into **Claude Code** and it builds a complete `.claude/` system — agents, rules, skills, and a smart dispatcher — tailored to your codebase. Then it maintains itself.
+Paste two lines into **Claude Code** and it builds a complete `.claude/` system — skills, commands, and a smart dispatcher — tailored to your codebase. Then it maintains itself.
 
 Enforces a **7-step workflow** on every task: **Think → Plan → Build → Review → Test → Ship → Reflect**
 
@@ -24,7 +24,7 @@ Enforces a **7-step workflow** on every task: **Think → Plan → Build → Rev
 Claude will:
 - Clone the bootstrap + community skill repos
 - Inspect your codebase
-- Generate `.claude/` with the 7-step workflow, agents, rules, and relevant skills
+- Generate `.claude/` with workflow, skills, and relevant community skills
 
 ---
 
@@ -32,24 +32,26 @@ Claude will:
 
 ```
 .claude/
-  CLAUDE.md              # Dispatcher (under 200 lines) — auto-loaded every session
+  CLAUDE.md              # Auto-loaded every session — workflow + project rules (under 200 lines)
   context.md             # Project overview, stack, architecture, conventions
-  agents/                # Concern-specific agents with YAML frontmatter
-  rules/                 # Hard constraints with optional paths: scoping
-  skills/                # Skill directories (SKILL.md + optional scripts/references/assets)
-  commands/              # User-invoked via /command-name
+  skills/                # Auto-triggered skill directories (NATIVE)
+    task-execution/      # 7-step workflow (always active)
+    [concern-a]/         # Concern-specific guidance (auto-triggers on matching tasks)
+    [concern-b]/         # ...
+  commands/              # User-invoked via /command-name (NATIVE)
+  settings.json          # Permissions and hooks
 ```
 
-| File | Native? | Purpose |
-|------|---------|---------|
-| `CLAUDE.md` | **Yes** — auto-loaded | 7-step workflow inline + dispatch table |
-| `commands/*.md` | **Yes** — `/name` | On-demand tools |
-| `agents/*.md` | Via CLAUDE.md | Concern-specific role definitions |
-| `rules/*.md` | Via CLAUDE.md | Hard constraints, always loaded |
-| `skills/*/SKILL.md` | Via CLAUDE.md | Repeatable workflows |
-| `context.md` | Via CLAUDE.md | Project knowledge base |
+### Native vs Convention
 
-> Only `CLAUDE.md` and `commands/` are native Claude Code features. Everything else works because `CLAUDE.md` instructs Claude to read them.
+| Feature | Native? | How it works |
+|---------|---------|---|
+| `CLAUDE.md` | **Yes** — auto-loaded | Read every session, guaranteed |
+| `commands/` | **Yes** — `/name` | User types slash command |
+| `skills/` | **Yes** — auto-triggered | Claude activates based on SKILL.md description matching the task |
+| `context.md` | No — convention | Works because CLAUDE.md tells Claude to read it |
+
+> The old `agents/` and `rules/` directories have been replaced. Agents are now skills (native auto-triggering). Universal rules go in CLAUDE.md directly. Concern-specific rules go inside the relevant skill's SKILL.md.
 
 ---
 
@@ -62,21 +64,21 @@ Claude will:
 | **Build** | Implement with clean code following conventions |
 | **Review** | Check for bugs, edge cases, regressions |
 | **Test** | Run tests, fix failures, add coverage |
-| **Ship** | Summarize changes, confirm it works |
-| **Reflect** | Note improvements, auto-update `.claude/` |
+| **Ship** | Summarize changes. **STOP — proceed to Reflect.** |
+| **Reflect** | Update `.claude/` docs. State what changed or why not. |
 
-Enforced by: inline block in `CLAUDE.md` (primary) + `skills/task-execution/SKILL.md` (detail) + `rules/workflow-step-enforcement.md` (hard rule).
+A response is **INCOMPLETE** until `## Reflect` is shown.
 
 ---
 
 ## Key Features
 
-- **Smart dispatch** — `CLAUDE.md` maps tasks to specific agents/rules/skills. No wasted tokens.
-- **Concern-specific agents** — not "frontend agent" but granular agents per responsibility area.
-- **Rule learning** — user preferences become persistent rules automatically.
-- **Community skills** — installs relevant skills from [anthropics/skills](https://github.com/anthropics/skills) and [awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills).
-- **Self-maintaining** — `.claude/` updates itself after every task.
-- **First principles** — every file backed by evidence, zero assumptions.
+- **Native-first architecture** — uses only Claude Code's native features (CLAUDE.md, skills/, commands/)
+- **Concern-specific skills** — auto-triggered, not "frontend skill" but granular per responsibility area
+- **Rule learning** — user preferences are persisted into CLAUDE.md or skills automatically
+- **Community skills** — installs relevant skills from [anthropics/skills](https://github.com/anthropics/skills) and [awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills)
+- **Post-install activation** — after bootstrapping, the agent reads its own CLAUDE.md to start following it immediately
+- **Self-maintaining** — `.claude/` updates itself after every task
 
 ---
 
@@ -95,24 +97,22 @@ Enforced by: inline block in `CLAUDE.md` (primary) + `skills/task-execution/SKIL
 agent-prompt/
   install.md                    # Installer — the entry point
   bootstrap/
-    overview.md                 # Role, assumptions, workflow, structure
+    overview.md                 # Role, workflow, structure, native vs convention
     agent-workflow.md           # The 7-step workflow definitions
     contracts/
-      core-contracts.md         # All behavioral contracts (merged)
+      core-contracts.md         # All behavioral contracts
     commands/
-      update-claude-docs.md     # Manual update command
-      fpt.md                    # First-principles thinking command
+      update-claude-docs.md
+      fpt.md
     guides/
-      decision-making.md        # How to decide what to create
-      inspect-repo.md           # Phase 1: inspect repository
-      create-central-files.md   # Phase 2: create central files
-      create-agents.md          # Phase 3: create dynamic agents
-      create-rules.md           # Phase 4: create dynamic rules
-      create-commands.md        # Phase 5: create dynamic commands
-      create-skills.md          # Phase 6: create dynamic skills
-      install-community-skills.md  # Phase 6b: community skills
-      secrets.md                # Phase 7: gitignore and secrets
-      output-requirements.md    # Phase 9: output requirements
+      decision-making.md
+      inspect-repo.md
+      create-central-files.md   # CLAUDE.md + context.md
+      create-skills.md          # Concern skills + workflow skills
+      create-commands.md
+      install-community-skills.md
+      secrets.md
+      output-requirements.md
 ```
 
 ---

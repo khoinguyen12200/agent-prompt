@@ -15,7 +15,7 @@ Clone these repos during installation:
 2. Read each SKILL.md's `name` and `description` in the YAML frontmatter
 3. Match against evidence found in the target repo (frameworks, tools, patterns)
 4. Copy relevant skill directories to `.claude/skills/`
-5. Register installed skills in the CLAUDE.md dispatch table
+5. Skills auto-trigger by their description — no dispatch table registration needed
 
 ## Rules
 

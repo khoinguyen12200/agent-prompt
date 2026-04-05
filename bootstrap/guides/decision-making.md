@@ -8,15 +8,15 @@ Read the file tree, package manifests, configs, and source code. Determine proje
 
 ## Step 2: Identify what exists now
 
-From files you read, determine: what distinct areas of responsibility exist, which warrant their own agents/rules/skills, and which are too small to justify dedicated files.
+From files you read, determine: what distinct areas of responsibility exist, which warrant their own skills, and which are too small to justify dedicated files.
 
 ## Step 3: Scale `.claude/` to the repo
 
-**Minimal/blank repo:** Lean `CLAUDE.md` + minimal `context.md` + only verifiable foundational rules. No agents/skills/commands for nonexistent concerns.
+**Minimal/blank repo:** Lean `CLAUDE.md` + minimal `context.md`. One skill (task-execution). No skills for nonexistent concerns.
 
-**Growing repo:** When new responsibilities emerge (verified by new files/patterns), create agents/rules/skills then. Update dispatch table and `context.md`.
+**Growing repo:** When new responsibilities emerge (verified by new files/patterns), create skills then. Update `context.md`.
 
-**Mature repo:** Agents, rules, and skills for every distinct concern. Full dispatch table. Commands for recurring team workflows.
+**Mature repo:** Skills for every distinct concern. Commands for recurring team workflows.
 
 ## The golden rule
 

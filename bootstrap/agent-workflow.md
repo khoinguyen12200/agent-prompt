@@ -54,8 +54,8 @@ Deliver the user-facing summary. This is NOT the final step.
 
 ## Step 7: Reflect
 Maintain the `.claude/` system. This step is mandatory — your response is INCOMPLETE without it.
-- Check if `.claude/` needs updating: context.md, rules, agents, skills, dispatch table. Update what's stale.
-- Extract any user-expressed preferences/constraints into `.claude/rules/`.
+- Check if `.claude/` needs updating: CLAUDE.md, context.md, skills. Update what's stale.
+- Extract user-expressed preferences/constraints into CLAUDE.md (universal) or relevant skill (specific).
 - State what `.claude/` files you changed, or explicitly state why none needed updating.
 - Note actionable improvements for future tasks.
 

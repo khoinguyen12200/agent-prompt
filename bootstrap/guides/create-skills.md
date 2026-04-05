@@ -1,53 +1,74 @@
-# Phase 6 — Create Dynamic Skills
+# Phase 3 — Create Skills
 
-Create the `skills/` folder only for repeatable workflows the repo actually needs.
+Skills are the primary mechanism for concern-specific guidance. They replace the old "agents" and "skills" as separate concepts — everything is now a skill, because skills are **natively auto-triggered** by Claude Code based on their SKILL.md description.
 
-## What is a skill?
+## Two types of skills
 
-A step-by-step workflow Claude follows automatically when triggered by the dispatch table. Unlike commands (user-invoked), skills activate based on task matching.
+### 1. Concern skills (replaces "agents")
+Each area of responsibility in the repo gets its own skill. When the task matches the skill's description, Claude Code activates it automatically.
 
-**Good skill:** Multi-step workflow with repo-specific checks and patterns.
-**Bad skill:** Generic process restating common sense.
+**The test:** If you need "and" to describe a skill's scope, it's too broad — split it.
+
+### 2. Workflow skills
+Repeatable multi-step workflows specific to this repo (e.g., deployment, migration review).
+
+## Mandatory skill
+
+**`skills/task-execution/SKILL.md`** — The 7-step workflow. Always active.
 
 ## Skill directory format
 
 ```
 skills/skill-name/
-├── SKILL.md          # required — with YAML frontmatter (name, description)
-├── scripts/          # optional
-├── references/       # optional
-└── assets/           # optional
+├── SKILL.md          # required — YAML frontmatter + instructions
+├── scripts/          # optional — helper scripts
+├── references/       # optional — reference docs
+└── assets/           # optional — templates, configs
 ```
 
-## When to create a skill
+### SKILL.md frontmatter
 
-Create when: the workflow is a **specific, repeatable sequence** with **repo-specific details** where wrong order or missed steps cause problems.
+```yaml
+---
+name: skill-name
+description: What this skill does and WHEN to use it. Front-load the trigger — Claude Code uses this to decide activation.
+---
+```
 
-Do NOT create when: the workflow is obvious, generic, or the concern doesn't exist yet.
+The `description` is critical — it determines when Claude auto-activates the skill. Be specific.
 
-## Mandatory skill
+## How to decompose a repo into concern skills
 
-**`skills/task-execution/SKILL.md`** — the 7-step workflow. Always referenced in `CLAUDE.md`.
+1. **Map file tree to responsibilities.** Identify clusters of files serving the same purpose.
+2. **Check for distinct patterns.** Different conventions from other clusters?
+3. **Check for distinct expertise.** Requires knowledge irrelevant elsewhere?
+4. **Check the boundary.** Can you define which files this concern owns?
 
-## Skill creation principles
+## Good vs bad
 
-- One workflow per skill
-- Only for workflows that exist — no speculation
-- Include repo-specific details Claude couldn't derive alone
-- Scale with repo: blank = only `task-execution`; mature = one per complex workflow
-- Bundle helper scripts, references, templates alongside SKILL.md
+**Good:** Owns defined files, repo-specific patterns, description triggers correctly, includes concrete rules.
+**Bad:** Covers "everything related to [broad domain]", generic advice, vague description.
 
-## What each SKILL.md must include
+## Scaling
 
-Frontmatter: `name`, `description`
+Minimal repo: 1 (task-execution only). Small: 2-4. Medium: 4-8. Large: as many as needed. Never create skills for nonexistent concerns.
 
-Body:
+## Embedding rules in skills
+
+**Universal rules** (apply to ALL tasks) → put in **CLAUDE.md directly** (auto-loaded).
+**Concern-specific rules** → put **inside the relevant skill's SKILL.md**. When the skill activates, its rules come with it. This is more reliable than separate rule files.
+
+## What each SKILL.md body must include
+
+For **concern skills**:
+- **Purpose** — what concern this governs
+- **Owns** — files/folders (glob patterns)
+- **Patterns in this repo** — actual conventions observed
+- **Rules for this concern** — constraints embedded here, not in separate files
+- **Checklist before finishing** — verification steps
+
+For **workflow skills**:
 - **Purpose** — what workflow this governs
-- **Trigger conditions** — specific, matchable
-- **Inputs required** — what Claude needs before starting
 - **Step-by-step execution** — repo-specific sequence
-- **Mapping to 7-step workflow** — which steps this covers/modifies
-- **Rules to check** — which `rules/*` to validate
+- **Rules to check** — constraints during this workflow
 - **Checks and risks** — what to verify, what could go wrong
-- **Output format** — expected result
-- **When to update** — what changes require revision
