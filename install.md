@@ -30,9 +30,7 @@ Read these files from the clone in order:
 
 ## Step 3: Install
 
-1. **Create `.claude/skills/task-execution/SKILL.md`** — Consolidate `agent-workflow.md` into one skill with YAML frontmatter. Include all 7 steps and rules.
-
-2. **Bootstrap `.claude/`** — Inspect the target repo. Create `CLAUDE.md`, `context.md`, concern skills, workflow skills, and commands as justified by evidence.
+1. **Bootstrap `.claude/`** — Inspect the target repo. Create `CLAUDE.md` (with 7-step workflow inline from `agent-workflow.md`), `context.md`, concern skills, and commands as justified by evidence. Do NOT create a task-execution skill — the workflow lives in CLAUDE.md only.
 
 3. **Install community skills** — Browse `/tmp/community-skills/` and `/tmp/awesome-skills/`. Copy relevant skills to `.claude/skills/` based on what the target repo actually contains.
 

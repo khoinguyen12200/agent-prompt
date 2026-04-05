@@ -35,7 +35,6 @@ Claude will:
   CLAUDE.md              # Auto-loaded every session — workflow + project rules (under 200 lines)
   context.md             # Project overview, stack, architecture, conventions
   skills/                # Auto-triggered skill directories (NATIVE)
-    task-execution/      # 7-step workflow (always active)
     [concern-a]/         # Concern-specific guidance (auto-triggers on matching tasks)
     [concern-b]/         # ...
   commands/              # User-invoked via /command-name (NATIVE)

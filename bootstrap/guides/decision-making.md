@@ -12,7 +12,7 @@ From files you read, determine: what distinct areas of responsibility exist, whi
 
 ## Step 3: Scale `.claude/` to the repo
 
-**Minimal/blank repo:** Lean `CLAUDE.md` + minimal `context.md`. One skill (task-execution). No skills for nonexistent concerns.
+**Minimal/blank repo:** Lean `CLAUDE.md` (with workflow inline) + minimal `context.md`. No skills for nonexistent concerns.
 
 **Growing repo:** When new responsibilities emerge (verified by new files/patterns), create skills then. Update `context.md`.
 

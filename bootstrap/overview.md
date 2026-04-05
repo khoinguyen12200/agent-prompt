@@ -37,8 +37,7 @@ Every task follows: **Think → Plan → Build → Review → Test → Ship → 
 CRITICAL: This workflow MUST be embedded **directly inline** at the top of `CLAUDE.md`. It is the ONLY guaranteed-read enforcement mechanism.
 
 You MUST create:
-1. **The workflow block directly in root `CLAUDE.md`** — full 7 steps inline, before anything else.
-2. `skills/task-execution/SKILL.md` — detailed skill with expanded guidance per step.
+1. **The workflow block directly in root `CLAUDE.md`** — full 7 steps inline, before anything else. This is the ONLY place the workflow lives. Do NOT create a separate task-execution skill — it duplicates CLAUDE.md and never gets invoked.
 
 **Visible step labels are mandatory.** A response is INCOMPLETE until ## Reflect is shown.
 
@@ -53,8 +52,6 @@ TARGET STRUCTURE
 ├── settings.json     # permissions, hooks
 ├── commands/         # user-invoked via /command-name ← NATIVE
 ├── skills/           # auto-triggered skill directories ← NATIVE
-│   ├── task-execution/
-│   │   └── SKILL.md  # the 7-step workflow (always active)
 │   ├── [concern-a]/
 │   │   └── SKILL.md  # replaces old "agents" — auto-triggers for matching tasks
 │   └── [concern-b]/
