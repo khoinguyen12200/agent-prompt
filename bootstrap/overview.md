@@ -32,6 +32,8 @@ Claude Code natively supports these. Use them in order of reliability:
 
 **Architecture principle:** Critical behaviors go in CLAUDE.md + hooks (guaranteed). Scoped constraints go in `rules/` with `paths:` (native per-file). Detailed knowledge goes in `skills/` (auto-triggered). Specialized tasks go in `agents/` (isolated context).
 
+**Brevity principle:** Every loaded file costs tokens on every turn. Write the minimum that enforces correct behavior. No explanations — only directives.
+
 ================================
 UNIVERSAL TASK EXECUTION WORKFLOW
 ================================

@@ -28,6 +28,8 @@ allowed-tools:
 
 # Code Reviewer
 
+Reply as short as possible. Only include essential findings. No preamble.
+
 Review all changed files for:
 - Logic errors and edge cases
 - Security vulnerabilities
@@ -36,6 +38,8 @@ Review all changed files for:
 
 Output a structured review with severity levels.
 ```
+
+**Agent body must be concise.** Every line costs tokens on every delegation. Include only what the agent specifically needs — no workflow restatement, no generic advice. Add `Reply as short as possible. Only include essential findings. No preamble.` to every agent body.
 
 ## Key frontmatter fields
 

@@ -2,7 +2,9 @@
 
 Rules are scoped constraints that auto-load when Claude accesses matching files. This is a **native** Claude Code feature — more reliable than skills for enforcing constraints.
 
-## ALL rules MUST have `paths:`
+## ALL rules MUST have `paths:` — NO EXCEPTIONS
+
+> **STOP: A rule file without `paths:` MUST NOT be created. Delete it instead.**
 
 Rules without `paths:` only load at session start and drift in long conversations. Rules WITH `paths:` re-load every time Claude touches matching files. Always use `paths:`.
 

@@ -2,7 +2,7 @@
 
 ## 1) `CLAUDE.md` — the only auto-loaded file
 
-**CRITICAL: Must be under 200 lines.** Re-injected as system-reminder every turn.
+**CRITICAL: Must be under 200 lines.** Re-injected as system-reminder every turn — every extra line costs tokens on every message.
 
 **Required structure:**
 1. **8-step workflow block (INLINE, at top)** — Use the template from `contracts/core-contracts.md`.
@@ -10,7 +10,7 @@
 3. **`@.claude/context.md`** — imports context directly (native @import, not an instruction to read it).
 4. **Commands** — List available commands.
 
-Write as direct instructions. No documentation, no explanations.
+**Write directives only. No prose, no explanations, no examples.** Bullet points over sentences. Each workflow step must fit on one line. If a rule needs explanation, it belongs in `rules/` or `skills/`, not here.
 
 ## 2) `settings.json` — hooks and permissions
 

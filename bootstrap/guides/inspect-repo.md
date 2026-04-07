@@ -1,45 +1,15 @@
 # Phase 1 — Inspect the Repository
 
-First inspect the repository in depth.
+Read relevant files: README, package manifests, source tree, routes/controllers/services/components, tests, CI/CD, Docker, database schema, lint/formatter config, auth/security code, scripts.
 
-Read as many relevant files as needed, such as:
-- README and docs
-- package manifests and lockfiles
-- source tree
-- app/server/client folders
-- components/pages/routes/controllers/services
-- tests
-- CI/CD configs
-- Docker/infra/deploy scripts
-- database schema/migrations/ORM config
-- lint/formatter/tooling config
-- auth/middleware/validation/security-related code
-- scripts and developer workflows
-- contribution or release docs if present
+Determine from evidence (cite the file for each):
+- repo maturity, languages, frameworks, runtimes, package manager
+- app type, architecture/layer boundaries
+- API, UI, database presence and style
+- testing and deployment strategy
+- security-sensitive areas, developer workflow conventions
+- which concerns are verified present vs absent
 
-Determine from evidence (files you actually read):
-- repository maturity
-- languages
-- frameworks
-- runtimes
-- package manager(s)
-- app type(s)
-- repository shape
-- architecture/layer boundaries
-- API presence and style
-- UI presence and style
-- database presence and style
-- testing strategy
-- deployment/release strategy
-- security-sensitive areas
-- developer workflow conventions
-- which concerns are verified present now
-- which concerns are verified absent now
+If unverifiable, mark as "unverified" — do not build `.claude/` content on it.
 
-For each item, you must be able to point to the file or pattern that proves it. If you cannot, mark it as "unverified" and do not build `.claude/` content on top of it.
-
-If the repo is blank or nearly blank:
-- explicitly say so
-- create only the bare minimum `.claude/` scaffold
-- do not speculate about what the project will become
-- do not create content for concerns that do not yet exist
+If the repo is blank: say so, create minimal scaffold only, no speculation.
