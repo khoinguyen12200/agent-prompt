@@ -1,59 +1,36 @@
 # Marketing Skills
 
-Install these if project involves marketing content.
+## Official (Anthropics)
 
-## marketing
+None specifically.
 
-**Source:** https://claude.com/plugins/marketing  
-**Install:**
-```bash
-# Plugin (global)
-/plugin install marketing
+## Community (Awesome)
+
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+| Skill | What |
+|-------|------|
+| brand-guidelines | Apply brand colors/typography |
+| competitive-ads-extractor | Analyze competitors' ads |
+| domain-name-brainstormer | Generate domain ideas |
+| internal-comms | Internal communications |
+| lead-research-assistant | Lead qualification |
+| article-extractor | Extract article text |
+| brainstorming | Design refinement |
+| content-research-writer | Write content with research |
+| family-history-research | Genealogy research |
+| meeting-insights-analyzer | Meeting transcript analysis |
+| notebooklm-integration | Chat with NotebookLM |
+| twitter-algorithm-optimizer | Optimize tweets |
+
+## Plugins
+
+| Skill | Install | What |
+|-------|---------|------|
+| marketing | `/plugin install marketing` | Marketing content |
+
+## Usage
+
 ```
-**When:** Creating marketing content  
-**What:** Marketing content creation and optimization
-
-## brand-guidelines
-
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
-```bash
-# Clone to temp then copy individual skills:
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-# Then copy specific skill folders:
-cp -r /tmp/awesome/[skill-name] .claude/skills/
-```
-```
-**When:** Applying brand standards  
-**What:** Applies Anthropic's brand colors and typography
-
-## competitive-ads-extractor
-
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:** With awesome-claude-skills repo  
-**When:** Competitor research  
-**What:** Extracts and analyzes competitors' ads
-
-## content-research-writer
-
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:** With awesome-claude-skills repo  
-**When:** Writing content  
-**What:** Research, citations, section-by-section feedback
-
-## twitter-algorithm-optimizer
-
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:** With awesome-claude-skills repo  
-**When:** Twitter/X optimization  
-**What:** Optimize tweets using Twitter's algorithm
-
-## Intent Mapping
-
-```yaml
-marketing: Load marketing plugin
-content: Load content-research-writer
-social: Load twitter-algorithm-optimizer
-brand: Load brand-guidelines
+Load marketing and create a campaign
 ```

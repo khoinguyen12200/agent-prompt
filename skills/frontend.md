@@ -1,53 +1,32 @@
 # Frontend Skills
 
-Install these if project uses React, Vue, Angular, or frontend frameworks.
+## Official (Anthropics)
 
-## frontend-design
+**Source:** https://github.com/anthropics/skills
 
-**Source:** https://claude.com/plugins/frontend-design  
-**Install:**
-```bash
-# Plugin (global)
-/plugin install frontend-design
+| Skill | What |
+|-------|------|
+| react-components | React component patterns |
+| vue-components | Vue.js patterns |
 
-# Or for project level, check if skill files available in awesome-claude-skills
+## Community (Awesome)
+
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+| Skill | What |
+|-------|------|
+| artifacts-builder | HTML/React/Tailwind artifacts |
+| d3-visualization | D3 charts and visualizations |
+
+## Plugins
+
+| Skill | Install | What |
+|-------|---------|------|
+| frontend-design | `/plugin install frontend-design` | Frontend design patterns |
+| ui-ux-pro-max | Check website | Advanced UI/UX |
+
+## Usage
+
 ```
-**When:** React, Vue, Angular projects  
-**What:** Frontend design patterns and component architecture
-
-## ui-ux-pro-max
-
-**Source:** https://ui-ux-pro-max-skill.nextlevelbuilder.io  
-**Install:** Check website for install method  
-**When:** Advanced UI/UX needs  
-**What:** Advanced UI/UX patterns and accessibility
-
-## artifacts-builder
-
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
-```bash
-# Clone to temp then copy individual skills:
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-# Then copy specific skill folders:
-cp -r /tmp/awesome/[skill-name] .claude/skills/
-```
-```
-**When:** Creating HTML artifacts with React/Tailwind  
-**What:** Multi-component HTML artifacts using React, Tailwind CSS, shadcn/ui
-
-## d3-visualization
-
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:** With awesome-claude-skills repo  
-**When:** Need charts/visualizations  
-**What:** D3 charts and interactive data visualizations
-
-## Intent Mapping
-
-```yaml
-frontend: Load frontend-design
-artifacts: Load artifacts-builder
-d3: Load d3-visualization
+Load frontend-design and create a component
 ```

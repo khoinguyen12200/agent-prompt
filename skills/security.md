@@ -1,27 +1,26 @@
 # Security Skills
 
-Install these for security testing and forensics.
+## Official (Anthropics)
 
-## How to Install
+None specifically.
+
+## Community (Awesome)
 
 **Source:** https://github.com/ComposioHQ/awesome-claude-skills
 
-Copy individual skill folders:
+| Skill | What |
+|-------|------|
+| ffuf-web-fuzzing | Web fuzzing for vulnerabilities |
+| computer-forensics | Digital forensics analysis |
+| file-deletion | Secure file deletion |
+| metadata-extraction | Extract file metadata |
+| threat-hunting-with-sigma-rules | Sigma detection rules |
 
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-cp -r /tmp/awesome/ffuf-web-fuzzing .claude/skills/
-```
+## From gstack
 
-## Available Skills
-
-| Skill | When | What |
-|-------|------|------|
-| ffuf-web-fuzzing | Security testing | Web fuzzing for vulnerabilities |
-| computer-forensics | Forensics | Digital forensics analysis |
-| file-deletion | Secure delete | Secure file deletion |
-| metadata-extraction | Metadata | Extract file metadata |
-| threat-hunting-with-sigma-rules | Threat hunting | Sigma detection rules |
+| Command | What |
+|---------|------|
+| /cso | OWASP + STRIDE security audit |
 
 ## Usage
 

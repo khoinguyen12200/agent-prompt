@@ -1,37 +1,30 @@
 # Creative & Media Skills
 
-Install these for image generation, video, and creative content.
+## Official (Anthropics)
 
-## Setup
+**Source:** https://github.com/anthropics/skills
 
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
-```bash
-# Clone to temp then copy individual skills:
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-# Then copy specific skill folders:
-cp -r /tmp/awesome/[skill-name] .claude/skills/
+| Skill | What |
+|-------|------|
+| creative-art | Art and creative design |
+| music | Music-related skills |
+
+## Community (Awesome)
+
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+| Skill | What |
+|-------|------|
+| canvas-design | PNG/PDF artwork |
+| imagen | Image generation with Gemini |
+| image-enhancer | Enhance image quality |
+| slack-gif-creator | Animated GIFs for Slack |
+| theme-factory | Themes for docs/slides |
+| video-downloader | Download YouTube videos |
+| youtube-transcript | Fetch YouTube transcripts |
+
+## Usage
+
 ```
-```
-
-## Available Skills
-
-| Skill | When | What |
-|-------|------|------|
-| canvas-design | Visual art | Create PNG/PDF artwork |
-| imagen | Image generation | Generate images with Gemini API |
-| image-enhancer | Image quality | Enhance resolution/sharpness |
-| slack-gif-creator | GIFs | Animated GIFs for Slack |
-| theme-factory | Theming | Apply themes to docs/slides |
-| video-downloader | Videos | Download YouTube videos |
-| youtube-transcript | Transcripts | Fetch YouTube transcripts |
-
-## Intent Mapping
-
-```yaml
-design: Load canvas-design or theme-factory
-image: Load imagen or image-enhancer
-gif: Load slack-gif-creator
-video: Load video-downloader or youtube-transcript
+Load imagen and generate a mockup
 ```

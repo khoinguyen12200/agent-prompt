@@ -1,54 +1,34 @@
 # Document Processing Skills
 
-Install these if project works with documents.
+## Official (Anthropics)
 
-## docx, pdf, pptx, xlsx
+**Source:** https://github.com/anthropics/skills
 
-**Source:** https://github.com/anthropics/skills  
 **Install:**
 ```bash
-# Plugin (global)
 /plugin install document-skills@anthropic-agent-skills
-
-# Or clone for project level
-git clone --single-branch --depth 1 https://github.com/anthropics/skills.git .claude/skills/anthropics
+# OR clone:
+git clone --depth 1 https://github.com/anthropics/skills.git .claude/skills/anthropics
 ```
-**When:** Processing PDF, Word, Excel, PowerPoint  
-**What:** Complete document processing suite
 
-| Skill | Files | What It Does |
-|-------|-------|--------------|
-| docx | .docx | Create, edit Word docs with tracked changes |
-| pdf | .pdf | Extract text, tables, merge, annotate |
-| pptx | .pptx | Read, generate slides |
+| Skill | Files | What |
+|-------|-------|------|
+| docx | .docx | Word docs, tracked changes, comments |
+| pdf | .pdf | Extract, merge, annotate PDFs |
+| pptx | .pptx | Slides, layouts |
 | xlsx | .xlsx | Spreadsheets, formulas, charts |
 
-## markdown-to-epub
+## Community (Awesome)
 
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
-```bash
-# Clone to temp then copy individual skills:
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-# Then copy specific skill folders:
-cp -r /tmp/awesome/[skill-name] .claude/skills/
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+| Skill | What |
+|-------|------|
+| markdown-to-epub | Markdown to EPUB ebook |
+| csv-data-summarizer | CSV analysis with visualizations |
+
+## Usage
+
 ```
-```
-**When:** Converting markdown to ebook  
-**What:** Markdown to EPUB converter
-
-## csv-data-summarizer
-
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:** With awesome-claude-skills repo  
-**When:** CSV analysis  
-**What:** CSV analysis with visualizations
-
-## Intent Mapping
-
-```yaml
-document: Load anthropics document-skills
-pdf: Load pdf skill
-csv: Load csv-data-summarizer
+Load docx skill and edit this Word document
 ```

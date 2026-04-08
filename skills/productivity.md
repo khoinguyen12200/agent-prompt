@@ -1,45 +1,37 @@
 # Productivity Skills
 
-Install these for file management and workspace utilities.
+## Official (Anthropics)
 
-## How to Install
+None specifically.
+
+## Community (Awesome)
 
 **Source:** https://github.com/ComposioHQ/awesome-claude-skills
 
-Copy individual skill folders:
-
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-cp -r /tmp/awesome/file-organizer .claude/skills/
-cp -r /tmp/awesome/google-workspace-skills .claude/skills/
-```
-
-## Available Skills
-
-| Skill | When | What |
-|-------|------|------|
-| file-organizer | File mgmt | Organize files/folders |
-| invoice-organizer | Taxes | Organize receipts for tax prep |
-| kaizen | Improvement | Continuous improvement (Lean) |
-| n8n-skills | Workflows | Operate n8n workflows |
-| raffle-winner-picker | Giveaways | Random winner selection |
-| tailored-resume-generator | Resumes | Tailored resume generation |
-| ship-learn-next | Planning | Decide what to build/learn |
-| tapestry | Documents | Link documents into networks |
-| git-pushing | Git | Automate git operations |
-| google-workspace-skills | Google apps | Gmail, Calendar, Drive, Docs |
-| outline | Wiki | Outline wiki management |
+| Skill | What |
+|-------|------|
+| file-organizer | Organize files/folders |
+| invoice-organizer | Receipts for tax prep |
+| kaizen | Continuous improvement |
+| n8n-skills | n8n workflows |
+| raffle-winner-picker | Random winner selection |
+| tailored-resume-generator | Tailored resumes |
+| ship-learn-next | Decide what to build |
+| tapestry | Link documents into networks |
+| git-pushing | Automate git operations |
+| google-workspace-skills | Gmail, Calendar, Drive |
+| outline | Outline wiki management |
 
 ## From gstack
 
-| Command | When | What |
-|---------|------|------|
-| /retro | Retros | Weekly engineering retro |
-| /document-release | Docs | Update docs after release |
-| /learn | Memory | Manage learned patterns |
+| Command | What |
+|---------|------|
+| /retro | Weekly engineering retro |
+| /document-release | Update docs after release |
+| /learn | Manage learned patterns |
 
 ## Usage
 
 ```
-Load google-workspace-skills and check my email
+Load google-workspace-skills and check email
 ```
