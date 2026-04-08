@@ -35,15 +35,8 @@ Read /tmp/claude-bootstrap/install.md and follow its instructions to bootstrap .
 | superpowers | 12 | Development workflow: debugging, refactoring, planning |
 | claude-mem | 1 | Memory and persistence across sessions |
 
-### Optional (Auto-detected by Claude)
-| Skill | When Detected |
-|-------|---------------|
-| anthropics-skills | PDF/Word/Excel work |
-| awesome-claude-skills | Web scraping, SaaS integrations |
-| frontend-design | React/Vue/Angular projects |
-| prisma | Database ORM usage |
-| marketing | Marketing content needs |
-| firecrawl | Web scraping needs |
+### Optional (User Selected)
+Claude will ask you to select from 180+ available skills based on your project needs.
 
 ## After Restart
 
