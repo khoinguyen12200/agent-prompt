@@ -1,77 +1,85 @@
 # Integrate Skills
 
-Skills for integrating with apps — automation, productivity, business.
+App automation, productivity, and business integrations.
 
-## App Automation (SaaS Integrations)
+## App Automation (SaaS)
 
-From https://github.com/ComposioHQ/awesome-claude-skills — copy skills you need individually:
-
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-
-# Copy ONLY the ones you need:
-cp -r /tmp/awesome/slack-automation .claude/skills/
-cp -r /tmp/awesome/github-automation .claude/skills/
-cp -r /tmp/awesome/notion-automation .claude/skills/
-# ... etc
-```
-
-**Available (78+ apps):**
+All from awesome-claude-skills catalog (copy individually):
 
 ### Project Management
-- asana-automation, basecamp-automation, clickup-automation
-- jira-automation, linear-automation, monday-automation
-- notion-automation, trello-automation
+- **asana-automation** — Asana integration
+- **jira-automation** — Jira integration
+- **linear-automation** — Linear integration
+- **notion-automation** — Notion integration
+- **trello-automation** — Trello integration
 
 ### Communication
-- slack-automation, discord-automation, telegram-automation
-- whatsapp-automation, microsoft-teams-automation
+- **slack-automation** — Slack integration
+- **discord-automation** — Discord integration
+- **telegram-automation** — Telegram integration
+- **microsoft-teams-automation** — Teams integration
 
 ### Email
-- gmail-automation, outlook-automation, sendgrid-automation
+- **gmail-automation** — Gmail integration
+- **outlook-automation** — Outlook integration
 
 ### Code & DevOps
-- github-automation, gitlab-automation, bitbucket-automation
-- vercel-automation, supabase-automation
+- **github-automation** — GitHub integration
+- **gitlab-automation** — GitLab integration
+- **vercel-automation** — Vercel deployment
+- **supabase-automation** — Supabase management
 
 ### Storage
-- google-drive-automation, dropbox-automation
+- **google-drive-automation** — Google Drive
+- **dropbox-automation** — Dropbox
 
 ### Social Media
-- twitter-automation, linkedin-automation, instagram-automation
+- **twitter-automation** — Twitter/X integration
+- **linkedin-automation** — LinkedIn integration
 
 ### E-commerce
-- shopify-automation, stripe-automation
+- **shopify-automation** — Shopify management
+- **stripe-automation** — Stripe operations
+
+---
 
 ## Productivity
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/file-organizer .claude/skills/
-cp -r /tmp/awesome/google-workspace-skills .claude/skills/
-cp -r /tmp/awesome/tapestry .claude/skills/
-```
+### file-organizer
+**Source:** awesome-claude-skills (file-organizer)
+**Type:** Catalog skill
 
-### From gstack
-- `/retro` — Weekly retrospective
-- `/document-release` — Update docs
-- `/learn` — Manage learned patterns
+**Provides:**
+- Automated file organization
+
+### google-workspace-skills
+**Source:** awesome-claude-skills (google-workspace-skills)
+**Type:** Catalog skill
+
+**Provides:**
+- Google Workspace automation
+
+---
 
 ## Business & Marketing
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/lead-research-assistant .claude/skills/
-cp -r /tmp/awesome/content-research-writer .claude/skills/
-cp -r /tmp/awesome/twitter-algorithm-optimizer .claude/skills/
-```
+### lead-research-assistant
+**Source:** awesome-claude-skills (lead-research-assistant)
+**Type:** Catalog skill
 
-### Plugins
-- **marketing** — `/plugin install marketing`
+**Provides:**
+- Lead research and enrichment
 
-## Usage
+### twitter-algorithm-optimizer
+**Source:** awesome-claude-skills (twitter-algorithm-optimizer)
+**Type:** Catalog skill
 
-```
-Load slack-automation and send a message
-Load github-automation and check issues
-```
+**Provides:**
+- Twitter content optimization
+
+### marketing
+**Source:** marketing (plugin)
+**Type:** Plugin
+
+**Provides:**
+- Marketing automation and content

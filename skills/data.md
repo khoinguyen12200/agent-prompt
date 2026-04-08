@@ -1,44 +1,59 @@
 # Data Skills
 
-Skills for working with data — analysis, extraction, research.
+Data analysis, extraction, and research.
 
 ## Analysis
 
-### From awesome-claude-skills (copy individually):
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-cp -r /tmp/awesome/csv-data-summarizer .claude/skills/
-```
-- **csv-data-summarizer** — CSV analysis
+### csv-data-summarizer
+**Source:** awesome-claude-skills (csv-data-summarizer)
+**Type:** Catalog skill
+
+**Provides:**
+- CSV data analysis and summarization
+
+**Configuration:**
+- paths: **/*.csv
+- allowed-tools: Read, Bash(csv processing)
+
+---
 
 ## Research
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/deep-research .claude/skills/
-cp -r /tmp/awesome/root-cause-tracing .claude/skills/
-```
-- **deep-research** — Multi-step research
-- **root-cause-tracing** — Trace errors
+### deep-research
+**Source:** awesome-claude-skills (deep-research)
+**Type:** Catalog skill
 
-### From gstack
-- `/investigate` — Systematic debugging
+**Provides:**
+- Multi-step research workflows
+
+### root-cause-tracing
+**Source:** awesome-claude-skills (root-cause-tracing)
+**Type:** Catalog skill
+
+**Provides:**
+- Error tracing and root cause analysis
+
+---
 
 ## Extraction
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/article-extractor .claude/skills/
-cp -r /tmp/awesome/reddit-fetch .claude/skills/
-cp -r /tmp/awesome/youtube-transcript .claude/skills/
-```
+### article-extractor
+**Source:** awesome-claude-skills (article-extractor)
+**Type:** Catalog skill
 
-### Plugins
-- **firecrawl** — `/plugin install firecrawl`
+**Provides:**
+- Web article content extraction
 
-## Usage
+### youtube-transcript
+**Source:** awesome-claude-skills (youtube-transcript)
+**Type:** Catalog skill
 
-```
-Load csv-data-summarizer and analyze this file
-Load deep-research and research this topic
-```
+**Provides:**
+- YouTube transcript fetching
+
+### firecrawl
+**Source:** firecrawl (plugin)
+**Type:** Plugin
+
+**Provides:**
+- Web scraping and data extraction

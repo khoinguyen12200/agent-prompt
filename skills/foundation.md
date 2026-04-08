@@ -1,63 +1,45 @@
-# Foundation Skills (Highly Recommended)
+# Foundation Skills
 
-Core skills for any development project.
+Core skills valuable for any software project.
 
 ## gstack
 
-**Status:** HIGHLY RECOMMENDED  
-**Source:** https://github.com/garrytan/gstack
+**Source:** github:garrytan/gstack
+**Type:** GitHub repository
+**Setup:** Has `./setup` script to run after clone
 
-**Install:**
-```bash
-git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
-cd .claude/skills/gstack && ./setup
-```
+**Provides:**
+- 23 specialist commands: /office-hours, /review, /qa, /ship, /cso, /browse, etc.
+- Planning, code review, testing, security audit, shipping workflows
 
-**What:** 23 specialists for end-to-end development
+**Configuration:**
+- hooks.SessionStart: Announces availability
+- allowed-tools: Bash(git *), Bash(gh *), Read, Grep, Edit, Write
 
-**Commands:**
-- `/office-hours` — Product planning
-- `/plan-ceo-review` — Strategic review
-- `/plan-eng-review` — Architecture planning
-- `/review` — Code review
-- `/qa` — Browser testing
-- `/ship` — Release workflow
-- `/cso` — Security audit
-- `/browse` — Browser automation
-- Plus 15 more...
+---
 
 ## superpowers
 
-**Status:** HIGHLY RECOMMENDED  
-**Source:** https://github.com/obra/superpowers
+**Source:** github:obra/superpowers
+**Type:** GitHub repository
 
-**Install:**
-```bash
-git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
-```
+**Provides:**
+- 12 workflow skills: systematic-debugging, test-driven-development, etc.
+- Debugging, refactoring, TDD patterns
 
-**What:** Development workflow
+**Configuration:**
+- hooks.SessionStart: Announces availability
+- allowed-tools: Bash(npm *), Bash(yarn *), Bash(node *)
 
-**Skills:**
-- `brainstorming` — Design refinement
-- `systematic-debugging` — 4-phase debugging
-- `subagent-driven-development` — Agent per task
-- `test-driven-development` — TDD
-- Plus 8 more...
+---
 
 ## claude-mem
 
-**Status:** HIGHLY RECOMMENDED  
-**Source:** https://claude-mem.ai/
+**Source:** claude-mem@thedotmack
+**Type:** Plugin
 
-**Install:** Visit website for setup
+**Provides:**
+- Memory persistence across sessions
 
-**What:** Memory across sessions
-
-## Usage
-
-```
-Load gstack and run /office-hours
-Load superpowers and debug this error
-Load claude-mem to remember this context
-```
+**Configuration:**
+- hooks.SessionStart: Loads memory

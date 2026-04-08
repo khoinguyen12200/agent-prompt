@@ -2,7 +2,7 @@
 
 > One command to give Claude Code a brain for your repo.
 
-Installs skill libraries you select. All skills are optional — you choose what to install.
+Installs skill libraries you select and **dynamically configures** Claude based on what you installed.
 
 ---
 
@@ -13,18 +13,21 @@ Installs skill libraries you select. All skills are optional — you choose what
 │   Detect    │ ──► │   Recommend  │ ──► │   Select    │
 │   Project   │     │    Skills    │     │   Skills    │
 └─────────────┘     └──────────────┘     └─────────────┘
-                                               │
-                                               ▼
+                                                │
+                                                ▼
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Prompt    │ ◄── │  Load Skill  │ ◄── │   Install   │
-│   "build"   │     │              │     │   Selected  │
+│   Generate  │ ◄── │ Read Config  │ ◄── │   Install   │
+│  settings   │     │  from Skills │     │   Selected  │
+│    .json    │     │              │     │             │
 └─────────────┘     └──────────────┘     └─────────────┘
 ```
 
 1. **Detects your project** — analyzes tech stack
 2. **Recommends skills** — organized into 6 categories
-3. **You select** — choose which to install via interactive prompts
-4. **Skills ready to use** — Load manually when needed
+3. **You select** — choose which to install
+4. **Installs skills** — clones or installs via `/plugin`
+5. **Reads skill configs** — extracts what each skill needs
+6. **Generates settings.json** — merges all configurations dynamically
 
 ---
 
@@ -70,24 +73,37 @@ Claude will strongly suggest these 3 for any project:
 
 ---
 
-## 📋 What Are Rules?
+## ⚙️ Dynamic Configuration
 
-Rules are path-scoped instructions that auto-load when you work with matching files.
+The bootstrap reads each installed skill's `SKILL.md` frontmatter to extract:
 
-**Example:** When you edit a React component, the frontend rules auto-load.
+- **Hooks** → Merged into `.claude/settings.json`
+- **Permissions** → Added to `permissions.allow`
+- **Auto-load paths** → Created as path-scoped rules
 
-```markdown
----
-name: frontend
-paths:
-  - "src/components/**/*.tsx"
----
-
-- Use named exports
-- Props interface named `Props`
+**Example:** If you install `gstack`:
+```yaml
+# From gstack/SKILL.md
+hooks:
+  SessionStart:
+    - command: echo "[gstack] Ready"
+allowed-tools: Bash(git *) Bash(gh *)
 ```
 
-Claude generates these based on your actual code patterns.
+Bootstrap generates:
+```json
+{
+  "permissions": {
+    "allow": ["Bash(git *)", "Bash(gh *)"]
+  },
+  "hooks": {
+    "SessionStart": [{
+      "type": "command",
+      "command": "echo '[gstack] Ready'"
+    }]
+  }
+}
+```
 
 ---
 
@@ -119,7 +135,8 @@ Using superpowers, debug this error...
 .claude/
 ├── CLAUDE.md              # Skill reference
 ├── context.md             # Project knowledge
-├── rules/                 # Project-specific rules
+├── settings.json          # Dynamic config (merged from skills)
+├── rules/                 # Path-scoped auto-load rules
 └── skills/                # Installed skills (you selected)
     ├── gstack/
     ├── superpowers/
@@ -135,7 +152,8 @@ Using superpowers, debug this error...
 | File | Purpose |
 |------|---------|
 | `install.md` | Instructions for Claude to follow |
-| `skills/*.md` | Skill catalog by category |
+| `skills/*.md` | Skill catalog with expected configurations |
+| `SKILL.md` | How dynamic configuration works |
 
 ---
 

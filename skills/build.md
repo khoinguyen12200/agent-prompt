@@ -1,90 +1,133 @@
 # Build Skills
 
-Skills for building applications — frontend, backend, database, APIs.
-
-## Foundation (Highly Recommended)
-
-### gstack
-**Source:** https://github.com/garrytan/gstack  
-**Install:**
-```bash
-git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
-cd .claude/skills/gstack && ./setup
-```
-**What:** 23 specialists — planning, review, QA, shipping
-
-### superpowers
-**Source:** https://github.com/obra/superpowers  
-**Install:**
-```bash
-git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
-```
-**What:** Debugging, TDD, planning, subagent-driven dev
+Frontend, backend, database, and testing skills.
 
 ## Frontend
 
-### Official
-- **react-components** — From https://github.com/anthropics/skills
-- **vue-components** — From https://github.com/anthropics/skills
+### react-components
+**Source:** awesome-claude-skills (react-components)
+**Type:** Catalog skill
 
-### From awesome-claude-skills catalog (copy individually):
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-cp -r /tmp/awesome/artifacts-builder .claude/skills/
-cp -r /tmp/awesome/d3-visualization .claude/skills/
-```
-- **artifacts-builder** — HTML/React/Tailwind artifacts
-- **d3-visualization** — D3 charts
+**Provides:**
+- React component generation and refactoring
 
-### Plugins
-- **frontend-design** — `/plugin install frontend-design`
+**Configuration:**
+- paths: src/**/*.tsx, src/**/*.jsx, *.tsx, *.jsx
+- allowed-tools: Read, Write, Edit
+
+### vue-components
+**Source:** awesome-claude-skills (vue)
+**Type:** Catalog skill
+
+**Provides:**
+- Vue component patterns
+
+**Configuration:**
+- paths: src/**/*.vue
+- allowed-tools: Read, Write, Edit
+
+### frontend-design
+**Source:** frontend-design@claude-plugins
+**Type:** Plugin
+
+**Provides:**
+- Design system guidance
+
+---
 
 ## Backend
 
-### Official
-- **api-design** — From https://github.com/anthropics/skills
-- **nodejs-express** — From https://github.com/anthropics/skills
-- **python-skills** — From https://github.com/anthropics/skills
+### api-design
+**Source:** awesome-claude-skills (api-design)
+**Type:** Catalog skill
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/aws-skills .claude/skills/
-cp -r /tmp/awesome/mcp-builder .claude/skills/
-cp -r /tmp/awesome/software-architecture .claude/skills/
-cp -r /tmp/awesome/prompt-engineering .claude/skills/
-```
+**Provides:**
+- REST API design patterns
+
+**Configuration:**
+- paths: src/api/**, **/routes/**, **/controllers/**
+- allowed-tools: Read, Write, Edit
+
+### nodejs-express
+**Source:** awesome-claude-skills (nodejs-express)
+**Type:** Catalog skill
+
+**Provides:**
+- Express.js patterns and middleware
+
+**Configuration:**
+- paths: **/*.js, **/*.ts (when package.json has express)
+- allowed-tools: Read, Write, Edit, Bash(node *)
+
+### python-skills
+**Source:** awesome-claude-skills (python-best-practices)
+**Type:** Catalog skill
+
+**Provides:**
+- Python best practices
+
+**Configuration:**
+- paths: **/*.py
+- allowed-tools: Read, Write, Edit, Bash(python *), Bash(pip *)
+
+---
 
 ## Database
 
-### Official
-- **sql-queries** — From https://github.com/anthropics/skills
-- **database-migrations** — From https://github.com/anthropics/skills
+### prisma
+**Source:** prisma@anthropic-agent-skills
+**Type:** Plugin
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/postgres .claude/skills/
-```
-- **postgres** — PostgreSQL queries
+**Provides:**
+- Prisma schema and query assistance
 
-### Plugins
-- **prisma** — `/plugin install prisma`
+**Configuration:**
+- paths: prisma/**, **/*.prisma
+- allowed-tools: Bash(npx prisma *)
+
+### postgres
+**Source:** awesome-claude-skills (postgres)
+**Type:** Catalog skill
+
+**Provides:**
+- PostgreSQL query help
+
+**Configuration:**
+- allowed-tools: Bash(psql *)
+
+---
 
 ## Testing
 
-### From superpowers
-- `test-driven-development` — TDD workflow
+### playwright
+**Source:** awesome-claude-skills (playwright)
+**Type:** Catalog skill
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/playwright .claude/skills/
-cp -r /tmp/awesome/webapp-testing .claude/skills/
-cp -r /tmp/awesome/pypict-testing .claude/skills/
-```
+**Provides:**
+- E2E test generation
 
-## Usage
+**Configuration:**
+- paths: **/*.spec.ts, **/*.test.ts, tests/**
+- allowed-tools: Bash(npx playwright *)
 
-```
-Load gstack and run /office-hours
-Load react-components
-Load postgres and query the database
-```
+### jest
+**Source:** awesome-claude-skills (jest)
+**Type:** Catalog skill
+
+**Provides:**
+- Jest testing patterns
+
+**Configuration:**
+- paths: **/*.test.js, **/*.test.ts
+- allowed-tools: Bash(npx jest *)
+
+---
+
+## About Awesome Claude Skills
+
+awesome-claude-skills is a catalog containing 100+ individual skill folders. When installing skills from this catalog:
+
+1. Clone the catalog: `git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome`
+2. Copy only the specific skill folders you need to `.claude/skills/`
+
+Do not clone the entire catalog into `.claude/skills/` - Claude won't recognize individual skills.

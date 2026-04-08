@@ -1,55 +1,72 @@
 # Create Skills
 
-Skills for creating content — documents, media, design, writing.
+Documents, media, design, and content creation.
 
 ## Documents
 
-### Official (Anthropics)
-**Install:** `/plugin install document-skills@anthropic-agent-skills`
+### document-skills
+**Source:** document-skills@anthropic-agent-skills
+**Type:** Plugin
 
-- **docx** — Word docs
-- **pdf** — PDF manipulation
-- **pptx** — Slides
-- **xlsx** — Spreadsheets
+**Provides:**
+- docx — Word document manipulation
+- pdf — PDF handling
+- pptx — Slide creation
+- xlsx — Spreadsheet operations
 
-### From awesome-claude-skills (copy individually):
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-cp -r /tmp/awesome/markdown-to-epub .claude/skills/
-```
+### markdown-to-epub
+**Source:** awesome-claude-skills (markdown-to-epub)
+**Type:** Catalog skill
+
+**Provides:**
+- Convert markdown to ePub format
+
+---
 
 ## Media & Design
 
-### Official
-- **creative-art** — Art and design
-- **music** — Music-related
+### creative-art
+**Source:** creative-art@anthropic-agent-skills
+**Type:** Plugin
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/canvas-design .claude/skills/
-cp -r /tmp/awesome/imagen .claude/skills/
-cp -r /tmp/awesome/image-enhancer .claude/skills/
-cp -r /tmp/awesome/slack-gif-creator .claude/skills/
-```
+**Provides:**
+- Art and design generation
 
-### From gstack
-- `/design-html` — Mockup to HTML
-- `/design-shotgun` — Generate mockups
+### canvas-design
+**Source:** awesome-claude-skills (canvas-design)
+**Type:** Catalog skill
+
+**Provides:**
+- Canvas-based design tools
+
+### imagen
+**Source:** awesome-claude-skills (imagen)
+**Type:** Catalog skill
+
+**Provides:**
+- Image generation
+
+---
 
 ## Writing & Content
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/content-research-writer .claude/skills/
-cp -r /tmp/awesome/brainstorming .claude/skills/
-```
+### content-research-writer
+**Source:** awesome-claude-skills (content-research-writer)
+**Type:** Catalog skill
 
-### Plugins
-- **marketing** — `/plugin install marketing`
+**Provides:**
+- Content research and writing assistance
 
-## Usage
+### brainstorming
+**Source:** awesome-claude-skills (brainstorming)
+**Type:** Catalog skill
 
-```
-Load docx and edit this Word document
-Load imagen and generate a mockup
-```
+**Provides:**
+- Structured brainstorming workflows
+
+### marketing
+**Source:** marketing (plugin)
+**Type:** Plugin
+
+**Provides:**
+- Marketing content and strategy

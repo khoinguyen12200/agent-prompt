@@ -1,30 +1,40 @@
 # Secure Skills
 
-Skills for security testing and forensics.
+Security testing and forensics.
 
 ## Security Testing
 
-### From gstack
-- `/cso` — OWASP + STRIDE audit
+### ffuf-web-fuzzing
+**Source:** awesome-claude-skills (ffuf-web-fuzzing)
+**Type:** Catalog skill
 
-### From awesome-claude-skills (copy individually):
-```bash
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-cp -r /tmp/awesome/ffuf-web-fuzzing .claude/skills/
-cp -r /tmp/awesome/threat-hunting-with-sigma-rules .claude/skills/
-```
+**Provides:**
+- Web fuzzing with ffuf
+
+**Configuration:**
+- allowed-tools: Bash(ffuf *)
+
+### threat-hunting-with-sigma-rules
+**Source:** awesome-claude-skills (threat-hunting-with-sigma-rules)
+**Type:** Catalog skill
+
+**Provides:**
+- Sigma rule-based threat hunting
+
+---
 
 ## Forensics
 
-### From awesome-claude-skills (copy individually):
-```bash
-cp -r /tmp/awesome/computer-forensics .claude/skills/
-cp -r /tmp/awesome/metadata-extraction .claude/skills/
-```
+### computer-forensics
+**Source:** awesome-claude-skills (computer-forensics)
+**Type:** Catalog skill
 
-## Usage
+**Provides:**
+- Digital forensics analysis
 
-```
-Load /cso and audit this codebase
-Load ffuf-web-fuzzing and scan for vulnerabilities
-```
+### metadata-extraction
+**Source:** awesome-claude-skills (metadata-extraction)
+**Type:** Catalog skill
+
+**Provides:**
+- File metadata extraction and analysis
