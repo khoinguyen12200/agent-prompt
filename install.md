@@ -39,39 +39,33 @@ Based on project detection, categorize remaining skills:
 
 ## Step 5: Ask User to Select Skills
 
-Use AskUserQuestion to let user choose which skills to install.
+Use AskUserQuestion with multi_select: true to let user choose skills.
 
-**First Question - Install Level:**
-```
-"Select skills to install:
-- Install ALL optional skills (recommended)
-- Select HIGH priority only
-- Select HIGH + MEDIUM priority
-- Let me choose individually"
-```
+**First Question - Quick Options:**
+Ask: "How would you like to install optional skills?"
+Options (single select):
+- Install ALL recommended skills (HIGH + MEDIUM)
+- Let me select individually by priority
 
-**If individual selection, ask by category:**
+**If individual selection, ask by category with multi_select:**
 
-Ask about HIGH recommended:
-```
-"High priority skills detected for this project:
-[LIST HIGH SKILLS]
-Select which to install:"
-```
+Ask about HIGH (multi_select: true):
+"Select HIGH priority skills to install:"
+[LIST HIGH SKILLS AS OPTIONS]
 
-Ask about MEDIUM:
-```
-"Medium priority skills:
-[LIST MEDIUM SKILLS]
-Select which to install:"
-```
+Ask about MEDIUM (multi_select: true):
+"Select MEDIUM priority skills to install:"
+[LIST MEDIUM SKILLS AS OPTIONS]
 
-Ask about LOW:
-```
-"Low priority (specialized) skills:
-[LIST LOW SKILLS]
-Select which to install:"
-```
+Ask about LOW (multi_select: true):
+"Select LOW priority (specialized) skills to install:"
+[LIST LOW SKILLS AS OPTIONS]
+
+**Alternative - Single Multi-Select:**
+Or combine all into one question:
+"Select optional skills to install (HIGH = strongly recommended, MEDIUM = useful, LOW = specialized):"
+[LIST ALL OPTIONAL SKILLS WITH PRIORITY LABELS]
+Use multi_select: true
 
 ## Step 6: Install Selected Skills
 
