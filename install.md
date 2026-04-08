@@ -59,44 +59,147 @@ For each selected skill, follow install instructions from its skills/ file:
 
 Analyze project and create `.claude/rules/` files with path-scoped constraints.
 
+### What Are Rules?
+
+Rules are markdown files in `.claude/rules/` that auto-load when you work with matching files. They give Claude specific instructions for different parts of your codebase.
+
+**Example:** When you edit `src/components/Button.tsx`, the `frontend.md` rule auto-loads.
+
 ### Rule Structure
+
+Every rule MUST have YAML frontmatter with `paths:`
 
 ```markdown
 ---
-name: [category]
+name: frontend
 paths:
-  - "pattern/**"
-  - "*.ext"
+  - "src/components/**/*.tsx"
+  - "src/components/**/*.jsx"
+  - "src/pages/**/*.tsx"
 ---
 
-# [Category] Rules
+# Frontend Rules
 
-## Conventions
-- Convention 1 (observed from code)
-- Convention 2 (observed from code)
+## Conventions (observed from actual code)
+- Use named exports for components
+- Props interface named `Props`
+- Default to functional components
 
 ## Checklist
-- [ ] Check 1
-- [ ] Check 2
+- [ ] Component renders without errors
+- [ ] TypeScript types are correct
+- [ ] Follows existing project patterns
 ```
 
-### Detection
+### How Rules Work
 
-| Category | Detect By | Paths Pattern |
+| Trigger | What Happens |
+|---------|--------------|
+| Read file matching `paths` | Rule auto-loads into context |
+| Work on different files | Rule stays unloaded (saves context) |
+| Multiple rules match | All matching rules load |
+
+### Detection Process
+
+1. **Scan directories** — List all folders and file extensions
+2. **Identify categories** — Look for:
+   - Frontend (React, Vue, Angular)
+   - Backend (API routes, handlers)
+   - Database (ORM, migrations, models)
+   - Testing (test files, specs)
+   - Config (configs, scripts)
+   - Documentation (docs, markdown)
+
+3. **Sample files** — Read 3-5 files per category to extract actual patterns
+
+4. **Write rules** — Document what you observe, not what you think should be
+
+### Path Patterns
+
+| Pattern | Matches |
+|---------|---------|
+| `**/*.ts` | All TypeScript files |
+| `src/components/**/*.tsx` | React components |
+| `src/api/**/*.ts` | API routes |
+| `prisma/**` | Prisma files |
+| `tests/**/*.test.ts` | Test files |
+| `*.{ts,tsx}` | TS and TSX in root |
+
+### Writing Effective Rules
+
+**DO:**
+- Use specific paths (not `**/*` which matches everything)
+- Extract from actual code patterns
+- Be concrete ("Use 2-space indent" not "Format nicely")
+- Keep under 30 lines per rule
+- One concern per file (frontend ≠ backend rules)
+
+**DON'T:**
+- Write generic advice
+- Copy style guides from internet
+- Create rules for < 5 files
+- Mix unrelated concerns
+
+### Categories to Detect
+
+| Category | Detect By | Paths Example |
 |----------|-----------|---------------|
-| Frontend | React/Vue/Angular files | `src/components/**`, `*.tsx` |
-| Backend | API routes, server files | `src/api/**`, `server/**` |
-| Database | ORM, migration files | `prisma/**`, `migrations/**` |
-| Testing | Test files | `*.test.*`, `tests/**` |
-| Styling | CSS, styled files | `*.css`, `*.scss` |
+| **Frontend** | React/Vue/Angular imports | `src/components/**`, `*.tsx` |
+| **Backend** | API handlers, routes | `src/api/**`, `server/**` |
+| **Database** | ORM models, migrations | `prisma/**`, `migrations/**` |
+| **Testing** | Test files, jest/vitest | `*.test.*`, `tests/**` |
+| **TypeScript** | .ts files | `src/**/*.ts` |
+| **Styling** | CSS, styled-components | `*.css`, `*.styled.*` |
 
-### Best Practices
+### Skip If
 
-- One concern per file
-- Use specific paths (not `**/*`)
-- Extract from actual code, not generic advice
-- Keep under 30 lines
-- Skip if less than 5 files or inconsistent patterns
+Do NOT create a rule if:
+- Less than 5 files in the category
+- Files have inconsistent/no patterns
+- Can't determine clear conventions from samples
+
+### Example Rules by Category
+
+**Frontend Rule:**
+```markdown
+---
+name: frontend
+paths:
+  - "src/components/**/*.tsx"
+  - "src/pages/**/*.tsx"
+---
+
+- Use named exports
+- Props interface: `Props`
+- Composition over inheritance
+```
+
+**API Rule:**
+```markdown
+---
+name: backend
+paths:
+  - "src/api/**/*.ts"
+---
+
+- Validate all inputs with zod
+- Return `{ success, data, error }` format
+- Use 200/201/400/404/500 status codes
+```
+
+**Testing Rule:**
+```markdown
+---
+name: testing
+paths:
+  - "**/*.test.ts"
+  - "tests/**"
+---
+
+- Test description: "should..."
+- One assertion per test ideally
+- Mock external dependencies
+```
 
 ## Step 7: Generate Core Files
 
