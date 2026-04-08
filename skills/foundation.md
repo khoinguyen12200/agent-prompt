@@ -1,97 +1,96 @@
 # Foundation Skills
 
+Core skills valuable for any software project.
+
 ## gstack
 
-**Type:** A (GitHub + Setup)
+**Type:** Multi-skill repository
 **Source:** https://github.com/garrytan/gstack
-**Prerequisites:** bun (for build), Playwright (for browser)
 
 **What It Is:**
-A collection of 23 specialist skills for end-to-end development, packaged as subdirectories each with their own SKILL.md.
+A collection of 23 specialist skills for end-to-end software development. Each skill is a subdirectory with its own `SKILL.md`.
 
-**Sub-Skills (23 total):**
-| Command | Purpose |
-|---------|---------|
-| `/office-hours` | Product planning, brainstorming |
-| `/review` | Pre-landing code review |
-| `/qa` | Browser testing, verification |
-| `/ship` | Release workflow |
-| `/cso` | Security audit (OWASP + STRIDE) |
-| `/browse` | Browser automation |
-| `/plan-ceo-review` | Strategic review |
-| `/plan-eng-review` | Architecture planning |
-| `/plan-design-review` | Design critique |
-| `/design-html` | Mockup to HTML |
-| `/design-shotgun` | Generate mockups |
-| `/retro` | Weekly retrospective |
-| `/investigate` | Systematic debugging |
-| `/learn` | Pattern documentation |
-| `/health` | Project health check |
-| `/ship` | Deployment workflow |
-| Plus 7 more... |
+**Skills Provided:**
+- office-hours — Product planning and brainstorming
+- review — Code review before landing changes
+- qa — Browser testing and verification
+- ship — Release and deployment workflow
+- cso — Security audit (OWASP + STRIDE)
+- browse — Browser automation
+- plan-ceo-review — Strategic review
+- plan-eng-review — Architecture planning
+- plan-design-review — Design critique
+- design-html — Convert mockups to HTML
+- design-shotgun — Generate mockups
+- retro — Weekly retrospective
+- investigate — Systematic debugging
+- learn — Pattern documentation
+- health — Project health check
+- document-release — Documentation updates
+- freeze/unfreeze — Code freeze management
+- checkpoint — Save progress
+- canary — Canary deployment
+- benchmark — Performance testing
+- land-and-deploy — Landing workflow
+- setup-deploy — Deployment setup
+- pair-agent — Pair programming
 
-**Install Process:**
-```bash
-git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
-cd .claude/skills/gstack && ./setup || true
-# CRITICAL: Link sub-skills
-cd ../.. && GSTACK_SKILLS_DIR="$(pwd)/.claude/skills" GSTACK_INSTALL_DIR="$(pwd)/.claude/skills/gstack" ./.claude/skills/gstack/bin/gstack-relink
-```
+**Prerequisites:**
+- bun (for building browser binary)
+- Playwright dependencies (for browser automation features)
 
-**Post-Install Verification:**
-```bash
-ls .claude/skills/office-hours/SKILL.md  # Should exist
-ls .claude/skills/review/SKILL.md        # Should exist
-ls .claude/skills/qa/SKILL.md            # Should exist
-```
+**Installation Notes:**
+- Has setup script that builds browser binary
+- Has `bin/gstack-relink` to link sub-skills for discovery
+- Browser features require Playwright; non-browser features work without it
+- Sub-skills must be linked to be discoverable as individual commands
+
+**Configuration:**
+- Each sub-skill has own `allowed-tools` in its SKILL.md
+- Main skill has SessionStart hooks
 
 ---
 
 ## superpowers
 
-**Type:** B (Plugin)
+**Type:** Multi-skill repository  
 **Source:** https://github.com/obra/superpowers
-**Prerequisites:** None
 
 **What It Is:**
-12 workflow skills in the `skills/` subdirectory.
+12 workflow skills for debugging, TDD, and collaboration patterns.
 
-**Sub-Skills (12 total):**
-| Command | Purpose |
-|---------|---------|
-| `/systematic-debugging` | 4-phase debugging |
-| `/test-driven-development` | TDD workflow |
-| `/subagent-driven-development` | Parallel agents |
-| `/brainstorming` | Design refinement |
-| `/writing-plans` | Plan creation |
-| `/executing-plans` | Plan execution |
-| `/receiving-code-review` | Handle review feedback |
-| `/requesting-code-review` | Request review |
-| Plus 3 more... |
-
-**Install Process:**
-```bash
-git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
-```
+**Skills Provided:**
+systematic-debugging — 4-phase debugging methodology
+test-driven-development — TDD workflow
+subagent-driven-development — Parallel agent tasks
+brainstorming — Design refinement
+writing-plans — Plan creation
+executing-plans — Plan execution
+receiving-code-review — Handle review feedback
+requesting-code-review — Request review
+finishing-a-development-branch — Branch completion
+using-git-worktrees — Worktree management
+verification-before-completion — Pre-completion checks
+dispatching-parallel-agents — Agent orchestration
 
 **Structure:**
-- `.claude/skills/superpowers/skills/<name>/SKILL.md` - Each subdirectory is a skill
+Skills are in `skills/` subdirectory, each with own `SKILL.md`.
+
+**Configuration:**
+Each skill has its own frontmatter with allowed-tools and hooks.
 
 ---
 
 ## claude-mem
 
-**Type:** B (Plugin)
+**Type:** Plugin
 **Source:** claude-mem@thedotmack
-**Prerequisites:** None
 
 **What It Is:**
 Memory persistence across Claude Code sessions.
 
-**Command:**
-- `/mem` - Recall and manage memory
+**Installation:**
+Via plugin marketplace.
 
-**Install Process:**
-```bash
-/plugin install claude-mem@thedotmack
-```
+**Configuration:**
+Auto-configured by plugin.

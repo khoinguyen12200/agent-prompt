@@ -1,93 +1,129 @@
 # Build Skills
 
-Frontend, backend, database, and testing.
+Frontend, backend, database, and testing skills.
 
 ## Frontend
 
 ### react-components
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/react-components
 
-**Provides:** React component patterns
+**What It Is:**
+React component generation and refactoring patterns.
 
-**Configuration:**
-- paths: src/**/*.tsx, src/**/*.jsx
+**Auto-load Paths:**
+- src/**/*.tsx
+- src/**/*.jsx
 
 ### vue-components
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/vue
 
-**Provides:** Vue component patterns
+**What It Is:**
+Vue component patterns and best practices.
 
-**Configuration:**
-- paths: src/**/*.vue
+**Auto-load Paths:**
+- src/**/*.vue
+
+### frontend-design
+**Type:** Plugin
+**Source:** frontend-design@claude-plugins
+
+**What It Is:**
+Design system guidance for frontend development.
 
 ---
 
 ## Backend
 
 ### api-design
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/api-design
 
-**Provides:** REST API patterns
+**What It Is:**
+REST API design patterns and conventions.
 
-**Configuration:**
-- paths: src/api/**, **/routes/**
+**Auto-load Paths:**
+- src/api/**
+- **/routes/**
+- **/controllers/**
+
+### nodejs-express
+**Type:** Single-skill
+**Source:** awesome-claude-skills/nodejs-express
+
+**What It Is:**
+Express.js patterns and middleware development.
+
+**Auto-load Paths:**
+- **/*.js, **/*.ts (when Express detected)
 
 ### python-skills
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/python-best-practices
 
-**Provides:** Python patterns
+**What It Is:**
+Python best practices and patterns.
 
-**Configuration:**
-- paths: **/*.py
+**Auto-load Paths:**
+- **/*.py
 
 ---
 
 ## Database
 
 ### prisma
-**Type:** Plugin (marketplace)
+**Type:** Plugin
 **Source:** prisma@anthropic-agent-skills
 
-**Provides:** Prisma schema assistance
+**What It Is:**
+Prisma schema and query assistance.
 
-**Configuration:**
-- paths: prisma/**, **/*.prisma
+**Auto-load Paths:**
+- prisma/**
+- **/*.prisma
 
 ### postgres
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/postgres
 
-**Provides:** PostgreSQL queries
+**What It Is:**
+PostgreSQL query assistance and optimization.
 
 ---
 
 ## Testing
 
 ### playwright
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/playwright
 
-**Provides:** E2E test generation
+**What It Is:**
+E2E test generation with Playwright.
 
-**Configuration:**
-- paths: **/*.spec.ts, tests/**
+**Auto-load Paths:**
+- **/*.spec.ts
+- tests/**
+
+### jest
+**Type:** Single-skill
+**Source:** awesome-claude-skills/jest
+
+**What It Is:**
+Jest testing patterns and best practices.
+
+**Auto-load Paths:**
+- **/*.test.js
+- **/*.test.ts
 
 ---
 
 ## Awesome Claude Skills Note
 
-awesome-claude-skills is a catalog with 100+ individual skills. Install by copying specific folders:
+awesome-claude-skills is a catalog containing 100+ individual skills. When installing:
 
-```bash
-# Clone catalog to temp (once)
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+1. Clone catalog to temporary location
+2. Copy only the specific skill directories needed
+3. Place directly in `.claude/skills/` (not nested under awesome/)
 
-# Copy only needed skills
-cp -r /tmp/awesome/[skill-name] .claude/skills/
-```
-
-Do NOT clone entire catalog to .claude/skills/
+Each skill in the catalog is a single-skill directory with its own SKILL.md.

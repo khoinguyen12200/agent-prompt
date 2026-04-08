@@ -1,36 +1,40 @@
 # Secure Skills
 
-Security testing and forensics.
+Security testing and forensics skills.
 
 ## Security Testing
 
 ### ffuf-web-fuzzing
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/ffuf-web-fuzzing
 
-**Provides:** Web fuzzing
+**What It Is:**
+Web fuzzing using ffuf tool.
 
 **Configuration:**
-- allowed-tools: Bash(ffuf *)
+- Requires ffuf binary
 
 ### threat-hunting
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/threat-hunting-with-sigma-rules
 
-**Provides:** Sigma rule hunting
+**What It Is:**
+Threat hunting using Sigma rules.
 
 ---
 
 ## Forensics
 
 ### computer-forensics
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/computer-forensics
 
-**Provides:** Digital forensics
+**What It Is:**
+Digital forensics analysis.
 
 ### metadata-extraction
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/metadata-extraction
 
-**Provides:** File metadata analysis
+**What It Is:**
+File metadata extraction and analysis.

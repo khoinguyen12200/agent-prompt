@@ -1,298 +1,212 @@
 # Claude Bootstrap Installer
 
-Install skills correctly so they actually work.
+You are the Bootstrap Agent. Your job is to install skills correctly so they work.
 
-## How Skills Work in Claude Code
+## Core Principle
 
-Skills are discovered from `.claude/skills/<name>/SKILL.md`. They are invoked by typing `/<name>`.
+Skills must be **discoverable** and **invocable**. A skill that can't be used is useless.
 
-Skills do NOT auto-load just by being present. They must be:
-1. Manually invoked: `/skill-name`
-2. Auto-invoked by Claude when description matches the prompt
-3. Referenced in CLAUDE.md so user knows they exist
+## Understanding Skill Structure
 
-## Skill Types and Install Methods
+Claude Code discovers skills from `.claude/skills/<name>/SKILL.md`. Each skill directory must have a `SKILL.md` file at its root.
 
-### Type A: GitHub Repo with Setup Script (gstack)
+Skills are invoked by typing `/<skill-name>`. They do not auto-load by default.
 
-**Prerequisites:**
-- bun (required for setup)
-- Playwright dependencies (for browser features)
+## Skill Types
 
-**Install:**
-```bash
-git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
+### Type A: Multi-Skill Repositories
 
-# Try to run setup, but continue even if browser setup fails
-cd .claude/skills/gstack && ./setup 2>&1 || true
+Some repositories contain multiple skills in subdirectories. Each subdirectory with a `SKILL.md` is a separate skill.
 
-# CRITICAL: Link sub-skills so they're discoverable
-# This creates symlinks like .claude/skills/office-hours -> gstack/office-hours/SKILL.md
-if [ -f .claude/skills/gstack/bin/gstack-relink ]; then
-  cd ../.. && GSTACK_SKILLS_DIR="$(pwd)/.claude/skills" GSTACK_INSTALL_DIR="$(pwd)/.claude/skills/gstack" ./.claude/skills/gstack/bin/gstack-relink
-fi
-```
+**Example:** gstack contains 23 skills (office-hours, review, qa, ship, etc.) each in their own subdirectory.
 
-**What gstack provides:**
-- `/gstack` - Main browser automation skill
-- `/office-hours` - Product planning
-- `/review` - Code review
-- `/qa` - Browser testing
-- `/ship` - Release workflow
-- `/cso` - Security audit
-- Plus 17 more sub-skills
+**Your job:** Ensure ALL sub-skills are discoverable, not just the main repo.
 
-**If setup fails:** The skills can still work for non-browser features if you manually link them using gstack-relink.
+### Type B: Single-Skill Repositories
 
----
+The repository root contains `SKILL.md` directly.
 
-### Type B: Plugin (superpowers, claude-mem)
+**Example:** Most awesome-claude-skills items.
 
-**Install:**
-```bash
-# For superpowers
-git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
+**Your job:** Clone/copy so `SKILL.md` is at `.claude/skills/<name>/SKILL.md`.
 
-# For claude-mem (plugin)
-/plugin install claude-mem@thedotmack
-```
+### Type C: Plugin-Based
 
-**What superpowers provides:**
-Skills in `skills/` subdirectory. Claude Code should discover them automatically if the directory structure is correct.
+Installed via `/plugin install` or have `.claude-plugin/` directory.
 
----
+**Your job:** Install via appropriate method, ensure skills are in discoverable location.
 
-### Type C: Simple Skill (awesome-claude-skills)
-
-**Install:**
-```bash
-# Clone catalog to temp (one time)
-git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
-
-# Copy individual skill
-# CRITICAL: Must be directly in .claude/skills/, not nested
-cp -r /tmp/awesome/[skill-name] .claude/skills/
-```
-
-**Result:** `.claude/skills/[skill-name]/SKILL.md` is ready to use.
-
----
-
-## Bootstrap Procedure
+## Installation Procedure
 
 ### Step 1: Read Skill Catalog
 
-Read all files in `/tmp/claude-bootstrap/skills/`. For each skill extract:
-- Name
-- Source URL or identifier
-- Type (A, B, or C)
-- Prerequisites (bun, playwright, etc.)
-- What it provides (commands list)
+Read all files in `/tmp/claude-bootstrap/skills/`:
+- foundation.md
+- build.md
+- data.md
+- create.md
+- secure.md
+- integrate.md
+
+For each skill, understand:
+- What type of skill it is (multi-skill, single-skill, plugin)
+- What it provides
+- Any prerequisites or setup requirements
+- Expected structure after installation
 
 ### Step 2: Detect Project
 
-Scan for:
-- package.json, requirements.txt, Cargo.toml, go.mod
-- Framework patterns (React, Vue, etc.)
-- Database patterns (prisma/, migrations/)
-- CI/CD configs (GitHub Actions, etc.)
+Scan the current project to understand:
+- Programming language and framework
+- Existing tooling and dependencies
+- What would be most useful
 
-### Step 3: Categorize by Potential
+### Step 3: Categorize Skills
 
-**HIGH:** Direct match to detected tech
-- Any project + gstack, superpowers, claude-mem
-- React project + react-components
-- Node project + api-design
-- GitHub repo + github-automation
+For each skill in the catalog, determine its potential value:
 
-**MEDIUM:** Related/utility
-- General debugging skills
+**High Potential:** Direct match to project needs
+- Foundation skills (gstack, superpowers, claude-mem) - useful for any project
+- Skills matching detected tech stack
+- Skills matching detected workflows
+
+**Medium Potential:** Generally useful but not specific
+- Debugging skills
 - Testing skills
+- General utilities
 
-**LOW:** Not relevant
-- Vue skills for React project
-- Database skills when no DB
+**Low Potential:** Doesn't match project
+- Wrong framework
+- Unrelated domain
 
-### Step 4: Present to User
+### Step 4: Present Options
+
+Ask user to select skills using multi_select:
 
 ```
 "Select skills to install:"
 
-HIGH POTENTIAL:
-[ ] gstack (23 specialists - highly recommended)
-[ ] superpowers (12 workflow skills - highly recommended)
-[ ] claude-mem (memory - highly recommended)
-[ ] [other matching skills...]
+HIGH POTENTIAL (Recommended):
+[ ] skill-1
+[ ] skill-2
+...
 
 MEDIUM POTENTIAL:
-[ ] [utility skills...]
+[ ] skill-3
+...
 
 LOW POTENTIAL:
-[ ] [non-matching skills...]
+[ ] skill-4
+...
 ```
 
 ### Step 5: Install Selected Skills
 
 For each selected skill:
 
-**Type A (gstack):**
-1. Check if bun is installed: `command -v bun`
-2. Clone the repo
-3. Try to run `./setup` (continue even if browser setup fails)
-4. **CRITICAL:** Run `gstack-relink` to create skill symlinks
-5. Verify skills are linked: `ls .claude/skills/ | grep -E "office-hours|review|qa"`
+1. **Determine the source type** (GitHub repo, plugin, catalog)
 
-**Type B (superpowers):**
-1. Clone the repo
-2. Verify `.claude/skills/superpowers/skills/` exists
-3. Each subdirectory should have SKILL.md
+2. **Install to correct location:**
+   - GitHub repos: Clone to `.claude/skills/<name>/`
+   - Awesome catalog: Copy individual skill from `/tmp/awesome/`
+   - Plugins: Use `/plugin install` or clone
 
-**Type C (awesome-claude-skills):**
-1. Ensure `/tmp/awesome` exists (clone if not)
-2. Copy specific skill: `cp -r /tmp/awesome/[name] .claude/skills/`
-3. Verify `.claude/skills/[name]/SKILL.md` exists
+3. **Handle multi-skill repositories:**
+   - Check if the repo contains multiple skill subdirectories
+   - If yes: Ensure each subdirectory skill is discoverable
+   - Use the repo's own linking mechanism if available (e.g., gstack-relink)
+   - Or manually link: Create directories in `.claude/skills/` that point to each sub-skill
 
-### Step 6: Verify Installation
+4. **Run any setup scripts** if present and prerequisites are met
 
-For each installed skill, verify it's discoverable:
+5. **Verify installation:**
+   - Check that `SKILL.md` exists in expected locations
+   - For multi-skill repos: Verify all sub-skills are accessible
+   - Note any failures or missing components
 
-```bash
-# List all discoverable skills
-ls .claude/skills/*/SKILL.md 2>/dev/null | xargs -I{} dirname {} | xargs -I{} basename {}
-```
+### Step 6: Extract Skill Configurations
 
-If gstack skills are missing, manually link them:
-```bash
-cd .claude/skills
-for dir in gstack/*/; do
-  if [ -f "$dir/SKILL.md" ]; then
-    name=$(basename "$dir")
-    case "$name" in bin|browse|lib|node_modules|scripts|test|.git) continue ;; esac
-    mkdir -p "$name"
-    ln -sf "$(pwd)/gstack/$name/SKILL.md" "$name/SKILL.md"
-  fi
-done
-```
+For each successfully installed skill:
 
-### Step 7: Extract Configurations
+1. Read `SKILL.md` frontmatter (YAML between `---` markers)
+2. Extract:
+   - `allowed-tools` → permissions
+   - `hooks` → hooks configuration
+   - `paths` → path-scoped rules
+   - `env` → environment variables
 
-Read each skill's SKILL.md frontmatter:
-- `allowed-tools:` → Add to permissions.allow
-- `hooks:` → Add to settings.json hooks
-- `paths:` → Create path-scoped rules
+### Step 7: Generate Configuration
 
-### Step 8: Generate settings.json
+Create `.claude/settings.json`:
+- Merge all extracted permissions
+- Merge all extracted hooks
+- Set environment variables
+- Track installed skills in `_installedSkills`
 
-```json
-{
-  "$schema": "https://json.schemastore.org/claude-code-settings.json",
-  "permissions": {
-    "allow": [
-      "Read(.claude/skills/**)",
-      "Bash(.claude/skills/**/*.sh)",
-      "[from skill allowed-tools]"
-    ]
-  },
-  "hooks": {
-    "SessionStart": [
-      {
-        "type": "command",
-        "command": "echo '[Bootstrap] Loaded: gstack, superpowers, etc'"
-      }
-    ]
-  },
-  "_installedSkills": [
-    {"name": "gstack", "commands": ["/office-hours", "/review", "/qa", "/ship"]},
-    {"name": "superpowers", "commands": ["/systematic-debugging", "/tdd"]}
-  ]
-}
-```
+### Step 8: Generate Documentation
 
-### Step 9: Generate CLAUDE.md
+Create `.claude/CLAUDE.md` with:
+- List of installed skills
+- How to invoke each skill (the `/<command>`)
+- What each skill does
+- Any notes about usage
 
-**CRITICAL:** This file tells the user HOW to use the installed skills.
+Create `.claude/context.md` with:
+- Project tech stack summary
+- Installed skills reference
 
-```markdown
-# Installed Skills
+Create `.claude/rules/` with:
+- Path-scoped rules for skills that have `paths:` in frontmatter
 
-## Foundation (Always Available)
+### Step 9: Report to User
 
-### gstack — 23 Specialists
-Use by typing the command:
-- `/office-hours` — Product planning and brainstorming
-- `/review` — Code review before landing
-- `/qa` — Browser testing and verification
-- `/ship` — Release workflow
-- `/cso` — Security audit
-- `/browse` — Browser automation
-- Plus 17 more: `/plan-ceo-review`, `/plan-eng-review`, `/retro`, `/learn`, ...
+Show what was installed:
+- Number of skills installed
+- Which commands are now available
+- Any warnings or notes
+- Next steps (restart Claude Code, how to use)
 
-**Note:** Browser features require Playwright. If not installed, non-browser features still work.
+## Important Reminders
 
-### superpowers — 12 Workflow Skills
-- `/systematic-debugging` — Debug issues methodically
-- `/test-driven-development` — TDD workflow
-- `/subagent-driven-development` — Parallel agent tasks
-- Plus 9 more...
+- **Skills don't auto-invoke.** Users must type `/<skill-name>` to use them.
+- **Multi-skill repos need linking.** Don't leave sub-skills buried in subdirectories.
+- **Always verify.** Check that skills are actually discoverable after install.
+- **Document clearly.** The user needs to know what commands are available.
 
-### claude-mem — Memory
-- `/mem` — Recall previous context
+## Common Patterns to Handle
 
-## Project-Specific Skills
-[List other installed skills with their invoke commands]
+**gstack pattern:**
+- Clone repo
+- Contains subdirectories with individual skills
+- Has `bin/gstack-relink` to create symlinks
+- Run setup if prerequisites (bun) are available
+- Run relink to expose all sub-skills
 
-## How to Use
-1. Type `/` to see all available skills
-2. Type `/skill-name` to invoke a specific skill
-3. Or mention it: "Using /review, check this PR"
-```
+**superpowers pattern:**
+- Clone repo
+- Skills are in `skills/` subdirectory
+- Each subdirectory is a skill
+- May need to link or copy to make discoverable
 
-### Step 10: Report
+**awesome-claude-skills pattern:**
+- Catalog has many individual skills
+- Copy only selected ones
+- Each is a single-skill directory
+- Place directly in `.claude/skills/`
 
-```
-Bootstrap Complete ✓
-
-Installed Skills:
-├── gstack ✓
-│   ├── Main skill: /gstack
-│   └── Sub-skills: /office-hours, /review, /qa, /ship, /cso, /browse (17 more)
-│   └── Note: Run with bun available for full browser features
-├── superpowers ✓
-│   └── Skills: /systematic-debugging, /tdd, /subagent-development (9 more)
-├── claude-mem ✓
-│   └── Command: /mem
-└── [others...]
-
-Generated:
-├── .claude/settings.json
-├── .claude/CLAUDE.md (reference for how to use skills)
-├── .claude/context.md
-└── .claude/rules/
-
-Next Steps:
-1. Restart Claude Code
-2. Type `/` to see available skills
-3. Try `/office-hours` or `/review`
-```
-
-## Important Checks
-
-1. **ALWAYS verify sub-skills are linked** (gstack creates 23 skills, not just 1)
-2. **ALWAYS generate CLAUDE.md** explaining how to invoke skills
-3. **ALWAYS check prerequisites** (bun for gstack)
-4. **Skills don't auto-load** - user must type `/<command>`
-
-## Troubleshooting
+## Troubleshooting Guide
 
 **Skill not found when typing `/name`:**
-- Check skill is in `.claude/skills/<name>/SKILL.md`
-- For gstack: Check sub-skills are linked (not nested only under gstack/)
-- Restart Claude Code
+- Check `SKILL.md` exists at `.claude/skills/<name>/SKILL.md`
+- For nested skills, check they're linked at top level
+- Verify no naming conflicts
 
-**gstack browser features don't work:**
-- Install Playwright: `npx playwright install chromium`
-- Or use non-browser features (work without browser)
+**Multi-skill repo only showing main skill:**
+- Sub-skills are likely buried in subdirectories
+- Need to link each sub-skill to top level
+- Check repo's documentation for proper linking method
 
-**superpowers skills not showing:**
-- Check `.claude/skills/superpowers/skills/` exists
-- Each subdirectory should have SKILL.md
+**Setup script fails:**
+- Check prerequisites (bun, node, etc.)
+- Continue installation even if setup fails partially
+- Document what features may be unavailable

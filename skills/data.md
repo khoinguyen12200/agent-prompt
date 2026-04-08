@@ -1,46 +1,51 @@
 # Data Skills
 
-Data analysis, extraction, research.
+Data analysis, extraction, and research skills.
 
 ## Analysis
 
 ### csv-data-summarizer
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/csv-data-summarizer
 
-**Provides:** CSV analysis
+**What It Is:**
+CSV data analysis and summarization.
 
-**Configuration:**
-- paths: **/*.csv
+**Auto-load Paths:**
+- **/*.csv
 
 ---
 
 ## Research
 
 ### deep-research
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/deep-research
 
-**Provides:** Multi-step research
+**What It Is:**
+Multi-step research workflows for thorough investigation.
 
 ### root-cause-tracing
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/root-cause-tracing
 
-**Provides:** Error tracing
+**What It Is:**
+Error tracing and root cause analysis.
 
 ---
 
 ## Extraction
 
 ### youtube-transcript
-**Type:** Simple Skill (SKILL.md)
+**Type:** Single-skill
 **Source:** awesome-claude-skills/youtube-transcript
 
-**Provides:** YouTube transcript fetching
+**What It Is:**
+YouTube transcript fetching and processing.
 
 ### firecrawl
-**Type:** Plugin (marketplace)
+**Type:** Plugin
 **Source:** firecrawl
 
-**Provides:** Web scraping
+**What It Is:**
+Web scraping and data extraction.
