@@ -2,7 +2,7 @@
 
 > One command to give Claude Code a brain for your repo.
 
-Installs skill libraries and configures **active skill loading** — skills automatically load when you need them.
+Installs skill libraries you select. All skills are optional — you choose what to install.
 
 ---
 
@@ -10,21 +10,21 @@ Installs skill libraries and configures **active skill loading** — skills auto
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Install   │ ──► │    Detect    │ ──► │   Select    │
-│  Mandatory  │     │    Project   │     │   Skills    │
+│   Detect    │ ──► │   Recommend  │ ──► │   Select    │
+│   Project   │     │    Skills    │     │   Skills    │
 └─────────────┘     └──────────────┘     └─────────────┘
-                                              │
-                                              ▼
+                                               │
+                                               ▼
 ┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Prompt    │ ◄── │  Auto-Load   │ ◄── │   Install   │
-│   "build"   │     │    Skills    │     │   Selected  │
+│   Prompt    │ ◄── │  Load Skill  │ ◄── │   Install   │
+│   "build"   │     │              │     │   Selected  │
 └─────────────┘     └──────────────┘     └─────────────┘
 ```
 
-1. **Installs mandatory skills** — gstack (23 specialists), superpowers, claude-mem
-2. **Detects your project** — analyzes tech stack
-3. **Lets you select skills** — from 180+ options via interactive prompts
-4. **Skills ready to use** — Load manually or mention in prompt
+1. **Detects your project** — analyzes tech stack
+2. **Recommends skills** — suggests highly recommended + optional
+3. **You select** — choose which to install via interactive prompts
+4. **Skills ready to use** — Load manually when needed
 
 ---
 
@@ -44,23 +44,28 @@ Read /tmp/claude-bootstrap/install.md and bootstrap .claude/ in this project.
 
 ## 📦 What Gets Installed
 
-### Mandatory (Always)
+### Highly Recommended
+Claude will strongly suggest these 3 for any project:
+
 | Skill | Count | What |
 |-------|-------|------|
 | **gstack** | 23 | Planning, review, QA, shipping — YC-style workflow |
 | **superpowers** | 12 | Debugging, refactoring, TDD |
 | **claude-mem** | 1 | Memory across sessions |
 
-### Optional (You Choose)
+### Optional Categories (You Choose)
 
-Claude detects your project and asks you to select from 180+ skills:
-
-- **Frontend** — React, Vue, design patterns
-- **Backend** — APIs, databases, ORMs
-- **Automation** — 78+ SaaS app integrations
-- **Security** — Testing, forensics
-- **Creative** — Images, video, design
-- **Productivity** — File mgmt, workspace tools
+| Category | Skills |
+|----------|--------|
+| **Workflow** | gstack, superpowers |
+| **Memory** | claude-mem |
+| **Frontend** | React, Vue, design patterns |
+| **Backend** | APIs, databases, ORMs |
+| **Documents** | PDF, Word, Excel |
+| **Automation** | 78+ SaaS app integrations |
+| **Security** | Testing, forensics |
+| **Creative** | Images, video, design |
+| **Productivity** | File mgmt, workspace tools |
 
 ---
 
@@ -78,8 +83,8 @@ Or mention it in your prompt:
 Using superpowers, debug this error...
 ```
 
-| Skill Library | Commands Available |
-|---------------|-------------------|
+| Skill | Commands Available |
+|-------|-------------------|
 | gstack | /office-hours, /review, /qa, /ship, etc. |
 | superpowers | systematic-debugging, subagent-driven-development, etc. |
 | [installed] | See .claude/skills/ for full list |
@@ -91,15 +96,13 @@ Using superpowers, debug this error...
 ```
 .claude/
 ├── CLAUDE.md              # Skill reference
-├── settings.json          # UserPromptSubmit hook
 ├── context.md             # Project knowledge
-├── intent-map.yaml        # Intent → skill mapping
 ├── rules/                 # Project-specific rules
-└── skills/                # Installed skills
-    ├── gstack/
-    ├── superpowers/
-    ├── claude-mem/
-    └── [your-selected]/
+└── skills/                # Installed skills (you selected)
+    ├── [workflow]/
+    ├── [memory]/
+    ├── [frontend]/
+    └── ...
 ```
 
 ---
