@@ -30,19 +30,15 @@ Installs skill libraries and configures **active skill loading** — skills auto
 
 ## 🚀 Quick Start
 
-```bash
-# Step 1: Clone
+**Step 1:** Clone this repo to temp:
+
 !rm -rf /tmp/claude-bootstrap && git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
-```
 
-```
-# Step 2: Tell Claude
+**Step 2:** Tell Claude to install:
+
 Read /tmp/claude-bootstrap/install.md and bootstrap .claude/ in this project.
-```
 
-```
-# Step 3: Restart when done
-```
+**Step 3:** Restart Claude Code when done.
 
 ---
 
