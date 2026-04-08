@@ -140,7 +140,38 @@ paths:
 - One concern per file
 - Skip if less than 5 files or inconsistent patterns
 
-## Step 6: Generate Core Files
+## Step 6: Generate settings.json
+
+Create `.claude/settings.json` with installed skills:
+
+```json
+{
+  "permissions": {},
+  "hooks": {},
+  "enabledSkills": [
+    "gstack",
+    "superpowers",
+    "claude-mem",
+    [LIST OTHER INSTALLED SKILLS HERE]
+  ]
+}
+```
+
+Or if skills are in subdirectories:
+```json
+{
+  "permissions": {},
+  "hooks": {},
+  "enabledSkills": [
+    "foundation/gstack",
+    "foundation/superpowers", 
+    "build/react-components",
+    [ETC...]
+  ]
+}
+```
+
+## Step 7: Generate Core Files
 
 **CLAUDE.md:**
 - List installed skills
@@ -149,7 +180,7 @@ paths:
 **context.md:**
 - Project info, tech stack, conventions
 
-## Step 7: Report
+## Step 8: Report
 
 Tell user what was installed:
 
