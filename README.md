@@ -22,7 +22,7 @@ Installs skill libraries you select. All skills are optional — you choose what
 ```
 
 1. **Detects your project** — analyzes tech stack
-2. **Recommends skills** — suggests highly recommended + optional
+2. **Recommends skills** — organized into 6 categories
 3. **You select** — choose which to install via interactive prompts
 4. **Skills ready to use** — Load manually when needed
 
@@ -53,19 +53,16 @@ Claude will strongly suggest these 3 for any project:
 | **superpowers** | 12 | Debugging, refactoring, TDD |
 | **claude-mem** | 1 | Memory across sessions |
 
-### Optional Categories (You Choose)
+### Skill Categories (You Choose)
 
 | Category | Skills |
 |----------|--------|
-| **Workflow** | gstack, superpowers |
-| **Memory** | claude-mem |
-| **Frontend** | React, Vue, design patterns |
-| **Backend** | APIs, databases, ORMs |
-| **Documents** | PDF, Word, Excel |
-| **Automation** | 78+ SaaS app integrations |
-| **Security** | Testing, forensics |
-| **Creative** | Images, video, design |
-| **Productivity** | File mgmt, workspace tools |
+| **Foundation** | gstack, superpowers, claude-mem |
+| **Build** | Frontend, backend, database, testing |
+| **Data** | Analysis, extraction, research |
+| **Create** | Documents, media, design, content |
+| **Secure** | Security testing, forensics |
+| **Integrate** | App automation, productivity, business |
 
 ---
 
@@ -83,8 +80,8 @@ Or mention it in your prompt:
 Using superpowers, debug this error...
 ```
 
-| Skill | Commands Available |
-|-------|-------------------|
+| Skill Library | Commands Available |
+|---------------|-------------------|
 | gstack | /office-hours, /review, /qa, /ship, etc. |
 | superpowers | systematic-debugging, subagent-driven-development, etc. |
 | [installed] | See .claude/skills/ for full list |
@@ -99,10 +96,12 @@ Using superpowers, debug this error...
 ├── context.md             # Project knowledge
 ├── rules/                 # Project-specific rules
 └── skills/                # Installed skills (you selected)
-    ├── [workflow]/
-    ├── [memory]/
-    ├── [frontend]/
-    └── ...
+    ├── foundation/
+    ├── build/
+    ├── data/
+    ├── create/
+    ├── secure/
+    └── integrate/
 ```
 
 ---
@@ -112,7 +111,7 @@ Using superpowers, debug this error...
 | File | Purpose |
 |------|---------|
 | `install.md` | Instructions for Claude to follow |
-| `skills/*.md` | Skill catalog (180+ skills) |
+| `skills/*.md` | Skill catalog by category |
 
 ---
 
