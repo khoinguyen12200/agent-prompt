@@ -2,32 +2,25 @@
 
 > One command to give Claude Code a brain for your repo.
 
-Installs skill libraries you select and **dynamically configures** Claude based on what you installed.
+Installs skill libraries and **makes them actually work** with proper linking and configuration.
 
 ---
 
 ## ✨ What It Does
 
 ```
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Detect    │ ──► │   Recommend  │ ──► │   Select    │
-│   Project   │     │    Skills    │     │   Skills    │
-└─────────────┘     └──────────────┘     └─────────────┘
-                                                │
-                                                ▼
-┌─────────────┐     ┌──────────────┐     ┌─────────────┐
-│   Generate  │ ◄── │ Read Config  │ ◄── │   Install   │
-│  settings   │     │  from Skills │     │   Selected  │
-│    .json    │     │              │     │             │
-└─────────────┘     └──────────────┘     └─────────────┘
+1. Detect project type
+2. Categorize skills by relevance (High/Medium/Low potential)
+3. User selects skills
+4. Install with CORRECT linking:
+   - gstack: Links all 23 sub-skills individually
+   - superpowers: Installs 12 workflow skills
+   - Others: Copy to proper location
+5. Generate CLAUDE.md with HOW to use each skill
+6. Create dynamic settings.json
 ```
 
-1. **Detects your project** — analyzes tech stack
-2. **Recommends skills** — organized into 6 categories
-3. **You select** — choose which to install
-4. **Installs skills** — clones or installs via `/plugin`
-5. **Reads skill configs** — extracts what each skill needs
-6. **Generates settings.json** — merges all configurations dynamically
+**Key Difference:** We don't just clone repos. We ensure skills are discoverable and usable.
 
 ---
 
@@ -49,83 +42,42 @@ Read /tmp/claude-bootstrap/install.md and bootstrap .claude/ in this project.
 
 ---
 
+## 🎯 How to Use Installed Skills
+
+After install, **you must type the command** to invoke a skill:
+
+```
+/office-hours     ← Product planning
+/review           ← Code review
+/qa               ← Browser testing
+/ship             ← Release workflow
+/cso              ← Security audit
+/systematic-debugging  ← Debug issues
+```
+
+Or type `/` to see all available skills.
+
+---
+
 ## 📦 What Gets Installed
 
-### Highly Recommended
-Claude will strongly suggest these 3 for any project:
+### Foundation (Highly Recommended)
 
-| Skill | Count | What |
-|-------|-------|------|
-| **gstack** | 23 | Planning, review, QA, shipping — YC-style workflow |
-| **superpowers** | 12 | Debugging, refactoring, TDD |
-| **claude-mem** | 1 | Memory across sessions |
+| Skill | Commands | Count |
+|-------|----------|-------|
+| **gstack** | `/office-hours`, `/review`, `/qa`, `/ship`, `/cso`, `/browse`, etc. | 23 |
+| **superpowers** | `/systematic-debugging`, `/tdd`, `/subagent-development`, etc. | 12 |
+| **claude-mem** | `/mem` | 1 |
 
-### Skill Categories (You Choose)
+### By Category
 
-| Category | Skills |
-|----------|--------|
-| **Foundation** | gstack, superpowers, claude-mem |
-| **Build** | Frontend, backend, database, testing |
-| **Data** | Analysis, extraction, research |
-| **Create** | Documents, media, design, content |
-| **Secure** | Security testing, forensics |
-| **Integrate** | App automation, productivity, business |
-
----
-
-## ⚙️ Dynamic Configuration
-
-The bootstrap reads each installed skill's `SKILL.md` frontmatter to extract:
-
-- **Hooks** → Merged into `.claude/settings.json`
-- **Permissions** → Added to `permissions.allow`
-- **Auto-load paths** → Created as path-scoped rules
-
-**Example:** If you install `gstack`:
-```yaml
-# From gstack/SKILL.md
-hooks:
-  SessionStart:
-    - command: echo "[gstack] Ready"
-allowed-tools: Bash(git *) Bash(gh *)
-```
-
-Bootstrap generates:
-```json
-{
-  "permissions": {
-    "allow": ["Bash(git *)", "Bash(gh *)"]
-  },
-  "hooks": {
-    "SessionStart": [{
-      "type": "command",
-      "command": "echo '[gstack] Ready'"
-    }]
-  }
-}
-```
-
----
-
-## 🎯 How to Use Skills
-
-After install, tell Claude to load a skill:
-
-```
-Load gstack and run /office-hours
-```
-
-Or mention it in your prompt:
-
-```
-Using superpowers, debug this error...
-```
-
-| Skill Library | Commands Available |
-|---------------|-------------------|
-| gstack | /office-hours, /review, /qa, /ship, etc. |
-| superpowers | systematic-debugging, subagent-driven-development, etc. |
-| [installed] | See .claude/skills/ for full list |
+| Category | Examples |
+|----------|----------|
+| **Build** | `/react-components`, `/api-design`, `/prisma`, `/playwright` |
+| **Data** | `/csv-data-summarizer`, `/deep-research` |
+| **Create** | `/docx`, `/creative-art`, `/imagen` |
+| **Secure** | `/ffuf-web-fuzzing`, `/threat-hunting` |
+| **Integrate** | `/github-automation`, `/slack-automation`, `/notion-automation` |
 
 ---
 
@@ -133,17 +85,36 @@ Using superpowers, debug this error...
 
 ```
 .claude/
-├── CLAUDE.md              # Skill reference
+├── CLAUDE.md              # HOW to use installed skills (reference)
 ├── context.md             # Project knowledge
-├── settings.json          # Dynamic config (merged from skills)
+├── settings.json          # Dynamic config from skills
 ├── rules/                 # Path-scoped auto-load rules
-└── skills/                # Installed skills (you selected)
-    ├── gstack/
+└── skills/
+    ├── gstack/            # Main gstack repo
+    │   ├── setup          # Setup script
+    │   ├── bin/           # Utilities
+    │   └── office-hours/  # Sub-skill
+    │   └── review/        # Sub-skill
+    │   └── qa/            # Sub-skill
+    │   └── ... (20 more)
+    │
+    ├── office-hours/ → gstack/office-hours/SKILL.md  # LINKED
+    ├── review/ → gstack/review/SKILL.md              # LINKED
+    ├── qa/ → gstack/qa/SKILL.md                      # LINKED
+    ├── ship/ → gstack/ship/SKILL.md                  # LINKED
+    ├── cso/ → gstack/cso/SKILL.md                    # LINKED
+    ├── ... (18 more linked skills)
+    │
     ├── superpowers/
-    ├── claude-mem/
-    ├── [other-skills-you-selected]/
-    └── ...
+    │   └── skills/
+    │       ├── systematic-debugging/SKILL.md
+    │       ├── test-driven-development/SKILL.md
+    │       └── ... (10 more)
+    │
+    └── [other skills]/
 ```
+
+**Why link gstack sub-skills?** Claude Code looks for `SKILL.md` one level under `.claude/skills/`. Without linking, the 23 sub-skills would be hidden inside `gstack/`.
 
 ---
 
@@ -152,8 +123,7 @@ Using superpowers, debug this error...
 | File | Purpose |
 |------|---------|
 | `install.md` | Instructions for Claude to follow |
-| `skills/*.md` | Skill catalog with expected configurations |
-| `SKILL.md` | How dynamic configuration works |
+| `skills/*.md` | Skill catalog with install details |
 
 ---
 

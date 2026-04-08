@@ -1,63 +1,97 @@
 # Foundation Skills
 
-Core skills for any software project.
-
 ## gstack
 
-**Type:** GitHub + Setup Script
+**Type:** A (GitHub + Setup)
 **Source:** https://github.com/garrytan/gstack
+**Prerequisites:** bun (for build), Playwright (for browser)
 
-**Provides:** 23 specialists — planning, review, QA, shipping, security
+**What It Is:**
+A collection of 23 specialist skills for end-to-end development, packaged as subdirectories each with their own SKILL.md.
 
-**Commands:**
-- `/office-hours` — Product planning
-- `/review` — Code review
-- `/qa` — Browser testing
-- `/ship` — Release workflow
-- `/cso` — Security audit
-- `/browse` — Browser automation
+**Sub-Skills (23 total):**
+| Command | Purpose |
+|---------|---------|
+| `/office-hours` | Product planning, brainstorming |
+| `/review` | Pre-landing code review |
+| `/qa` | Browser testing, verification |
+| `/ship` | Release workflow |
+| `/cso` | Security audit (OWASP + STRIDE) |
+| `/browse` | Browser automation |
+| `/plan-ceo-review` | Strategic review |
+| `/plan-eng-review` | Architecture planning |
+| `/plan-design-review` | Design critique |
+| `/design-html` | Mockup to HTML |
+| `/design-shotgun` | Generate mockups |
+| `/retro` | Weekly retrospective |
+| `/investigate` | Systematic debugging |
+| `/learn` | Pattern documentation |
+| `/health` | Project health check |
+| `/ship` | Deployment workflow |
+| Plus 7 more... |
 
-**Install Requirements:**
-- bun (will be checked by setup script)
-- Must run `./setup` after clone
+**Install Process:**
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
+cd .claude/skills/gstack && ./setup || true
+# CRITICAL: Link sub-skills
+cd ../.. && GSTACK_SKILLS_DIR="$(pwd)/.claude/skills" GSTACK_INSTALL_DIR="$(pwd)/.claude/skills/gstack" ./.claude/skills/gstack/bin/gstack-relink
+```
 
-**Configuration (from SKILL.md):**
-- allowed-tools: Bash, Read, AskUserQuestion
-- hooks: SessionStart (auto-detects proactive mode)
+**Post-Install Verification:**
+```bash
+ls .claude/skills/office-hours/SKILL.md  # Should exist
+ls .claude/skills/review/SKILL.md        # Should exist
+ls .claude/skills/qa/SKILL.md            # Should exist
+```
 
 ---
 
 ## superpowers
 
-**Type:** Plugin (.claude-plugin/)
+**Type:** B (Plugin)
 **Source:** https://github.com/obra/superpowers
+**Prerequisites:** None
 
-**Provides:** 12 workflow skills — debugging, TDD, collaboration
+**What It Is:**
+12 workflow skills in the `skills/` subdirectory.
 
-**Commands:**
-- `/systematic-debugging` — 4-phase debugging
-- `/test-driven-development` — TDD workflow
-- `/subagent-driven-development` — Parallel agents
-- Plus 9 more...
+**Sub-Skills (12 total):**
+| Command | Purpose |
+|---------|---------|
+| `/systematic-debugging` | 4-phase debugging |
+| `/test-driven-development` | TDD workflow |
+| `/subagent-driven-development` | Parallel agents |
+| `/brainstorming` | Design refinement |
+| `/writing-plans` | Plan creation |
+| `/executing-plans` | Plan execution |
+| `/receiving-code-review` | Handle review feedback |
+| `/requesting-code-review` | Request review |
+| Plus 3 more... |
 
-**Install Requirements:**
-- Clone only (no setup script)
+**Install Process:**
+```bash
+git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
+```
 
-**Configuration:**
-- Skills auto-register from skills/ directory
-- No special hooks required
+**Structure:**
+- `.claude/skills/superpowers/skills/<name>/SKILL.md` - Each subdirectory is a skill
 
 ---
 
 ## claude-mem
 
-**Type:** Plugin (marketplace)
+**Type:** B (Plugin)
 **Source:** claude-mem@thedotmack
+**Prerequisites:** None
 
-**Provides:** Memory persistence across sessions
+**What It Is:**
+Memory persistence across Claude Code sessions.
 
-**Install Requirements:**
-- /plugin install claude-mem@thedotmack
+**Command:**
+- `/mem` - Recall and manage memory
 
-**Configuration:**
-- Hooks auto-configured by plugin
+**Install Process:**
+```bash
+/plugin install claude-mem@thedotmack
+```
