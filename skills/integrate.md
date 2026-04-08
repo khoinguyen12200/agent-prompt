@@ -1,10 +1,10 @@
 # Integrate Skills
 
-App automation, productivity, and business integrations.
+App automation and SaaS integrations.
 
-## App Automation (SaaS)
+## SaaS Integrations (from awesome-claude-skills)
 
-All from awesome-claude-skills catalog (copy individually):
+All are **Type:** Simple Skill (SKILL.md)
 
 ### Project Management
 - **asana-automation** — Asana integration
@@ -18,10 +18,6 @@ All from awesome-claude-skills catalog (copy individually):
 - **discord-automation** — Discord integration
 - **telegram-automation** — Telegram integration
 - **microsoft-teams-automation** — Teams integration
-
-### Email
-- **gmail-automation** — Gmail integration
-- **outlook-automation** — Outlook integration
 
 ### Code & DevOps
 - **github-automation** — GitHub integration
@@ -43,43 +39,13 @@ All from awesome-claude-skills catalog (copy individually):
 
 ---
 
-## Productivity
+## Install Pattern
 
-### file-organizer
-**Source:** awesome-claude-skills (file-organizer)
-**Type:** Catalog skill
+All awesome-claude-skills items follow same pattern:
 
-**Provides:**
-- Automated file organization
+```bash
+# From temp catalog (already cloned)
+cp -r /tmp/awesome/[skill-name] .claude/skills/
+```
 
-### google-workspace-skills
-**Source:** awesome-claude-skills (google-workspace-skills)
-**Type:** Catalog skill
-
-**Provides:**
-- Google Workspace automation
-
----
-
-## Business & Marketing
-
-### lead-research-assistant
-**Source:** awesome-claude-skills (lead-research-assistant)
-**Type:** Catalog skill
-
-**Provides:**
-- Lead research and enrichment
-
-### twitter-algorithm-optimizer
-**Source:** awesome-claude-skills (twitter-algorithm-optimizer)
-**Type:** Catalog skill
-
-**Provides:**
-- Twitter content optimization
-
-### marketing
-**Source:** marketing (plugin)
-**Type:** Plugin
-
-**Provides:**
-- Marketing automation and content
+No setup script. Just copy and use.

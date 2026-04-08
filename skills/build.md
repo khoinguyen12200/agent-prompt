@@ -1,133 +1,93 @@
 # Build Skills
 
-Frontend, backend, database, and testing skills.
+Frontend, backend, database, and testing.
 
 ## Frontend
 
 ### react-components
-**Source:** awesome-claude-skills (react-components)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/react-components
 
-**Provides:**
-- React component generation and refactoring
+**Provides:** React component patterns
 
 **Configuration:**
-- paths: src/**/*.tsx, src/**/*.jsx, *.tsx, *.jsx
-- allowed-tools: Read, Write, Edit
+- paths: src/**/*.tsx, src/**/*.jsx
 
 ### vue-components
-**Source:** awesome-claude-skills (vue)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/vue
 
-**Provides:**
-- Vue component patterns
+**Provides:** Vue component patterns
 
 **Configuration:**
 - paths: src/**/*.vue
-- allowed-tools: Read, Write, Edit
-
-### frontend-design
-**Source:** frontend-design@claude-plugins
-**Type:** Plugin
-
-**Provides:**
-- Design system guidance
 
 ---
 
 ## Backend
 
 ### api-design
-**Source:** awesome-claude-skills (api-design)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/api-design
 
-**Provides:**
-- REST API design patterns
-
-**Configuration:**
-- paths: src/api/**, **/routes/**, **/controllers/**
-- allowed-tools: Read, Write, Edit
-
-### nodejs-express
-**Source:** awesome-claude-skills (nodejs-express)
-**Type:** Catalog skill
-
-**Provides:**
-- Express.js patterns and middleware
+**Provides:** REST API patterns
 
 **Configuration:**
-- paths: **/*.js, **/*.ts (when package.json has express)
-- allowed-tools: Read, Write, Edit, Bash(node *)
+- paths: src/api/**, **/routes/**
 
 ### python-skills
-**Source:** awesome-claude-skills (python-best-practices)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/python-best-practices
 
-**Provides:**
-- Python best practices
+**Provides:** Python patterns
 
 **Configuration:**
 - paths: **/*.py
-- allowed-tools: Read, Write, Edit, Bash(python *), Bash(pip *)
 
 ---
 
 ## Database
 
 ### prisma
+**Type:** Plugin (marketplace)
 **Source:** prisma@anthropic-agent-skills
-**Type:** Plugin
 
-**Provides:**
-- Prisma schema and query assistance
+**Provides:** Prisma schema assistance
 
 **Configuration:**
 - paths: prisma/**, **/*.prisma
-- allowed-tools: Bash(npx prisma *)
 
 ### postgres
-**Source:** awesome-claude-skills (postgres)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/postgres
 
-**Provides:**
-- PostgreSQL query help
-
-**Configuration:**
-- allowed-tools: Bash(psql *)
+**Provides:** PostgreSQL queries
 
 ---
 
 ## Testing
 
 ### playwright
-**Source:** awesome-claude-skills (playwright)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/playwright
 
-**Provides:**
-- E2E test generation
-
-**Configuration:**
-- paths: **/*.spec.ts, **/*.test.ts, tests/**
-- allowed-tools: Bash(npx playwright *)
-
-### jest
-**Source:** awesome-claude-skills (jest)
-**Type:** Catalog skill
-
-**Provides:**
-- Jest testing patterns
+**Provides:** E2E test generation
 
 **Configuration:**
-- paths: **/*.test.js, **/*.test.ts
-- allowed-tools: Bash(npx jest *)
+- paths: **/*.spec.ts, tests/**
 
 ---
 
-## About Awesome Claude Skills
+## Awesome Claude Skills Note
 
-awesome-claude-skills is a catalog containing 100+ individual skill folders. When installing skills from this catalog:
+awesome-claude-skills is a catalog with 100+ individual skills. Install by copying specific folders:
 
-1. Clone the catalog: `git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome`
-2. Copy only the specific skill folders you need to `.claude/skills/`
+```bash
+# Clone catalog to temp (once)
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
 
-Do not clone the entire catalog into `.claude/skills/` - Claude won't recognize individual skills.
+# Copy only needed skills
+cp -r /tmp/awesome/[skill-name] .claude/skills/
+```
+
+Do NOT clone entire catalog to .claude/skills/

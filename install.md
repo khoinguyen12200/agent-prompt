@@ -1,17 +1,59 @@
 # Claude Bootstrap Installer
 
-You are the Bootstrap Agent. Install skills and generate dynamic configuration.
+Install skills and make them work automatically.
 
-## Your Goal
+## Skill Installation Patterns
 
-1. Read available skills from `/tmp/claude-bootstrap/skills/`
-2. Detect the project type by scanning files
-3. Categorize skills by potential value for THIS project
-4. Present to user and install selected
-5. Read each installed skill's configuration
-6. Generate dynamic settings.json
+There are 3 types of skills. Each type has a specific install procedure:
 
-## Step 1: Read Available Skills
+### Type 1: GitHub Repo with Setup Script
+**Pattern:** Clone → Run setup → Done
+
+**Example:** gstack
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
+# Check for setup script
+if [ -f .claude/skills/gstack/setup ]; then
+  cd .claude/skills/gstack && ./setup
+fi
+```
+
+**Detection:** Has `setup` file in root (executable script)
+
+---
+
+### Type 2: Plugin with .claude-plugin/
+**Pattern:** Clone to global OR use /plugin install
+
+**Example:** superpowers
+```bash
+# Option A: Clone (project-level)
+git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
+
+# Option B: Plugin install (user-level)  
+/plugin install superpowers@anthropic-agent-skills
+```
+
+**Detection:** Has `.claude-plugin/plugin.json` file
+
+---
+
+### Type 3: Simple Skill (SKILL.md only)
+**Pattern:** Clone/copy → No setup needed
+
+**Example:** awesome-claude-skills items
+```bash
+# Copy individual skill folder
+cp -r /tmp/awesome/[skill-name] .claude/skills/
+```
+
+**Detection:** Has `SKILL.md` but no `setup` script, no `.claude-plugin/`
+
+---
+
+## Bootstrap Procedure
+
+### Step 1: Read Skills Catalog
 
 Read all files in `/tmp/claude-bootstrap/skills/`:
 - foundation.md
@@ -21,93 +63,139 @@ Read all files in `/tmp/claude-bootstrap/skills/`:
 - secure.md
 - integrate.md
 
-Extract each skill's:
+For each skill, extract:
 - Name
-- Source URL (GitHub repo or plugin identifier)
-- Description
-- What it provides (commands, hooks, paths, etc.)
+- Source (GitHub URL or plugin identifier)
+- Type hint (if provided)
+- What it provides
 
-## Step 2: Detect Project Type
+### Step 2: Detect Project
 
-Scan the project to understand:
-- Language/framework (React, Vue, Node, Python, Go, Rust, etc.)
-- Database (Prisma, Postgres, Mongo, etc.)
-- Testing setup (Jest, Playwright, Pytest, etc.)
-- Other patterns (API routes, components, etc.)
+Scan project files to determine:
+- Language/framework (package.json, requirements.txt, Cargo.toml, etc.)
+- Framework (React, Vue, etc.)
+- Database (prisma/, migrations/, etc.)
+- Testing setup
+- GitHub repo (for GitHub automation skills)
+- etc.
 
-## Step 3: Categorize by Potential
+### Step 3: Categorize Skills
 
-Based on project detection, categorize ALL available skills into:
+For EACH skill in catalog, determine potential:
 
-### High Potential
-Skills that directly match the project's tech stack and would provide immediate value.
+**HIGH:** Direct match to project tech
+- React project + react-components
+- Node project + gstack/superpowers
+- GitHub repo + github-automation
+- Uses Slack + slack-automation
 
-Examples of matching logic:
-- React project + react-components skill = High
-- Node project + gstack/superpowers = High  
-- Any project + foundation skills = High
-- Project with GitHub + github-automation = High
+**MEDIUM:** Adjacent/related
+- General debugging skills
+- API design for backend projects
 
-### Medium Potential
-Skills that could be useful but aren't core to the tech stack, or skills for adjacent workflows.
+**LOW:** Not relevant
+- Vue skills for React project
+- Database skills when no DB detected
 
-Examples:
-- React project + general debugging skills
-- Node backend + API design skills
-- Project with testing + advanced testing skills
+### Step 4: Present Options
 
-### Low Potential
-Skills that don't match the tech stack or are for completely different use cases.
+Ask user with multi_select:
 
-Examples:
-- Frontend-only project + backend database skills
-- No Slack integration needed + slack-automation
+```
+"Select skills to install (grouped by relevance):"
 
-## Step 4: Present to User
+HIGH POTENTIAL (recommended):
+[ ] skill-1 (matches your React project)
+[ ] skill-2 (matches your Node.js setup)
+...
 
-Use AskUserQuestion to let user select skills:
+MEDIUM POTENTIAL:
+[ ] skill-3 (general debugging)
+...
 
-**Question 1:** Select installation approach
-- "Recommended: Install High Potential skills only"
-- "Balanced: Install High + Medium Potential skills"
-- "Manual: I want to choose individually"
+LOW POTENTIAL:
+[ ] skill-4 (Vue - not your stack)
+...
+```
 
-**Question 2** (only if Manual): Show skills grouped by potential with multi_select
-- High Potential (pre-selected)
-- Medium Potential  
-- Low Potential
+### Step 5: Install Selected Skills
 
-## Step 5: Install Selected Skills
+For EACH selected skill:
 
-For each selected skill:
+1. **Determine type by checking source:**
+   - Source contains `@` → Plugin (Type 2)
+   - Source is GitHub URL → Clone and check for setup (Type 1 or 3)
+   - Source is `awesome-claude-skills` → Copy from temp (Type 3)
 
-1. Determine install method from the skill's source:
-   - GitHub repo → `git clone [source] .claude/skills/[name]`
-   - Plugin → `/plugin install [identifier]`
-   - Awesome catalog → Copy from `/tmp/awesome/`
+2. **Execute install based on type:**
 
-2. Run any post-install commands if mentioned in skill docs
+   **Type 1 (GitHub with setup):**
+   ```bash
+   git clone --single-branch --depth 1 [source] .claude/skills/[name]
+   cd .claude/skills/[name] && ./setup
+   ```
 
-3. Verify installation succeeded
+   **Type 2 (Plugin):**
+   ```bash
+   # Prefer project-level clone
+   git clone --single-branch --depth 1 [source] .claude/skills/[name]
+   ```
 
-## Step 6: Extract Skill Configurations
+   **Type 3 (Simple/Catalog):**
+   ```bash
+   # For awesome-claude-skills items
+   cp -r /tmp/awesome/[skill-name] .claude/skills/
+   
+   # For other simple skills
+   git clone --single-branch --depth 1 [source] .claude/skills/[name]
+   ```
 
-For EACH installed skill, read its files to extract configuration:
+3. **Verify installation:**
+   - Check `.claude/skills/[name]/SKILL.md` exists
+   - For Type 1: Check setup completed (look for expected files)
+   - Log success/failure
 
-Check in order:
-1. `SKILL.md` frontmatter (YAML between `---`)
-2. `.claude-plugin/plugin.json` (if exists)
-3. `hooks/hooks.json` (if exists)
+### Step 6: Extract Skill Configurations
+
+For EACH installed skill, read configuration:
+
+**From SKILL.md frontmatter:**
+```yaml
+---
+name: skill-name
+allowed-tools: Read Write Bash(git *)
+hooks:
+  SessionStart:
+    - type: command
+      command: echo "Ready"
+---
+```
+
+**From .claude-plugin/plugin.json:**
+```json
+{
+  "name": "plugin-name",
+  "hooks": { ... }
+}
+```
+
+**From hooks/hooks.json:**
+```json
+{
+  "hooks": {
+    "SessionStart": [...]
+  }
+}
+```
 
 Extract:
-- `hooks` → Add to settings.json hooks section
-- `allowed-tools` → Convert to permissions.allow rules
-- `paths` → Create path-scoped rules in rules/
-- `env` → Add to settings.json env section
+- `allowed-tools` → permissions.allow entries
+- `hooks` → hooks section
+- `paths` → create rules/[skill-name]-paths.md
 
-## Step 7: Generate settings.json
+### Step 7: Generate settings.json
 
-Create `.claude/settings.json` by merging ALL extracted configurations:
+Merge all extracted configs:
 
 ```json
 {
@@ -115,65 +203,91 @@ Create `.claude/settings.json` by merging ALL extracted configurations:
   "permissions": {
     "allow": [
       "Read(.claude/skills/**)",
-      "[merged from all installed skills]"
+      "Bash(.claude/skills/**/*.sh)",
+      "[from skill-1 allowed-tools]",
+      "[from skill-2 allowed-tools]"
     ]
   },
   "hooks": {
-    "[merged from all installed skills]"
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "echo '[skill-1] Ready'"
+      }
+    ]
   },
-  "env": {
-    "[merged from all installed skills]"
-  }
+  "_installedSkills": [
+    {
+      "name": "skill-1",
+      "source": "github:user/repo",
+      "type": "github-with-setup"
+    }
+  ]
 }
 ```
 
-Merge rules:
-- permissions.allow: Concatenate all, deduplicate
-- hooks: Concatenate all arrays by event type
-- env: Merge objects, use skill name prefix if conflicts
+### Step 8: Generate Core Files
 
-## Step 8: Generate Core Files
+**CLAUDE.md:**
+```markdown
+# Installed Skills
 
-### CLAUDE.md
-- List all installed skills with descriptions
-- Show how to invoke each skill
+## Foundation
+- **gstack** — Planning, review, QA, shipping
+  - Usage: `/office-hours`, `/review`, `/qa`, `/ship`
+  
+## Project-Specific
+- **[skill-name]** — Description
+  - Usage: `/command-name`
+```
 
-### context.md
-- Project tech stack summary
-- Installed skills reference
+**context.md:**
+```markdown
+# Project Context
 
-### rules/
-- For each skill with `paths:` in frontmatter, create a path-scoped rule
+## Tech Stack
+[Detected from files]
 
-## Step 9: Report
+## Installed Skills
+[List with descriptions]
+```
 
-Show user what was done:
+**rules/[skill]-paths.md** (for skills with paths):
+```markdown
+---
+name: skill-paths
+paths:
+  - "src/**/*.tsx"
+---
+
+Auto-load [skill-name] when editing these files.
+```
+
+### Step 9: Report
 
 ```
 Bootstrap Complete ✓
 
-Project Detected: [type]
+Project: [detected type]
 
-Skills Installed: [N]
-├── High Potential: [list]
-├── Medium Potential: [list]
-└── Low Potential: [list]
+Installed [N] skills:
+├── HIGH potential: [list with types]
+├── MEDIUM potential: [list]
+└── LOW potential: [list]
 
-Configuration Generated:
-├── .claude/settings.json
-│   ├── permissions: [N] rules
-│   ├── hooks: [N] hooks
-│   └── env: [N] variables
+Generated:
+├── .claude/settings.json ([N] permissions, [N] hooks)
 ├── .claude/CLAUDE.md
 ├── .claude/context.md
-└── .claude/rules/ ([N] path-scoped rules)
+└── .claude/rules/ ([N] path rules)
 
 Next: Restart Claude Code
 ```
 
-## Key Principles
+## Important Rules
 
-- **No hardcoded install commands** — Read from skill docs
-- **Project-aware** — Match skills to actual project needs
-- **Dynamic config** — Extract from skill files after install
-- **User choice** — Present options, don't decide unilaterally
+1. **ALWAYS run setup scripts** for Type 1 skills
+2. **ALWAYS verify** skill installed correctly before adding to settings.json
+3. **ALWAYS extract** configuration from skill files after install
+4. **NEVER skip** verification steps
+5. **NEVER assume** - check the actual skill structure

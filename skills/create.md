@@ -1,72 +1,43 @@
 # Create Skills
 
-Documents, media, design, and content creation.
+Documents, media, design, content.
 
 ## Documents
 
 ### document-skills
+**Type:** Plugin (marketplace)
 **Source:** document-skills@anthropic-agent-skills
-**Type:** Plugin
 
-**Provides:**
-- docx — Word document manipulation
-- pdf — PDF handling
-- pptx — Slide creation
-- xlsx — Spreadsheet operations
-
-### markdown-to-epub
-**Source:** awesome-claude-skills (markdown-to-epub)
-**Type:** Catalog skill
-
-**Provides:**
-- Convert markdown to ePub format
+**Provides:** docx, pdf, pptx, xlsx handling
 
 ---
 
 ## Media & Design
 
 ### creative-art
+**Type:** Plugin (marketplace)
 **Source:** creative-art@anthropic-agent-skills
-**Type:** Plugin
 
-**Provides:**
-- Art and design generation
-
-### canvas-design
-**Source:** awesome-claude-skills (canvas-design)
-**Type:** Catalog skill
-
-**Provides:**
-- Canvas-based design tools
+**Provides:** Art generation
 
 ### imagen
-**Source:** awesome-claude-skills (imagen)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/imagen
 
-**Provides:**
-- Image generation
+**Provides:** Image generation
 
 ---
 
-## Writing & Content
+## Writing
 
 ### content-research-writer
-**Source:** awesome-claude-skills (content-research-writer)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/content-research-writer
 
-**Provides:**
-- Content research and writing assistance
-
-### brainstorming
-**Source:** awesome-claude-skills (brainstorming)
-**Type:** Catalog skill
-
-**Provides:**
-- Structured brainstorming workflows
+**Provides:** Content writing
 
 ### marketing
-**Source:** marketing (plugin)
-**Type:** Plugin
+**Type:** Plugin (marketplace)
+**Source:** marketing
 
-**Provides:**
-- Marketing content and strategy
+**Provides:** Marketing content

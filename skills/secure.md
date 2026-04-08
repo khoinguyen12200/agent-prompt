@@ -5,36 +5,32 @@ Security testing and forensics.
 ## Security Testing
 
 ### ffuf-web-fuzzing
-**Source:** awesome-claude-skills (ffuf-web-fuzzing)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/ffuf-web-fuzzing
 
-**Provides:**
-- Web fuzzing with ffuf
+**Provides:** Web fuzzing
 
 **Configuration:**
 - allowed-tools: Bash(ffuf *)
 
-### threat-hunting-with-sigma-rules
-**Source:** awesome-claude-skills (threat-hunting-with-sigma-rules)
-**Type:** Catalog skill
+### threat-hunting
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/threat-hunting-with-sigma-rules
 
-**Provides:**
-- Sigma rule-based threat hunting
+**Provides:** Sigma rule hunting
 
 ---
 
 ## Forensics
 
 ### computer-forensics
-**Source:** awesome-claude-skills (computer-forensics)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/computer-forensics
 
-**Provides:**
-- Digital forensics analysis
+**Provides:** Digital forensics
 
 ### metadata-extraction
-**Source:** awesome-claude-skills (metadata-extraction)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/metadata-extraction
 
-**Provides:**
-- File metadata extraction and analysis
+**Provides:** File metadata analysis

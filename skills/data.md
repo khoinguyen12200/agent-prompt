@@ -1,59 +1,46 @@
 # Data Skills
 
-Data analysis, extraction, and research.
+Data analysis, extraction, research.
 
 ## Analysis
 
 ### csv-data-summarizer
-**Source:** awesome-claude-skills (csv-data-summarizer)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/csv-data-summarizer
 
-**Provides:**
-- CSV data analysis and summarization
+**Provides:** CSV analysis
 
 **Configuration:**
 - paths: **/*.csv
-- allowed-tools: Read, Bash(csv processing)
 
 ---
 
 ## Research
 
 ### deep-research
-**Source:** awesome-claude-skills (deep-research)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/deep-research
 
-**Provides:**
-- Multi-step research workflows
+**Provides:** Multi-step research
 
 ### root-cause-tracing
-**Source:** awesome-claude-skills (root-cause-tracing)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/root-cause-tracing
 
-**Provides:**
-- Error tracing and root cause analysis
+**Provides:** Error tracing
 
 ---
 
 ## Extraction
 
-### article-extractor
-**Source:** awesome-claude-skills (article-extractor)
-**Type:** Catalog skill
-
-**Provides:**
-- Web article content extraction
-
 ### youtube-transcript
-**Source:** awesome-claude-skills (youtube-transcript)
-**Type:** Catalog skill
+**Type:** Simple Skill (SKILL.md)
+**Source:** awesome-claude-skills/youtube-transcript
 
-**Provides:**
-- YouTube transcript fetching
+**Provides:** YouTube transcript fetching
 
 ### firecrawl
-**Source:** firecrawl (plugin)
-**Type:** Plugin
+**Type:** Plugin (marketplace)
+**Source:** firecrawl
 
-**Provides:**
-- Web scraping and data extraction
+**Provides:** Web scraping
