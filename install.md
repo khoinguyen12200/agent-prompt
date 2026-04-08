@@ -23,8 +23,8 @@ Categorize all skills into:
 **Detected for Project:**
 - Skills matching detected tech stack
 
-**Available:**
-- All other skills
+**Other Potentially Useful:**
+- Skills that might be helpful based on project type
 
 ## Step 4: Ask User
 
