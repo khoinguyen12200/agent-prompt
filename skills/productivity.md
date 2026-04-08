@@ -2,12 +2,16 @@
 
 Install these for file management and workspace utilities.
 
-## Setup
+## How to Install
 
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+Copy individual skill folders:
+
 ```bash
-git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git .claude/skills/awesome
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+cp -r /tmp/awesome/file-organizer .claude/skills/
+cp -r /tmp/awesome/google-workspace-skills .claude/skills/
 ```
 
 ## Available Skills
@@ -34,11 +38,8 @@ git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude
 | /document-release | Docs | Update docs after release |
 | /learn | Memory | Manage learned patterns |
 
-## Intent Mapping
+## Usage
 
-```yaml
-organize: Load file-organizer or invoice-organizer
-google: Load google-workspace-skills
-wiki: Load outline
-retro: Load /retro
+```
+Load google-workspace-skills and check my email
 ```

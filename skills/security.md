@@ -2,12 +2,15 @@
 
 Install these for security testing and forensics.
 
-## Setup
+## How to Install
 
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+Copy individual skill folders:
+
 ```bash
-git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git .claude/skills/awesome
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+cp -r /tmp/awesome/ffuf-web-fuzzing .claude/skills/
 ```
 
 ## Available Skills
@@ -20,11 +23,8 @@ git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude
 | metadata-extraction | Metadata | Extract file metadata |
 | threat-hunting-with-sigma-rules | Threat hunting | Sigma detection rules |
 
-## Intent Mapping
+## Usage
 
-```yaml
-security: Load ffuf-web-fuzzing
-fuzzing: Load ffuf-web-fuzzing
-forensics: Load computer-forensics
-threat-hunting: Load threat-hunting-with-sigma-rules
+```
+Load ffuf-web-fuzzing and scan for vulnerabilities
 ```

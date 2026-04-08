@@ -18,10 +18,7 @@ Install these if project needs to scrape websites.
 ## firecrawl-skill
 
 **Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
-```bash
-git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git .claude/skills/awesome
-```
+**Install:** Copy `firecrawl` folder from awesome-claude-skills to `.claude/skills/firecrawl`
 **When:** Scraping (if plugin not available)  
 **What:** Web scraping capabilities
 

@@ -27,7 +27,12 @@ Install these if project uses React, Vue, Angular, or frontend frameworks.
 **Source:** https://github.com/ComposioHQ/awesome-claude-skills  
 **Install:**
 ```bash
-git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git .claude/skills/awesome
+# Clone to temp then copy individual skills:
+```bash
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+# Then copy specific skill folders:
+cp -r /tmp/awesome/[skill-name] .claude/skills/
+```
 ```
 **When:** Creating HTML artifacts with React/Tailwind  
 **What:** Multi-component HTML artifacts using React, Tailwind CSS, shadcn/ui

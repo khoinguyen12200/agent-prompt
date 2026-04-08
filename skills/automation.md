@@ -2,12 +2,20 @@
 
 Install these if project needs SaaS app integrations.
 
-## Setup
+## How to Install
 
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+This is a catalog of 78+ skills. Copy individual skill folders you need:
+
 ```bash
-git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git .claude/skills/awesome
+# Clone to temp location
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+
+# Copy specific skill folders (examples):
+cp -r /tmp/awesome/slack-automation .claude/skills/
+cp -r /tmp/awesome/github-automation .claude/skills/
+cp -r /tmp/awesome/notion-automation .claude/skills/
 ```
 
 ## Available Automations (78+ apps)
@@ -55,12 +63,9 @@ git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude
 - shopify-automation — Products, orders, customers
 - stripe-automation — Charges, customers, subscriptions
 
-## Intent Mapping
+## Usage
 
-```yaml
-slack: Load awesome-claude-skills slack-automation
-github: Load awesome-claude-skills github-automation
-notion: Load awesome-claude-skills notion-automation
-jira: Load awesome-claude-skills jira-automation
-[app]: Load awesome-claude-skills [app]-automation
+After copying a skill folder to `.claude/skills/`, load it:
+```
+Load slack-automation skill
 ```

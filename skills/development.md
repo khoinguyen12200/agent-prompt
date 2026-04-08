@@ -2,12 +2,20 @@
 
 Install these for additional development capabilities.
 
-## Setup
+## How to Install
 
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills  
-**Install:**
+**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+
+This is a catalog. Copy individual skill folders you need:
+
 ```bash
-git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git .claude/skills/awesome
+# Clone to temp
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+
+# Copy specific skills:
+cp -r /tmp/awesome/aws-skills .claude/skills/
+cp -r /tmp/awesome/playwright .claude/skills/
+cp -r /tmp/awesome/test-driven-development .claude/skills/
 ```
 
 ## Available Skills
@@ -35,11 +43,8 @@ git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude
 | review-implementing | Code review | Evaluate implementation plans |
 | test-fixing | Fix tests | Detect and fix failing tests |
 
-## Intent Mapping
+## Usage
 
-```yaml
-aws: Load aws-skills
-test: Load playwright or test-driven-development
-architecture: Load software-architecture
-mcp: Load mcp-builder
+```
+Load aws-skills and analyze my infrastructure
 ```

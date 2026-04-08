@@ -7,7 +7,12 @@ Install these for image generation, video, and creative content.
 **Source:** https://github.com/ComposioHQ/awesome-claude-skills  
 **Install:**
 ```bash
-git clone --single-branch --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git .claude/skills/awesome
+# Clone to temp then copy individual skills:
+```bash
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+# Then copy specific skill folders:
+cp -r /tmp/awesome/[skill-name] .claude/skills/
+```
 ```
 
 ## Available Skills
