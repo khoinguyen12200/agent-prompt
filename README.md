@@ -1,67 +1,113 @@
-# Claude Bootstrap
+# Claude Bootstrap 🚀
 
-Installs skill libraries and configures active skill loading for Claude Code.
+> One command to give Claude Code a brain for your repo.
 
-## How It Works
+Installs skill libraries and configures **active skill loading** — skills automatically load when you need them.
 
-1. **User runs 2 commands** (see below)
-2. **Claude reads install.md** and follows instructions
-3. **Claude installs mandatory skills** (gstack + superpowers + claude-mem)
-4. **Claude detects project type** and installs relevant optional skills
-5. **Claude generates core files** (CLAUDE.md, settings.json, etc.)
-6. **User restarts Claude Code**
-7. **UserPromptSubmit hook actively loads skills** when user prompts
+---
 
-## Quick Start (2 Commands)
+## ✨ What It Does
 
-**Step 1:** Clone this repo to temp
+```
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   Install   │ ──► │    Detect    │ ──► │   Select    │
+│  Mandatory  │     │    Project   │     │   Skills    │
+└─────────────┘     └──────────────┘     └─────────────┘
+                                              │
+                                              ▼
+┌─────────────┐     ┌──────────────┐     ┌─────────────┐
+│   Prompt    │ ◄── │  Auto-Load   │ ◄── │   Install   │
+│   "build"   │     │    Skills    │     │   Selected  │
+└─────────────┘     └──────────────┘     └─────────────┘
+```
+
+1. **Installs mandatory skills** — gstack (23 specialists), superpowers, claude-mem
+2. **Detects your project** — analyzes tech stack
+3. **Lets you select skills** — from 180+ options via interactive prompts
+4. **Auto-loads on prompt** — UserPromptSubmit hook loads the right skill
+
+---
+
+## 🚀 Quick Start
+
 ```bash
+# Step 1: Clone
 !rm -rf /tmp/claude-bootstrap && git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
 ```
 
-**Step 2:** Tell Claude to install
 ```
-Read /tmp/claude-bootstrap/install.md and follow its instructions to bootstrap .claude/ in this project.
+# Step 2: Tell Claude
+Read /tmp/claude-bootstrap/install.md and bootstrap .claude/ in this project.
 ```
 
-**Step 3:** Restart Claude Code when Claude says it's done
+```
+# Step 3: Restart when done
+```
 
-## What Gets Installed
+---
+
+## 📦 What Gets Installed
 
 ### Mandatory (Always)
-| Skill | Count | Description |
-|-------|-------|-------------|
-| gstack | 23 | Specialists: /office-hours, /review, /qa, /ship, etc. |
-| superpowers | 12 | Development workflow: debugging, refactoring, planning |
-| claude-mem | 1 | Memory and persistence across sessions |
+| Skill | Count | What |
+|-------|-------|------|
+| **gstack** | 23 | Planning, review, QA, shipping — YC-style workflow |
+| **superpowers** | 12 | Debugging, refactoring, TDD |
+| **claude-mem** | 1 | Memory across sessions |
 
-### Optional (User Selected)
-Claude will ask you to select from 180+ available skills based on your project needs.
+### Optional (You Choose)
 
-## After Restart
+Claude detects your project and asks you to select from 180+ skills:
 
-When you type a prompt, the hook tells Claude which skill to load:
+- **Frontend** — React, Vue, design patterns
+- **Backend** — APIs, databases, ORMs
+- **Automation** — 78+ SaaS app integrations
+- **Security** — Testing, forensics
+- **Creative** — Images, video, design
+- **Productivity** — File mgmt, workspace tools
+
+---
+
+## 🎯 How It Works
 
 | You Type | Claude Loads |
 |----------|--------------|
 | "build feature" | gstack /office-hours |
-| "review code" | gstack /review |
-| "test this" | gstack /qa |
+| "review this" | gstack /review |
+| "test it" | gstack /qa |
 | "ship it" | gstack /ship |
 | "debug error" | superpowers systematic-debugging |
 | "refactor" | superpowers subagent-driven-development |
 
-## Skill Catalog (180+ Skills)
+---
 
-See `skills/` folder for complete list:
-- Name, source URL, install command, description
+## 📁 Project Structure After
 
-## Files
+```
+.claude/
+├── CLAUDE.md              # Skill reference
+├── settings.json          # UserPromptSubmit hook
+├── context.md             # Project knowledge
+├── intent-map.yaml        # Intent → skill mapping
+├── rules/                 # Project-specific rules
+└── skills/                # Installed skills
+    ├── gstack/
+    ├── superpowers/
+    ├── claude-mem/
+    └── [your-selected]/
+```
 
-- `install.md` — Instructions for Claude to follow
-- `skills/*.md` — Skill catalog by category
-- `TEST.md` — Original requirements
+---
+
+## 📚 Files
+
+| File | Purpose |
+|------|---------|
+| `install.md` | Instructions for Claude to follow |
+| `skills/*.md` | Skill catalog (180+ skills) |
+
+---
 
 ## License
 
-MIT
+MIT © 2024
