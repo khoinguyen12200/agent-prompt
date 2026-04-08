@@ -4,233 +4,203 @@ Install skills correctly so they are discoverable and invocable.
 
 ## How Skills Work
 
-Skills are discovered from `.claude/skills/<name>/SKILL.md`. User invokes them by typing `/<skill-name>`.
+Claude Code discovers skills from `.claude/skills/<name>/SKILL.md`. User invokes by typing `/<skill-name>`.
 
-**For skills to work:**
-1. `SKILL.md` must exist at `.claude/skills/<name>/SKILL.md`
-2. Skill name matches directory name (or `name:` in frontmatter)
-3. User types `/<skill-name>` to invoke
+**Requirement:** Each skill must have `SKILL.md` at `.claude/skills/<name>/SKILL.md`
 
-## Skill Installation
+## Universal Installation Method
 
-### Type A: Multi-Skill Repository (gstack)
+This method works for ALL skill types:
 
-**Structure:** One repo with multiple skill subdirectories
-
-**Example:** gstack has 23 skills (office-hours/, review/, qa/, ship/, etc.)
-
-**Install:**
 ```bash
-git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
+# Step 1: Install skill source to .claude/skills/
+# (git clone for repos, cp -r for catalog items, /plugin install for plugins)
 
-# Run setup if bun available
-if command -v bun >/dev/null 2>&1; then
-  cd .claude/skills/gstack && ./setup
+# Step 2: Discover and link ALL sub-skills
+# For each subdirectory with SKILL.md, ensure it's accessible at top level
+
+for skill_dir in .claude/skills/*/; do
+  [ -d "$skill_dir" ] || continue
+  
+  # Check if this directory has SKILL.md (it's a skill)
+  if [ -f "$skill_dir/SKILL.md" ]; then
+    name=$(basename "$skill_dir")
+    
+    # Skip non-skill directories (bin, lib, scripts, etc.)
+    case "$name" in
+      bin|lib|scripts|node_modules|.git|.github|docs|test|tests|dist|build|contrib|agents)
+        continue
+        ;;
+    esac
+    
+    # Skill is already at top level - verify it works
+    echo "Skill found: $name"
+  fi
+  
+  # Check for nested skills (superpowers/skills/, gstack subdirs, etc.)
+  for nested in "$skill_dir"/*/; do
+    [ -d "$nested" ] || continue
+    
+    if [ -f "$nested/SKILL.md" ]; then
+      nested_name=$(basename "$nested")
+      
+      # Skip common non-skill directories
+      case "$nested_name" in
+        bin|lib|scripts|node_modules|.git|.github|docs|test|tests|dist|build)
+          continue
+          ;;
+      esac
+      
+      # Link nested skill to top level
+      mkdir -p ".claude/skills/$nested_name"
+      ln -sf "$(pwd)/.claude/skills/$(basename "$skill_dir")/$nested_name/SKILL.md" \
+             ".claude/skills/$nested_name/SKILL.md"
+      
+      echo "Linked sub-skill: $nested_name"
+    fi
+  done
+done
+```
+
+## Installation by Source
+
+### GitHub Repositories
+
+```bash
+# Clone to .claude/skills/
+git clone --single-branch --depth 1 <repo-url> .claude/skills/<repo-name>
+
+# Run setup if exists
+if [ -f .claude/skills/<repo-name>/setup ]; then
+  (cd .claude/skills/<repo-name> && ./setup) || true
 fi
 
-# Link sub-skills (CRITICAL - Claude only looks 1 level deep)
-for dir in .claude/skills/gstack/*/; do
-  if [ -f "$dir/SKILL.md" ]; then
-    name=$(basename "$dir")
-    case "$name" in bin|lib|scripts|node_modules|.git) continue ;; esac
-    mkdir -p ".claude/skills/$name"
-    ln -sf "$(pwd)/.claude/skills/gstack/$name/SKILL.md" ".claude/skills/$name/SKILL.md"
-  fi
-done
+# Link all sub-skills (use universal method above)
 ```
 
-**Verify:**
+### Awesome Claude Skills (Catalog)
+
 ```bash
-ls .claude/skills/office-hours/SKILL.md
-ls .claude/skills/review/SKILL.md
-ls .claude/skills/qa/SKILL.md
-```
-
----
-
-### Type B: Plugin with Sub-skills (superpowers)
-
-**Structure:** Skills in `skills/` subdirectory
-
-**Install:**
-```bash
-git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
-
-# Link sub-skills
-for dir in .claude/skills/superpowers/skills/*/; do
-  if [ -f "$dir/SKILL.md" ]; then
-    name=$(basename "$dir")
-    mkdir -p ".claude/skills/$name"
-    ln -sf "$(pwd)/.claude/skills/superpowers/skills/$name/SKILL.md" ".claude/skills/$name/SKILL.md"
-  fi
-done
-```
-
-**Verify:**
-```bash
-ls .claude/skills/systematic-debugging/SKILL.md
-ls .claude/skills/test-driven-development/SKILL.md
-```
-
----
-
-### Type C: Simple Skill (awesome-claude-skills)
-
-**Structure:** Single SKILL.md at root
-
-**Install:**
-```bash
-# Ensure catalog exists
+# Clone catalog once to temp
 if [ ! -d /tmp/awesome ]; then
   git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
 fi
 
-# Copy skill
-cp -r /tmp/awesome/[skill-name] .claude/skills/
+# Copy selected skill
+cp -r /tmp/awesome/<skill-name> .claude/skills/
 ```
 
-**Verify:**
+### Plugins
+
 ```bash
-ls .claude/skills/[skill-name]/SKILL.md
+/plugin install <plugin-id>
 ```
 
----
-
-### Type D: Plugin (claude-mem)
-
-**Install:**
-```bash
-/plugin install claude-mem@thedotmack
-```
-
----
-
-## Bootstrap Procedure
+## Complete Bootstrap Procedure
 
 ### Step 1: Read Catalog
 
-Read `/tmp/claude-bootstrap/skills/*.md` to understand available skills.
+Read `/tmp/claude-bootstrap/skills/*.md` for available skills.
 
 ### Step 2: Detect Project
 
-Scan for:
-- package.json, requirements.txt, Cargo.toml, go.mod
-- src/**/*.tsx (React), src/**/*.vue (Vue)
-- prisma/ (database)
-- .github/ (uses GitHub)
+Scan for tech stack indicators (package.json, requirements.txt, src/**/*.tsx, etc.)
 
 ### Step 3: Categorize Skills
 
-**HIGH:** Foundation skills (gstack, superpowers, claude-mem) + tech matches
-**MEDIUM:** General utilities
-**LOW:** Wrong tech stack
+| Potential | Criteria |
+|-----------|----------|
+| **HIGH** | Foundation skills (gstack, superpowers, claude-mem) + matches detected tech |
+| **MEDIUM** | General utilities (debugging, testing) |
+| **LOW** | Wrong tech stack |
 
-### Step 4: User Selects
+### Step 4: User Selection
 
 Present skills grouped by potential with multi_select.
 
-### Step 5: Install Each Skill
+### Step 5: Install Skills
 
-For each selected skill:
+For EACH selected skill:
 
-1. **Determine type** from skill info
-2. **Execute correct install** (Type A/B/C/D)
-3. **Verify SKILL.md exists** at `.claude/skills/<name>/SKILL.md`
-4. **Note failures** and continue
+1. **Clone/copy source** to `.claude/skills/`
+2. **Run setup** if present (continue on failure)
+3. **Link sub-skills** using universal method
+4. **Verify** each skill has `SKILL.md` at top level
 
-### Step 6: Generate CLAUDE.md
+### Step 6: Verify Installation
 
-Create skill reference:
+```bash
+# Count total skills installed
+echo "Total skills: $(ls .claude/skills/*/SKILL.md 2>/dev/null | wc -l)"
+
+# List all installed skills
+for skill_md in .claude/skills/*/SKILL.md; do
+  [ -f "$skill_md" ] && echo "✓ $(basename $(dirname $skill_md))"
+done
+```
+
+### Step 7: Generate CLAUDE.md
 
 ```markdown
 # Installed Skills
 
 ## Foundation
 
-### /office-hours
-Source: gstack | 23 specialists total
-Product planning and brainstorming
+### gstack — 37 Specialists
+- `/office-hours` — Product planning
+- `/review` — Code review
+- `/qa` — Browser testing  
+- `/ship` — Release workflow
+- `/cso` — Security audit
+- `/browse` — Browser automation
+- `/investigate` — Debugging
+- Plus 30 more...
 
-### /review
-Source: gstack
-Code review before landing changes
+### superpowers — 12 Workflows
+- `/systematic-debugging` — Debug methodology
+- `/test-driven-development` — TDD workflow
+- `/subagent-driven-development` — Parallel agents
+- Plus 9 more...
 
-### /qa
-Source: gstack
-Browser testing and verification
+### claude-mem
+- `/mem` — Memory persistence
 
-### /ship
-Source: gstack
-Release workflow
-
-### /cso
-Source: gstack
-Security audit (OWASP + STRIDE)
-
-### /browse
-Source: gstack
-Browser automation
-
-### /systematic-debugging
-Source: superpowers | 12 workflows total
-4-phase debugging methodology
-
-### /test-driven-development
-Source: superpowers
-TDD workflow
-
-### /subagent-driven-development
-Source: superpowers
-Parallel agent tasks
-
-### /mem
-Source: claude-mem
-Memory persistence
+## Project-Specific
+[List other installed skills]
 
 ## Usage
-
-Type `/` to see all skills.
-Type `/<skill-name>` to invoke.
+Type `/` to see all skills. Type `/<skill-name>` to invoke.
 ```
 
-### Step 7: Report
+### Step 8: Report
 
 ```
 Bootstrap Complete ✓
 
-Installed [N] skills:
-├── gstack (23 sub-skills linked)
-│   ├── /office-hours ✓
-│   ├── /review ✓
-│   ├── /qa ✓
-│   ├── /ship ✓
-│   ├── /cso ✓
-│   ├── /browse ✓
-│   └── 17 more...
-├── superpowers (12 sub-skills linked)
-│   ├── /systematic-debugging ✓
-│   ├── /test-driven-development ✓
-│   └── 10 more...
-├── claude-mem ✓
-└── [others...]
+Installed Skills: [N] total
+├── gstack: 37 sub-skills ✓
+├── superpowers: 12 sub-skills ✓
+├── claude-mem: 1 skill ✓
+└── [others]: [count] ✓
 
-Generated:
-└── .claude/CLAUDE.md (skill reference)
+Verify: ls .claude/skills/*/SKILL.md
 
 Next:
 1. Restart Claude Code
-2. Type `/` to see skills
-3. Try `/office-hours` or `/review`
+2. Type `/` to see all skills
+3. Type `/<skill>` to use
 ```
 
-## Common Issues
+## Troubleshooting
 
-**Skill not found with `/name`:**
-- Check: `ls .claude/skills/<name>/SKILL.md`
-- Fix: Sub-skills not linked properly
+**Skill not found:**
+```bash
+# Check if SKILL.md exists
+ls .claude/skills/<skill-name>/SKILL.md
 
-**gstack shows only `/gstack`:**
-- Run linking step to expose sub-skills
+# If missing, re-run linking
+```
 
-**superpowers skills missing:**
-- Link from `superpowers/skills/` to `.claude/skills/`
+**Sub-skills not linked:**
+- Re-run the universal linking method
+- Check for errors in symlink creation
