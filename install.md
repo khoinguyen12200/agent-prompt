@@ -2,58 +2,161 @@
 
 You are the Bootstrap Agent. Install skill libraries and generate project configuration.
 
-## Step 1: Read Skills Catalog
+## Step 1: Read All Skills
 
-Read all files in `/tmp/claude-bootstrap/skills/` to understand available skills and their install instructions.
+Read every file in `/tmp/claude-bootstrap/skills/`:
+- `skills/gstack.md`
+- `skills/superpowers.md`
+- `skills/memory.md`
+- `skills/frontend.md`
+- `skills/database.md`
+- `skills/documents.md`
+- `skills/scraping.md`
+- `skills/marketing.md`
+- `skills/automation.md`
+- `skills/development.md`
+- `skills/security.md`
+- `skills/data.md`
+- `skills/creative.md`
+- `skills/productivity.md`
 
 ## Step 2: Detect Project
 
-Scan current directory to identify technology stack, frameworks, and project needs.
+Scan the current project directory:
+- List all directories and subdirectories
+- Identify file extensions and patterns
+- Check for config files (package.json, requirements.txt, etc.)
+- Note any existing .claude/ configuration
 
 ## Step 3: Install Mandatory Skills
 
-Install skills marked as MANDATORY in the skills/ files:
+Install these three skills (marked MANDATORY in their files):
 
-- Read `skills/gstack.md` and install it
-- Read `skills/superpowers.md` and install it
+1. **gstack** - Clone and setup
+2. **superpowers** - Clone to project (use git clone, not plugin install)
+3. **claude-mem** - Follow install instructions in memory.md
 
 ## Step 4: Install Optional Skills
 
-Read each remaining file in skills/ and install if the project matches the "When to Install" criteria described in that file.
+For each remaining skills file, decide if project needs it:
+
+- Read the "When to Install" or criteria in each file
+- Compare against detected project structure
+- If match found → install it
+- If no match → skip it
+
+**Decision criteria:**
+- frontend.md → React/Vue/Angular files detected?
+- database.md → Database/ORM usage detected?
+- documents.md → PDF/Word/Excel handling needed?
+- scraping.md → Web scraping requirements?
+- marketing.md → Marketing content work?
+- automation.md → SaaS integrations needed?
+- development.md → Additional dev tools needed?
+- security.md → Security testing requirements?
+- data.md → Data analysis/research work?
+- creative.md → Images/video/design work?
+- productivity.md → File management/workspace needs?
 
 ## Step 5: Generate Rules
 
-Analyze project structure and create `.claude/rules/` files based on detected patterns.
+Analyze project and create `.claude/rules/` files:
 
-For each detected category:
-1. Create a file named `{category}.md` in `.claude/rules/`
-2. Add YAML frontmatter with `name:` and `paths:`
-3. Document actual conventions found in the codebase
-4. Keep under 30 lines
-
-Only create rules where clear patterns exist.
+1. Scan codebase for patterns
+2. Identify: frontend, backend, database, testing, config, docs
+3. For each clear pattern found:
+   - Create `{category}.md` in `.claude/rules/`
+   - Add YAML frontmatter with `name:` and `paths:`
+   - Document actual conventions from code
+   - Keep under 30 lines
 
 ## Step 6: Generate Core Files
 
-Create `.claude/CLAUDE.md` listing:
-- Installed mandatory skills
-- Installed optional skills
-- Intent to skill mapping
-- Principles
+Create in `.claude/`:
 
-Create `.claude/settings.json` with UserPromptSubmit hook.
+**CLAUDE.md:**
+- List all installed skills (mandatory + optional)
+- Intent → skill mapping
+- Principles section
 
-Create `.claude/context.md` with project info.
+**settings.json:**
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [{
+      "matcher": "",
+      "hooks": [{
+        "type": "command",
+        "command": "echo '[Claude] Analyzing prompt to load relevant skills...'"
+      }]
+    }]
+  }
+}
+```
 
-Create `.claude/intent-map.yaml` mapping intents to skill loading commands.
+**context.md:**
+- Project name/type
+- Technology stack detected
+- Key directories
+- Conventions observed
+
+**intent-map.yaml:**
+```yaml
+intents:
+  build:
+    patterns: [build, create, "new feature", implement]
+    action: "Load gstack. Run /office-hours"
+  review:
+    patterns: [review, "check code", audit]
+    action: "Load gstack. Run /review"
+  test:
+    patterns: [test, qa, verify]
+    action: "Load gstack. Run /qa"
+  ship:
+    patterns: [ship, deploy, release]
+    action: "Load gstack. Run /ship"
+  debug:
+    patterns: [debug, fix, error, bug]
+    action: "Load superpowers. Use systematic-debugging"
+  refactor:
+    patterns: [refactor, cleanup, restructure]
+    action: "Load superpowers. Use subagent-driven-development"
+  plan:
+    patterns: [plan, design, architecture]
+    action: "Load superpowers. Use brainstorming"
+  [ADD MAPPINGS FOR INSTALLED OPTIONAL SKILLS]
+default: "Use available skills based on context"
+```
 
 ## Step 7: Copy Skills Reference
 
-Copy skills folder to project:
 ```bash
-cp -r /tmp/claude-bootstrap/skills .claude/
+mkdir -p .claude/bootstrap-catalog
+cp -r /tmp/claude-bootstrap/skills .claude/bootstrap-catalog/
 ```
 
 ## Step 8: Report
 
-Tell user what was installed, what plugins to install after restart, what files were generated, and to restart Claude Code.
+Tell user exactly what was installed:
+
+```
+Bootstrap Complete ✓
+
+Mandatory Skills Installed:
+- gstack (23 specialists)
+- superpowers (12 workflow skills)
+- claude-mem (memory)
+
+Optional Skills Installed (Based on Project Detection):
+[List each with reason why it was selected]
+
+Generated Files:
+- .claude/CLAUDE.md
+- .claude/settings.json
+- .claude/context.md
+- .claude/intent-map.yaml
+- .claude/rules/ [if any created]
+- .claude/bootstrap-catalog/skills/
+
+Next Step: Restart Claude Code to activate.
+```
