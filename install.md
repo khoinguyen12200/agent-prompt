@@ -49,7 +49,88 @@ Install each selected skill using instructions from its skills/ file.
 
 ## Step 6: Generate Rules
 
-Analyze project and create `.claude/rules/` files.
+Analyze project structure and create `.claude/rules/` files with path-scoped constraints.
+
+### Rule Structure
+
+Each rule file must have YAML frontmatter with `paths:` to scope it to specific files:
+
+```markdown
+---
+name: [category]
+paths:
+  - "pattern/**"
+  - "*.ext"
+---
+
+# [Category] Rules
+
+## Conventions
+- Convention 1 (observed from actual code)
+- Convention 2 (observed from actual code)
+
+## Checklist
+- [ ] Check 1
+- [ ] Check 2
+```
+
+### Detection Process
+
+1. **Scan codebase** — List all directories, identify file extensions
+2. **Identify patterns** — Look for: frontend, backend, database, tests, config, docs
+3. **Read sample files** — Read 3-5 files per category to extract actual conventions
+4. **Document patterns** — Write rules based on observed code, not generic advice
+
+### Categories to Detect
+
+| Category | File Pattern | What to Extract |
+|----------|--------------|-----------------|
+| Frontend | `src/components/**`, `*.tsx`, `*.jsx`, `*.vue` | Component patterns, naming, imports |
+| Backend | `src/api/**`, `src/routes/**`, `server/**` | API patterns, error handling |
+| Database | `prisma/**`, `migrations/**`, `models/**` | Schema patterns, naming |
+| Testing | `*.test.*`, `*.spec.*`, `tests/**` | Test structure, assertions |
+| TypeScript | `*.ts`, `*.tsx` | Type patterns, interfaces |
+| Config | `*.config.*`, `config/**` | Config structure |
+| Styling | `*.css`, `*.scss`, `*.styled.*` | Class naming, organization |
+
+### Best Practices
+
+- **One concern per file** — Don't mix frontend and backend rules
+- **Use specific paths** — `src/components/**/*.tsx` not `**/*.tsx`
+- **Extract from code** — Document what you actually see, not what you think should be
+- **Keep it short** — Under 30 lines per rule file
+- **Skip if unclear** — If files are inconsistent, don't create a rule
+- **Use checklists** — End with 3-5 verification checklists
+
+### Example Rule File
+
+```markdown
+---
+name: frontend
+paths:
+  - "src/components/**/*.tsx"
+  - "src/pages/**/*.tsx"
+---
+
+# Frontend Rules
+
+## Conventions
+- Use named exports for components
+- Props interface named `Props`
+- Use composition over inheritance
+
+## Checklist
+- [ ] Component renders without errors
+- [ ] TypeScript types are correct
+- [ ] Follows existing naming pattern
+```
+
+### Skip Conditions
+
+Do NOT create a rule if:
+- Less than 5 files in the category
+- Files have inconsistent patterns
+- No clear convention emerges from sample files
 
 ## Step 7: Generate Core Files
 
