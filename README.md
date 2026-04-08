@@ -24,7 +24,7 @@ Installs skill libraries and configures **active skill loading** — skills auto
 1. **Installs mandatory skills** — gstack (23 specialists), superpowers, claude-mem
 2. **Detects your project** — analyzes tech stack
 3. **Lets you select skills** — from 180+ options via interactive prompts
-4. **Auto-loads on prompt** — UserPromptSubmit hook loads the right skill
+4. **Skills ready to use** — Load manually or mention in prompt
 
 ---
 
@@ -68,16 +68,25 @@ Claude detects your project and asks you to select from 180+ skills:
 
 ---
 
-## 🎯 How It Works
+## 🎯 How to Use Skills
 
-| You Type | Claude Loads |
-|----------|--------------|
-| "build feature" | gstack /office-hours |
-| "review this" | gstack /review |
-| "test it" | gstack /qa |
-| "ship it" | gstack /ship |
-| "debug error" | superpowers systematic-debugging |
-| "refactor" | superpowers subagent-driven-development |
+After install, tell Claude to load a skill:
+
+```
+Load gstack and run /office-hours
+```
+
+Or mention it in your prompt:
+
+```
+Using superpowers, debug this error...
+```
+
+| Skill Library | Commands Available |
+|---------------|-------------------|
+| gstack | /office-hours, /review, /qa, /ship, etc. |
+| superpowers | systematic-debugging, subagent-driven-development, etc. |
+| [installed] | See .claude/skills/ for full list |
 
 ---
 

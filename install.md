@@ -84,54 +84,12 @@ Create in `.claude/`:
 - Intent → skill mapping
 - Principles
 
-**settings.json:**
-```json
-{
-  "hooks": {
-    "UserPromptSubmit": [{
-      "matcher": "",
-      "hooks": [{
-        "type": "command",
-        "command": "echo '[Claude] Analyzing prompt to load relevant skills...'"
-      }]
-    }]
-  }
-}
-```
-
 **context.md:**
 - Project info
 - Technology stack
 - Conventions
 
-**intent-map.yaml:**
-```yaml
-intents:
-  build:
-    patterns: [build, create, "new feature", implement]
-    action: "Load gstack. Run /office-hours"
-  review:
-    patterns: [review, "check code", audit]
-    action: "Load gstack. Run /review"
-  test:
-    patterns: [test, qa, verify]
-    action: "Load gstack. Run /qa"
-  ship:
-    patterns: [ship, deploy, release]
-    action: "Load gstack. Run /ship"
-  debug:
-    patterns: [debug, fix, error, bug]
-    action: "Load superpowers. Use systematic-debugging"
-  refactor:
-    patterns: [refactor, cleanup, restructure]
-    action: "Load superpowers. Use subagent-driven-development"
-  plan:
-    patterns: [plan, design, architecture]
-    action: "Load superpowers. Use brainstorming"
-default: "Use available skills based on context"
-```
-
-## Step 9: Report
+## Step 8: Report
 
 Tell user what was installed:
 
