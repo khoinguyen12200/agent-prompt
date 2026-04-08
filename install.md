@@ -128,14 +128,7 @@ intents:
 default: "Use available skills based on context"
 ```
 
-## Step 7: Copy Skills Reference
-
-Copy the skills catalog for reference:
-```bash
-cp -r /tmp/claude-bootstrap/skills .claude/
-```
-
-## Step 8: Report
+## Step 7: Report
 
 Tell user exactly what was installed:
 
@@ -156,7 +149,6 @@ Generated Files:
 - .claude/context.md
 - .claude/intent-map.yaml
 - .claude/rules/ [if any created]
-- .claude/bootstrap-catalog/skills/
 
 Next Step: Restart Claude Code to activate.
 ```
