@@ -1,6 +1,6 @@
 # Memory Skills
 
-Install these if user wants persistence across sessions.
+**Status:** MANDATORY - Always install
 
 ## claude-mem
 
