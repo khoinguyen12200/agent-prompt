@@ -30,11 +30,11 @@ Scan the current project directory:
 
 ## Step 3: Install Mandatory Skills
 
-Install these three skills (marked MANDATORY in their files):
+Install these three skills (marked MANDATORY in their files). DO NOT skip any:
 
-1. **gstack** - Clone and setup
-2. **superpowers** - Clone to project (use git clone, not plugin install)
-3. **claude-mem** - Follow install instructions in memory.md
+1. **gstack** - Clone from GitHub to .claude/skills/gstack and run ./setup
+2. **superpowers** - Clone from GitHub to .claude/skills/superpowers (DO NOT use plugin install, must be at project level)
+3. **claude-mem** - Follow install instructions in skills/memory.md (visit website and set up)
 
 ## Step 4: Install Optional Skills
 
@@ -130,9 +130,9 @@ default: "Use available skills based on context"
 
 ## Step 7: Copy Skills Reference
 
+Copy the skills catalog for reference:
 ```bash
-mkdir -p .claude/bootstrap-catalog
-cp -r /tmp/claude-bootstrap/skills .claude/bootstrap-catalog/
+cp -r /tmp/claude-bootstrap/skills .claude/
 ```
 
 ## Step 8: Report
