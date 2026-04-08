@@ -96,12 +96,11 @@ Using superpowers, debug this error...
 ├── context.md             # Project knowledge
 ├── rules/                 # Project-specific rules
 └── skills/                # Installed skills (you selected)
-    ├── foundation/
-    ├── build/
-    ├── data/
-    ├── create/
-    ├── secure/
-    └── integrate/
+    ├── gstack/
+    ├── superpowers/
+    ├── claude-mem/
+    ├── [other-skills-you-selected]/
+    └── ...
 ```
 
 ---
