@@ -1,76 +1,49 @@
-# GStack Skills
+# gstack
 
-From: https://github.com/garrytan/gstack
+**Status:** MANDATORY  
+**Source:** https://github.com/garrytan/gstack
 
-Install:
+## Install
+
+### Option 1: Global (Recommended)
 ```bash
-git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git ~/.claude/skills/gstack
-cd ~/.claude/skills/gstack && ./setup
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
+cd .claude/skills/gstack && ./setup
 ```
 
-## Planning Skills
+### Option 2: Project Level
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
+cd .claude/skills/gstack && ./setup
+```
 
-| Command | Use When | Description |
-|---------|----------|-------------|
-| `/office-hours` | Building new feature | 6 forcing questions that reframe product before coding |
-| `/plan-ceo-review` | Strategic decisions | Challenges scope, finds 10-star product hiding in request |
-| `/plan-eng-review` | Technical planning | Architecture, data flow diagrams, edge cases, tests |
-| `/plan-design-review` | UI/UX decisions | Rates design dimensions 0-10, detects AI slop |
-| `/plan-devex-review` | API/SDK design | Developer experience review, benchmarks TTHW |
-| `/autoplan` | Full pipeline | Runs CEO → design → eng review automatically |
+## What It Is
 
-## Review Skills
+23 specialist skills for end-to-end software development. YC-style workflow with planning, review, QA, and shipping.
 
-| Command | Use When | Description |
-|---------|----------|-------------|
-| `/review` | Code complete | Staff engineer review, auto-fixes obvious issues |
-| `/investigate` | Debugging needed | Systematic root-cause debugging, Iron Law enforcement |
-| `/design-review` | UI changes | Design audit then fixes what it finds |
-| `/devex-review` | API changes | Live developer experience audit |
-| `/codex` | Second opinion | Independent review from OpenAI Codex CLI |
+## Available Commands
 
-## QA Skills
+| Command | When to Use |
+|---------|-------------|
+| /office-hours | Building new feature - 6 forcing questions |
+| /plan-ceo-review | Strategic decisions |
+| /plan-eng-review | Technical planning |
+| /plan-design-review | UI/UX decisions |
+| /autoplan | Full pipeline (CEO→Eng→Design) |
+| /review | Code complete |
+| /qa | Ready to test |
+| /ship | Ready to release |
+| /cso | Security audit |
+| /browse | Need browser |
+| /design-html | Mockup to production HTML |
+| /retro | Weekly retro |
+| + 10 more... |
 
-| Command | Use When | Description |
-|---------|----------|-------------|
-| `/qa` | Ready to test | Browser testing, finds bugs, fixes with atomic commits |
-| `/qa-only` | Bug report needed | Same methodology but report only, no code changes |
-| `/benchmark` | Performance check | Baseline page load times, Core Web Vitals |
+## Intent Mapping
 
-## Shipping Skills
-
-| Command | Use When | Description |
-|---------|----------|-------------|
-| `/ship` | Ready to release | Sync main, run tests, audit coverage, push, open PR |
-| `/land-and-deploy` | PR approved | Merge PR, wait for CI, deploy, verify production |
-| `/canary` | After deploy | Post-deploy monitoring for errors/regressions |
-| `/document-release` | After release | Update all project docs to match what shipped |
-
-## Design Skills
-
-| Command | Use When | Description |
-|---------|----------|-------------|
-| `/design-consultation` | Design system needed | Build complete design system from scratch |
-| `/design-shotgun` | Need options | Generate 4-6 AI mockup variants, iterate visually |
-| `/design-html` | Mockup to code | Turn mockup into production HTML, 30KB zero deps |
-| `/design-review` | Audit existing | Same audit as plan-design-review, then fixes |
-
-## Browser Skills
-
-| Command | Use When | Description |
-|---------|----------|-------------|
-| `/browse` | Need browser | Real Chromium, real clicks, ~100ms per command |
-| `/open-gstack-browser` | Full browser | GStack Browser with sidebar, anti-bot stealth |
-| `/setup-browser-cookies` | Auth needed | Import cookies from real Chrome/Arc/Brave |
-| `/pair-agent` | Multi-agent | Share browser with OpenClaw/Hermes/Codex agents |
-
-## Utility Skills
-
-| Command | Use When | Description |
-|---------|----------|-------------|
-| `/cso` | Security audit | OWASP Top 10 + STRIDE threat model, zero noise |
-| `/careful` | Dangerous ops | Warn before rm -rf, DROP TABLE, force-push |
-| `/freeze` | Scope control | Lock edits to one directory |
-| `/guard` | Maximum safety | `/careful` + `/freeze` combined |
-| `/retro` | Weekly retro | Per-person breakdowns, shipping streaks, trends |
-| `/learn` | Memory mgmt | Review/search what gstack learned across sessions |
+```yaml
+build: Load gstack /office-hours
+review: Load gstack /review
+test: Load gstack /qa
+ship: Load gstack /ship
+```

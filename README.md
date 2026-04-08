@@ -16,7 +16,7 @@ Installs skill libraries and configures active skill loading for Claude Code.
 
 **Step 1:** Clone this repo to temp
 ```bash
-rm -rf /tmp/claude-bootstrap && git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
+!rm -rf /tmp/claude-bootstrap && git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
 ```
 
 **Step 2:** Tell Claude to install

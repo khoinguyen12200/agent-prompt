@@ -1,53 +1,47 @@
-# Superpowers Skills
+# superpowers
 
-From: https://github.com/obra/superpowers
+**Status:** MANDATORY  
+**Source:** https://github.com/obra/superpowers
 
-Install:
+## Install
+
+### Option 1: Plugin (Global)
 ```bash
 /plugin install superpowers@claude-plugins-official
 ```
 
-## Development Workflow Skills
+### Option 2: Project Level (Git Clone)
+```bash
+git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
+```
 
-| Skill | Use When | Description |
-|-------|----------|-------------|
-| `brainstorming` | Planning phase | Socratic design refinement before writing code |
-| `writing-plans` | Implementation | Break work into bite-sized 2-5 minute tasks |
-| `executing-plans` | Execution | Batch execution with human checkpoints |
-| `subagent-driven-development` | Complex tasks | Dispatches fresh subagent per task with two-stage review |
-| `dispatching-parallel-agents` | Independent tasks | Concurrent subagent workflows |
+Then add to CLAUDE.md: "Load skills from .claude/skills/superpowers/skills/"
 
-## Testing Skills
+## What It Is
 
-| Skill | Use When | Description |
-|-------|----------|-------------|
-| `test-driven-development` | Writing code | RED-GREEN-REFACTOR cycle, deletes code before tests |
+Development workflow skills with systematic debugging, planning, and subagent-driven development.
 
-## Debugging Skills
+## Available Skills
 
-| Skill | Use When | Description |
-|-------|----------|-------------|
-| `systematic-debugging` | Errors found | 4-phase root cause process |
-| `root-cause-tracing` | Deep errors | Trace back to find original trigger |
-| `verification-before-completion` | After fix | Ensure it's actually fixed |
+| Skill | When to Use |
+|-------|-------------|
+| brainstorming | Planning phase |
+| writing-plans | Implementation planning |
+| executing-plans | Batch execution |
+| subagent-driven-development | Complex multi-task work |
+| dispatching-parallel-agents | Concurrent subagents |
+| test-driven-development | RED-GREEN-REFACTOR |
+| systematic-debugging | Debugging errors |
+| root-cause-tracing | Deep error tracing |
+| using-git-worktrees | Isolated branches |
+| finishing-a-development-branch | Complete work |
+| requesting-code-review | Pre-review checklist |
+| receiving-code-review | Handle feedback |
 
-## Git Skills
+## Intent Mapping
 
-| Skill | Use When | Description |
-|-------|----------|-------------|
-| `using-git-worktrees` | Parallel work | Creates isolated workspace on new branch |
-| `finishing-a-development-branch` | Task complete | Merge/PR decision workflow, cleanup |
-
-## Review Skills
-
-| Skill | Use When | Description |
-|-------|----------|-------------|
-| `requesting-code-review` | Code ready | Pre-review checklist |
-| `receiving-code-review` | Got feedback | Responding to feedback workflow |
-
-## Meta Skills
-
-| Skill | Use When | Description |
-|-------|----------|-------------|
-| `writing-skills` | Creating skills | How to create effective skills |
-| `using-superpowers` | Introduction | Introduction to the skills system |
+```yaml
+debug: Load superpowers systematic-debugging
+refactor: Load superpowers subagent-driven-development
+plan: Load superpowers brainstorming
+```
