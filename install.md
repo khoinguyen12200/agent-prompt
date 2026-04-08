@@ -37,7 +37,7 @@ for skill_dir in .claude/skills/*/; do
     echo "Skill found: $name"
   fi
   
-  # Check for nested skills (superpowers/skills/, gstack subdirs, etc.)
+  # Check for nested skills (superpowers/skills/, etc.)
   for nested in "$skill_dir"/*/; do
     [ -d "$nested" ] || continue
     
@@ -110,9 +110,9 @@ Scan for tech stack indicators (package.json, requirements.txt, src/**/*.tsx, et
 
 | Potential | Criteria |
 |-----------|----------|
-| **HIGH** | Foundation skills (gstack, superpowers, claude-mem) + matches detected tech |
-| **MEDIUM** | General utilities (debugging, testing) |
-| **LOW** | Wrong tech stack |
+| **HIGH** | Direct match to detected tech stack |
+| **MEDIUM** | Related utilities |
+| **LOW** | General purpose (superpowers), wrong tech |
 
 ### Step 4: User Selection
 
@@ -144,32 +144,13 @@ done
 ```markdown
 # Installed Skills
 
-## Foundation
-
-### gstack — 37 Specialists
-- `/office-hours` — Product planning
-- `/review` — Code review
-- `/qa` — Browser testing  
-- `/ship` — Release workflow
-- `/cso` — Security audit
-- `/browse` — Browser automation
-- `/investigate` — Debugging
-- Plus 30 more...
-
-### superpowers — 12 Workflows
-- `/systematic-debugging` — Debug methodology
-- `/test-driven-development` — TDD workflow
-- `/subagent-driven-development` — Parallel agents
-- Plus 9 more...
-
-### claude-mem
-- `/mem` — Memory persistence
-
-## Project-Specific
-[List other installed skills]
-
 ## Usage
+
 Type `/` to see all skills. Type `/<skill-name>` to invoke.
+
+## Installed Skills
+
+[List each installed skill with description]
 ```
 
 ### Step 8: Report
@@ -178,10 +159,9 @@ Type `/` to see all skills. Type `/<skill-name>` to invoke.
 Bootstrap Complete ✓
 
 Installed Skills: [N] total
-├── gstack: 37 sub-skills ✓
-├── superpowers: 12 sub-skills ✓
-├── claude-mem: 1 skill ✓
-└── [others]: [count] ✓
+├── [skill-1]: [count] sub-skills ✓
+├── [skill-2]: [count] sub-skills ✓
+└── ...
 
 Verify: ls .claude/skills/*/SKILL.md
 
