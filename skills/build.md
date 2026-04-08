@@ -2,63 +2,89 @@
 
 Skills for building applications — frontend, backend, database, APIs.
 
+## Foundation (Highly Recommended)
+
+### gstack
+**Source:** https://github.com/garrytan/gstack  
+**Install:**
+```bash
+git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .claude/skills/gstack
+cd .claude/skills/gstack && ./setup
+```
+**What:** 23 specialists — planning, review, QA, shipping
+
+### superpowers
+**Source:** https://github.com/obra/superpowers  
+**Install:**
+```bash
+git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
+```
+**What:** Debugging, TDD, planning, subagent-driven dev
+
 ## Frontend
 
-### Official (Anthropics)
-- **react-components** — React patterns
-- **vue-components** — Vue.js patterns
+### Official
+- **react-components** — From https://github.com/anthropics/skills
+- **vue-components** — From https://github.com/anthropics/skills
 
-### Community (Awesome)
+### From awesome-claude-skills catalog (copy individually):
+```bash
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+cp -r /tmp/awesome/artifacts-builder .claude/skills/
+cp -r /tmp/awesome/d3-visualization .claude/skills/
+```
 - **artifacts-builder** — HTML/React/Tailwind artifacts
 - **d3-visualization** — D3 charts
 
 ### Plugins
-- **frontend-design** — `/plugin install frontend-design` — Design patterns
-- **ui-ux-pro-max** — Advanced UI/UX
+- **frontend-design** — `/plugin install frontend-design`
 
 ## Backend
 
-### Official (Anthropics)
-- **api-design** — REST/GraphQL patterns
-- **nodejs-express** — Express patterns
-- **python-skills** — Python development
+### Official
+- **api-design** — From https://github.com/anthropics/skills
+- **nodejs-express** — From https://github.com/anthropics/skills
+- **python-skills** — From https://github.com/anthropics/skills
 
-### Community (Awesome)
-- **aws-skills** — AWS CDK, serverless
-- **mcp-builder** — MCP servers
-- **software-architecture** — Clean Architecture, SOLID
-- **prompt-engineering** — Best practices
+### From awesome-claude-skills (copy individually):
+```bash
+cp -r /tmp/awesome/aws-skills .claude/skills/
+cp -r /tmp/awesome/mcp-builder .claude/skills/
+cp -r /tmp/awesome/software-architecture .claude/skills/
+cp -r /tmp/awesome/prompt-engineering .claude/skills/
+```
 
 ## Database
 
-### Official (Anthropics)
-- **sql-queries** — SQL optimization
-- **database-migrations** — Migration strategies
+### Official
+- **sql-queries** — From https://github.com/anthropics/skills
+- **database-migrations** — From https://github.com/anthropics/skills
 
-### Community (Awesome)
+### From awesome-claude-skills (copy individually):
+```bash
+cp -r /tmp/awesome/postgres .claude/skills/
+```
 - **postgres** — PostgreSQL queries
 
 ### Plugins
-- **prisma** — `/plugin install prisma` — Prisma ORM
+- **prisma** — `/plugin install prisma`
 
-## Testing & QA
-
-### From gstack
-- `/review` — Code review
-- `/qa` — Browser testing
+## Testing
 
 ### From superpowers
 - `test-driven-development` — TDD workflow
 
-### Community (Awesome)
-- **playwright** — Browser automation
-- **webapp-testing** — Local app testing
-- **pypict-testing** — Combinatorial testing
+### From awesome-claude-skills (copy individually):
+```bash
+cp -r /tmp/awesome/playwright .claude/skills/
+cp -r /tmp/awesome/webapp-testing .claude/skills/
+cp -r /tmp/awesome/pypict-testing .claude/skills/
+```
 
 ## Usage
 
 ```
-Load react-components and create a component
-Load prisma and design the schema
-Load playwright and test this flow
+Load gstack and run /office-hours
+Load react-components
+Load postgres and query the database
 ```

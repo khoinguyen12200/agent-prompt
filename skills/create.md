@@ -7,46 +7,49 @@ Skills for creating content — documents, media, design, writing.
 ### Official (Anthropics)
 **Install:** `/plugin install document-skills@anthropic-agent-skills`
 
-- **docx** — Word docs, tracked changes
-- **pdf** — Extract, merge, annotate
-- **pptx** — Slides, layouts
-- **xlsx** — Spreadsheets, formulas
+- **docx** — Word docs
+- **pdf** — PDF manipulation
+- **pptx** — Slides
+- **xlsx** — Spreadsheets
 
-### Community (Awesome)
-- **markdown-to-epub** — Markdown to ebook
+### From awesome-claude-skills (copy individually):
+```bash
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+cp -r /tmp/awesome/markdown-to-epub .claude/skills/
+```
 
 ## Media & Design
 
-### Official (Anthropics)
+### Official
 - **creative-art** — Art and design
 - **music** — Music-related
 
-### Community (Awesome)
-- **canvas-design** — PNG/PDF artwork
-- **imagen** — Image generation (Gemini)
-- **image-enhancer** — Enhance quality
-- **slack-gif-creator** — Animated GIFs
-- **theme-factory** — Themes for docs/slides
-- **video-downloader** — Download videos
+### From awesome-claude-skills (copy individually):
+```bash
+cp -r /tmp/awesome/canvas-design .claude/skills/
+cp -r /tmp/awesome/imagen .claude/skills/
+cp -r /tmp/awesome/image-enhancer .claude/skills/
+cp -r /tmp/awesome/slack-gif-creator .claude/skills/
+```
 
 ### From gstack
-- `/design-html` — Mockup to production HTML
-- `/design-shotgun` — Generate mockup variants
+- `/design-html` — Mockup to HTML
+- `/design-shotgun` — Generate mockups
 
 ## Writing & Content
 
-### Community (Awesome)
-- **content-research-writer** — Write with research
-- **brainstorming** — Design refinement
-- **article-extractor** — Extract article text
+### From awesome-claude-skills (copy individually):
+```bash
+cp -r /tmp/awesome/content-research-writer .claude/skills/
+cp -r /tmp/awesome/brainstorming .claude/skills/
+```
 
 ### Plugins
-- **marketing** — `/plugin install marketing` — Marketing content
+- **marketing** — `/plugin install marketing`
 
 ## Usage
 
 ```
 Load docx and edit this Word document
 Load imagen and generate a mockup
-Load marketing and create a campaign
 ```

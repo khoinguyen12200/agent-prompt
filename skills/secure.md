@@ -1,22 +1,26 @@
 # Secure Skills
 
-Skills for security testing, forensics, and audit.
+Skills for security testing and forensics.
 
 ## Security Testing
 
 ### From gstack
-- `/cso` — OWASP Top 10 + STRIDE security audit
+- `/cso` — OWASP + STRIDE audit
 
-### Community (Awesome)
-- **ffuf-web-fuzzing** — Web fuzzing for vulnerabilities
-- **threat-hunting-with-sigma-rules** — Sigma detection rules
+### From awesome-claude-skills (copy individually):
+```bash
+git clone --depth 1 https://github.com/ComposioHQ/awesome-claude-skills.git /tmp/awesome
+cp -r /tmp/awesome/ffuf-web-fuzzing .claude/skills/
+cp -r /tmp/awesome/threat-hunting-with-sigma-rules .claude/skills/
+```
 
 ## Forensics
 
-### Community (Awesome)
-- **computer-forensics** — Digital forensics analysis
-- **metadata-extraction** — Extract file metadata
-- **file-deletion** — Secure file deletion
+### From awesome-claude-skills (copy individually):
+```bash
+cp -r /tmp/awesome/computer-forensics .claude/skills/
+cp -r /tmp/awesome/metadata-extraction .claude/skills/
+```
 
 ## Usage
 

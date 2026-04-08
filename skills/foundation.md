@@ -13,21 +13,18 @@ git clone --single-branch --depth 1 https://github.com/garrytan/gstack.git .clau
 cd .claude/skills/gstack && ./setup
 ```
 
-**What:** 23 specialists for end-to-end development workflow
+**What:** 23 specialists for end-to-end development
 
 **Commands:**
-- `/office-hours` — Product planning with 6 forcing questions
-- `/plan-ceo-review` — Strategic scope review
+- `/office-hours` — Product planning
+- `/plan-ceo-review` — Strategic review
 - `/plan-eng-review` — Architecture planning
-- `/autoplan` — Full planning pipeline
 - `/review` — Code review
 - `/qa` — Browser testing
 - `/ship` — Release workflow
-- `/cso` — Security audit (OWASP + STRIDE)
-- `/browse` — Real browser automation
-- `/design-html` — Mockup to production HTML
-- `/retro` — Weekly retrospective
-- Plus 12 more...
+- `/cso` — Security audit
+- `/browse` — Browser automation
+- Plus 15 more...
 
 ## superpowers
 
@@ -39,25 +36,23 @@ cd .claude/skills/gstack && ./setup
 git clone --single-branch --depth 1 https://github.com/obra/superpowers.git .claude/skills/superpowers
 ```
 
-**What:** Development workflow — debugging, TDD, planning
+**What:** Development workflow
 
 **Skills:**
 - `brainstorming` — Design refinement
 - `systematic-debugging` — 4-phase debugging
 - `subagent-driven-development` — Agent per task
-- `test-driven-development` — RED-GREEN-REFACTOR
-- `writing-plans` — Implementation planning
-- `using-git-worktrees` — Isolated branches
-- Plus 6 more...
+- `test-driven-development` — TDD
+- Plus 8 more...
 
 ## claude-mem
 
 **Status:** HIGHLY RECOMMENDED  
 **Source:** https://claude-mem.ai/
 
-**Install:** Visit https://claude-mem.ai/ for setup
+**Install:** Visit website for setup
 
-**What:** Memory and persistence across sessions
+**What:** Memory across sessions
 
 ## Usage
 
