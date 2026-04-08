@@ -66,6 +66,27 @@ Claude will strongly suggest these 3 for any project:
 
 ---
 
+## 📋 What Are Rules?
+
+Rules are path-scoped instructions that auto-load when you work with matching files.
+
+**Example:** When you edit a React component, the frontend rules auto-load.
+
+```markdown
+---
+name: frontend
+paths:
+  - "src/components/**/*.tsx"
+---
+
+- Use named exports
+- Props interface named `Props`
+```
+
+Claude generates these based on your actual code patterns.
+
+---
+
 ## 🎯 How to Use Skills
 
 After install, tell Claude to load a skill:
