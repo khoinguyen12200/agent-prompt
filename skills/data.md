@@ -1,27 +1,36 @@
-# Data & Research Skills
+# Data Skills
 
-## Official (Anthropics)
+Skills for working with data — analysis, extraction, research.
 
-None specifically - use gstack /investigate for debugging.
+## Analysis
 
-## Community (Awesome)
+### Community (Awesome)
+- **csv-data-summarizer** — CSV analysis with visualizations
+- **postgres** — PostgreSQL queries
 
-**Source:** https://github.com/ComposioHQ/awesome-claude-skills
+## Research
 
-| Skill | What |
-|-------|------|
-| csv-data-summarizer | CSV analysis with visualizations |
-| deep-research | Multi-step research with Gemini |
-| root-cause-tracing | Trace errors to origin |
+### Community (Awesome)
+- **deep-research** — Multi-step research with Gemini
+- **root-cause-tracing** — Trace errors to origin
 
-## From gstack
+### From gstack
+- `/investigate` — Systematic debugging
 
-| Command | What |
-|---------|------|
-| /investigate | Systematic debugging |
+## Extraction
+
+### Community (Awesome)
+- **article-extractor** — Extract article content from web pages
+- **reddit-fetch** — Fetch Reddit content
+- **youtube-transcript** — Fetch YouTube transcripts
+
+### Plugins
+- **firecrawl** — `/plugin install firecrawl` — Web scraping
 
 ## Usage
 
 ```
 Load csv-data-summarizer and analyze this file
+Load deep-research and research this topic
+Load firecrawl and scrape this website
 ```

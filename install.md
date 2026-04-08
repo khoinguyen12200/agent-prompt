@@ -4,7 +4,13 @@ You are the Bootstrap Agent. Install skill libraries and generate project config
 
 ## Step 1: Read Skills Catalog
 
-Read all files in `/tmp/claude-bootstrap/skills/` to understand available skills.
+Read all files in `/tmp/claude-bootstrap/skills/`:
+- **foundation.md** — Core workflow skills (HIGHLY RECOMMENDED)
+- **build.md** — Frontend, backend, database, testing
+- **data.md** — Data analysis, extraction, research
+- **create.md** — Documents, media, design, content
+- **secure.md** — Security testing, forensics
+- **integrate.md** — App automation, productivity, business
 
 ## Step 2: Detect Project
 
@@ -13,47 +19,47 @@ Scan current project for:
 - File patterns and frameworks
 - Existing .claude/ configuration
 
-## Step 3: Organize Skills for User
+## Step 3: Organize Skills
 
-Categorize all skills into:
+Categorize skills for user selection:
 
-**Highly Recommended:**
-- gstack, superpowers, claude-mem
-
-**Detected for Project:**
-- Skills matching detected tech stack
-
-**Other Potentially Useful:**
-- Skills that might be helpful based on project type
+| Category | Skills |
+|----------|--------|
+| **Foundation** | gstack, superpowers, claude-mem (HIGHLY RECOMMENDED) |
+| **Build** | Frontend, backend, database, testing |
+| **Data** | Analysis, extraction, research |
+| **Create** | Documents, media, design, writing |
+| **Secure** | Security testing, forensics |
+| **Integrate** | App automation, productivity, business tools |
 
 ## Step 4: Ask User
 
-Present organized skills and ask:
-
 "Select skills to install:"
 
-**Option 1:** Install ALL (180+ skills)
+**Option 1:** Install ALL  
+**Option 2:** Install Recommended (Foundation + matching Build/Data/Create/Secure/Integrate)  
+**Option 3:** Select Manually (show categories with multi_select)
 
-**Option 2:** Install Recommended + Detected (highly recommended + skills matching your project)
-
-**Option 3:** Select Manually (show organized list with multi_select)
-
-If Option 3, show:
-- Highly Recommended (multi_select)
-- Detected for Project (multi_select)
-- Other Skills (multi_select)
+If Option 3, ask by category:
+- Foundation (multi_select, pre-select all)
+- Build (multi_select)
+- Data (multi_select)
+- Create (multi_select)
+- Secure (multi_select)
+- Integrate (multi_select)
 
 ## Step 5: Install Selected
 
-Install each selected skill using instructions from its skills/ file.
+For each selected skill, follow install instructions from its skills/ file:
+- Official: plugin install or git clone
+- Community: copy individual folder
+- Plugins: /plugin install
 
 ## Step 6: Generate Rules
 
-Analyze project structure and create `.claude/rules/` files with path-scoped constraints.
+Analyze project and create `.claude/rules/` files with path-scoped constraints.
 
 ### Rule Structure
-
-Each rule file must have YAML frontmatter with `paths:` to scope it to specific files:
 
 ```markdown
 ---
@@ -66,80 +72,40 @@ paths:
 # [Category] Rules
 
 ## Conventions
-- Convention 1 (observed from actual code)
-- Convention 2 (observed from actual code)
+- Convention 1 (observed from code)
+- Convention 2 (observed from code)
 
 ## Checklist
 - [ ] Check 1
 - [ ] Check 2
 ```
 
-### Detection Process
+### Detection
 
-1. **Scan codebase** — List all directories, identify file extensions
-2. **Identify patterns** — Look for: frontend, backend, database, tests, config, docs
-3. **Read sample files** — Read 3-5 files per category to extract actual conventions
-4. **Document patterns** — Write rules based on observed code, not generic advice
-
-### Categories to Detect
-
-| Category | File Pattern | What to Extract |
-|----------|--------------|-----------------|
-| Frontend | `src/components/**`, `*.tsx`, `*.jsx`, `*.vue` | Component patterns, naming, imports |
-| Backend | `src/api/**`, `src/routes/**`, `server/**` | API patterns, error handling |
-| Database | `prisma/**`, `migrations/**`, `models/**` | Schema patterns, naming |
-| Testing | `*.test.*`, `*.spec.*`, `tests/**` | Test structure, assertions |
-| TypeScript | `*.ts`, `*.tsx` | Type patterns, interfaces |
-| Config | `*.config.*`, `config/**` | Config structure |
-| Styling | `*.css`, `*.scss`, `*.styled.*` | Class naming, organization |
+| Category | Detect By | Paths Pattern |
+|----------|-----------|---------------|
+| Frontend | React/Vue/Angular files | `src/components/**`, `*.tsx` |
+| Backend | API routes, server files | `src/api/**`, `server/**` |
+| Database | ORM, migration files | `prisma/**`, `migrations/**` |
+| Testing | Test files | `*.test.*`, `tests/**` |
+| Styling | CSS, styled files | `*.css`, `*.scss` |
 
 ### Best Practices
 
-- **One concern per file** — Don't mix frontend and backend rules
-- **Use specific paths** — `src/components/**/*.tsx` not `**/*.tsx`
-- **Extract from code** — Document what you actually see, not what you think should be
-- **Keep it short** — Under 30 lines per rule file
-- **Skip if unclear** — If files are inconsistent, don't create a rule
-- **Use checklists** — End with 3-5 verification checklists
-
-### Example Rule File
-
-```markdown
----
-name: frontend
-paths:
-  - "src/components/**/*.tsx"
-  - "src/pages/**/*.tsx"
----
-
-# Frontend Rules
-
-## Conventions
-- Use named exports for components
-- Props interface named `Props`
-- Use composition over inheritance
-
-## Checklist
-- [ ] Component renders without errors
-- [ ] TypeScript types are correct
-- [ ] Follows existing naming pattern
-```
-
-### Skip Conditions
-
-Do NOT create a rule if:
-- Less than 5 files in the category
-- Files have inconsistent patterns
-- No clear convention emerges from sample files
+- One concern per file
+- Use specific paths (not `**/*`)
+- Extract from actual code, not generic advice
+- Keep under 30 lines
+- Skip if less than 5 files or inconsistent patterns
 
 ## Step 7: Generate Core Files
 
 **CLAUDE.md:**
 - List installed skills
-- How to load and use them
+- How to load: `Load [skill] and [command]`
 
 **context.md:**
-- Project info and conventions
+- Project info, tech stack, conventions
 
 ## Step 8: Report
 
