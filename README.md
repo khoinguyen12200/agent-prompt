@@ -6,7 +6,7 @@ Installs skill libraries and configures active skill loading for Claude Code.
 
 1. **User runs 2 commands** (see below)
 2. **Claude reads install.md** and follows instructions
-3. **Claude installs mandatory skills** (gstack + superpowers)
+3. **Claude installs mandatory skills** (gstack + superpowers + claude-mem)
 4. **Claude detects project type** and installs relevant optional skills
 5. **Claude generates core files** (CLAUDE.md, settings.json, etc.)
 6. **User restarts Claude Code**
@@ -33,6 +33,7 @@ Read /tmp/claude-bootstrap/install.md and follow its instructions to bootstrap .
 |-------|-------|-------------|
 | gstack | 23 | Specialists: /office-hours, /review, /qa, /ship, etc. |
 | superpowers | 12 | Development workflow: debugging, refactoring, planning |
+| claude-mem | 1 | Memory and persistence across sessions |
 
 ### Optional (Auto-detected by Claude)
 | Skill | When Detected |
