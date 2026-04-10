@@ -36,18 +36,18 @@ All templates are in `project.example/`:
 
 | Template | Creates | Purpose |
 |----------|---------|---------|
-| `CLAUDE.md.example` | `CLAUDE.md` | Main project instructions |
+| `CLAUDE.example.md` | `CLAUDE.md` | Main project instructions |
 | `settings.json.example` | `.claude/settings.json` | Team-shared configuration |
 | `settings.local.json.example` | `.claude/settings.local.json` | Personal overrides |
-| `CLAUDE.local.md.example` | `CLAUDE.local.md` | Private preferences |
+| `CLAUDE.local.example.md` | `CLAUDE.local.md` | Private preferences |
 | `dot.mcp.json.example` | `.mcp.json` | MCP server configurations (always create) |
 | `dot.worktreeinclude.example` | `.worktreeinclude` | Worktree inclusions (always create) |
-| `rules/example-rule.md.example` | `.claude/rules/*.md` | Topic/path-scoped rules |
-| `skills/example-skill/SKILL.md.example` | `.claude/skills/<name>/SKILL.md` | Reusable workflows |
-| `commands/example-command.md.example` | `.claude/commands/*.md` | Quick commands |
-| `agents/example-agent.md.example` | `.claude/agents/*.md` | Subagent definitions |
-| `agent-memory/example-agent/MEMORY.md.example` | `.claude/agent-memory/<name>/MEMORY.md` | Agent memory |
-| `output-styles/example-style.md.example` | `.claude/output-styles/*.md` | Output styles |
+| `rules/example-rule.example.md` | `.claude/rules/*.md` | Topic/path-scoped rules |
+| `skills/example-skill/SKILL.example.md` | `.claude/skills/<name>/SKILL.md` | Reusable workflows |
+| `commands/example-command.example.md` | `.claude/commands/*.md` | Quick commands |
+| `agents/example-agent.example.md` | `.claude/agents/*.md` | Subagent definitions |
+| `agent-memory/example-agent/MEMORY.example.md` | `.claude/agent-memory/<name>/MEMORY.md` | Agent memory |
+| `output-styles/example-style.example.md` | `.claude/output-styles/*.md` | Output styles |
 
 ## What Gets Created
 

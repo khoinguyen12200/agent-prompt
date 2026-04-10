@@ -24,26 +24,26 @@ All templates are in `project.example/`:
 
 ```
 project.example/
-├── CLAUDE.md.example                    # Main project instructions
-├── CLAUDE.local.md.example              # Private preferences template
+├── CLAUDE.example.md                    # Main project instructions
+├── CLAUDE.local.example.md              # Private preferences template
 ├── settings.json.example                # Team-shared configuration
 ├── settings.local.json.example          # Personal overrides
 ├── dot.mcp.json.example                 # MCP server configurations
 ├── dot.worktreeinclude.example          # Worktree inclusions
 ├── rules/
-│   └── example-rule.md.example          # Topic-scoped rules
+│   └── example-rule.example.md          # Topic-scoped rules
 ├── skills/
 │   └── example-skill/
-│       └── SKILL.md.example             # Reusable workflows
+│       └── SKILL.example.md             # Reusable workflows
 ├── commands/
-│   └── example-command.md.example       # Quick commands
+│   └── example-command.example.md       # Quick commands
 ├── agents/
-│   └── example-agent.md.example         # Subagent definitions
+│   └── example-agent.example.md         # Subagent definitions
 ├── agent-memory/
 │   └── example-agent/
-│       └── MEMORY.md.example            # Agent persistent memory
+│       └── MEMORY.example.md            # Agent persistent memory
 └── output-styles/
-    └── example-style.md.example         # Output styles
+    └── example-style.example.md         # Output styles
 ```
 
 **Action**: Read each `.example` file to understand what to create.
@@ -130,7 +130,7 @@ CLAUDE.local.md                # Private preferences (add to .gitignore!)
 - Architecture (discover from directory structure)
 - Testing approach (discover from test configs)
 
-**Read template**: `project.example/CLAUDE.md.example`
+**Read template**: `project.example/CLAUDE.example.md`
 
 ---
 
@@ -181,7 +181,7 @@ CLAUDE.local.md                # Private preferences (add to .gitignore!)
 
 **What to include**: Template explaining it's for personal preferences
 
-**Read template**: `project.example/CLAUDE.local.md.example`
+**Read template**: `project.example/CLAUDE.local.example.md`
 
 **Action**: Also add `CLAUDE.local.md` to `.gitignore`
 
@@ -206,7 +206,7 @@ paths:
 ---
 ```
 
-**Read template**: `project.example/rules/example-rule.md.example`
+**Read template**: `project.example/rules/example-rule.example.md`
 
 ---
 
@@ -228,7 +228,7 @@ paths:
 - Step-by-step instructions
 - Argument placeholders if needed ($ARGUMENTS)
 
-**Read template**: `project.example/skills/example-skill/SKILL.md.example`
+**Read template**: `project.example/skills/example-skill/SKILL.example.md`
 
 ---
 
@@ -244,7 +244,7 @@ paths:
 
 **Simpler than skills** - single file, no supporting files.
 
-**Read template**: `project.example/commands/example-command.md.example`
+**Read template**: `project.example/commands/example-command.example.md`
 
 ---
 
@@ -264,7 +264,7 @@ paths:
 - Tool permissions
 - System prompt defining persona
 
-**Read template**: `project.example/agents/example-agent.md.example`
+**Read template**: `project.example/agents/example-agent.example.md`
 
 ---
 
@@ -278,7 +278,7 @@ paths:
 - Reference material
 - Preferences
 
-**Read template**: `project.example/agent-memory/example-agent/MEMORY.md.example`
+**Read template**: `project.example/agent-memory/example-agent/MEMORY.example.md`
 
 ---
 
@@ -292,7 +292,7 @@ paths:
 - explanatory - Detailed explanations
 - technical - Precise terminology
 
-**Read template**: `project.example/output-styles/example-style.md.example`
+**Read template**: `project.example/output-styles/example-style.example.md`
 
 ---
 
