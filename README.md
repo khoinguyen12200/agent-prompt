@@ -40,8 +40,8 @@ All templates are in `project.example/`:
 | `settings.json.example` | `.claude/settings.json` | Team-shared configuration |
 | `settings.local.json.example` | `.claude/settings.local.json` | Personal overrides |
 | `CLAUDE.local.md.example` | `CLAUDE.local.md` | Private preferences |
-| `dot.mcp.json.example` | `.mcp.json` | MCP server configurations |
-| `dot.worktreeinclude.example` | `.worktreeinclude` | Worktree inclusions |
+| `dot.mcp.json.example` | `.mcp.json` | MCP server configurations (always create) |
+| `dot.worktreeinclude.example` | `.worktreeinclude` | Worktree inclusions (always create) |
 | `rules/example-rule.md.example` | `.claude/rules/*.md` | Topic/path-scoped rules |
 | `skills/example-skill/SKILL.md.example` | `.claude/skills/<name>/SKILL.md` | Reusable workflows |
 | `commands/example-command.md.example` | `.claude/commands/*.md` | Quick commands |
@@ -64,8 +64,8 @@ All templates are in `project.example/`:
 └── output-styles/             # Custom output styles
 
 CLAUDE.local.md                # Private preferences (gitignored)
-.mcp.json                      # MCP server configs (optional)
-.worktreeinclude               # Worktree inclusions (optional)
+.mcp.json                      # MCP server configs
+.worktreeinclude               # Worktree inclusions
 ```
 
 ## Key Features

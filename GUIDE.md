@@ -110,8 +110,8 @@ Create this structure in the project:
 └── output-styles/             # Custom output styles (*.md files)
 
 CLAUDE.local.md                # Private preferences (add to .gitignore!)
-.mcp.json                      # MCP server configs (optional)
-.worktreeinclude               # Worktree inclusions (optional)
+.mcp.json                      # MCP server configs (always create)
+.worktreeinclude               # Worktree inclusions (always create)
 ```
 
 ---
@@ -296,21 +296,45 @@ paths:
 
 ---
 
-### 11. Optional Root Files
+### 11. MCP Configuration (.mcp.json)
 
-#### .mcp.json
 **Location**: `./.mcp.json`
 **Commit**: ✅ Yes
 
 MCP server configurations for team-shared integrations.
 
+**Always create this file** - even if empty. It serves as documentation
+of available MCP integrations and can be populated as needed.
+
+**What to include**:
+- GitHub integration (if project uses GitHub)
+- Database connections (if team shares DB access)
+- Other shared integrations
+
+**If no MCP servers needed yet**: Create with empty `mcpServers` object
+and comments explaining what can be added.
+
 **Read template**: `project.example/dot.mcp.json.example`
 
-#### .worktreeinclude
+---
+
+### 12. Worktree Configuration (.worktreeinclude)
+
 **Location**: `./.worktreeinclude`
 **Commit**: ✅ Yes
 
-Gitignored files to copy to new worktrees.
+Gitignored files to copy to new git worktrees.
+
+**Always create this file** - even if just a template with comments.
+This documents which files should exist in all worktrees.
+
+**What to include**:
+- `.env.example` - Environment template
+- `docker-compose.override.yml.example` - Docker config template
+- Any other `.example` files developers need to copy
+
+**If no templates exist yet**: Create with comments explaining what
+should be listed when templates are added.
 
 **Read template**: `project.example/dot.worktreeinclude.example`
 
@@ -342,9 +366,9 @@ After creating all files:
 - [ ] `.gitignore` updated with Claude files
 - [ ] Rules created for relevant topics
 - [ ] Skills created for common workflows
-- [ ] Example agents created (optional)
-- [ ] Optional: `.mcp.json` if needed
-- [ ] Optional: `.worktreeinclude` if needed
+- [ ] Example agents created
+- [ ] `.mcp.json` created (can be empty template)
+- [ ] `.worktreeinclude` created (can be empty template)
 
 ---
 
