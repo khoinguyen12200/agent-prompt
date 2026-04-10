@@ -1,0 +1,113 @@
+# .WORKTREEINCLUDE - Git Worktree File Inclusions
+# ================================================
+#
+# Location: Project root as `.worktreeinclude`
+# Purpose: Specify gitignored files to copy into new git worktrees
+# Commit: YES - Share with team
+#
+# WHAT IS THIS FOR?
+# =================
+#
+# Git worktrees allow checking out multiple branches simultaneously.
+# By default, gitignored files (like .env) are NOT copied to new worktrees.
+#
+# This file lists gitignored files that SHOULD be copied when creating
+# a new worktree.
+#
+# USE CASES
+# =========
+#
+# 1. ENVIRONMENT TEMPLATES:
+#    You have .env.example that developers copy to .env
+#    The example file should exist in all worktrees
+#
+# 2. DOCKER COMPOSE OVERRIDES:
+#    You have docker-compose.override.yml.example
+#    Each worktree needs this template
+#
+# 3. IDE SETTINGS:
+#    You have .vscode/settings.json.example
+#    Each worktree gets the template
+#
+# 4. LOCAL CONFIG TEMPLATES:
+#    Any .example or .template files developers need to copy
+#
+# WHAT TO LIST HERE
+# =================
+#
+# List files that:
+# - Are gitignored (or would be)
+# - Should exist in every worktree
+# - Are templates/examples (not real secrets!)
+#
+# DO NOT list:
+# - Real credential files (.env with actual values)
+# - Real secret files
+# - Files with sensitive data
+#
+# EXAMPLE ENTRIES
+# ===============
+#
+# Environment templates:
+# .env.example
+# .env.local.example
+# .env.development.example
+#
+# Docker configuration:
+# docker-compose.override.yml.example
+# Dockerfile.local.example
+#
+# IDE settings:
+# .vscode/settings.json.example
+# .idea/runConfigurations/example.xml
+#
+# Local config:
+# config/local.json.example
+# settings.local.example.yml
+#
+# HOW GIT WORKTREES WORK
+# ======================
+#
+# Creating a new worktree:
+#   git worktree add ../feature-branch-name
+#
+# This:
+# 1. Creates a new directory at ../feature-branch-name
+# 2. Checks out the specified branch there
+# 3. Copies files listed in .worktreeinclude
+#
+# EXAMPLE COMPLETE FILE
+# =====================
+#
+# # Environment templates
+# .env.example
+# .env.local.example
+# .env.test.example
+#
+# # Docker
+# docker-compose.override.yml.example
+# Dockerfile.development
+#
+# # IDE
+# .vscode/settings.json.example
+# .vscode/launch.json.example
+#
+# # Config
+# config/database.yml.example
+# config/local.json.example
+#
+# SETUP INSTRUCTIONS
+# ==================
+#
+# 1. Copy this template to `.worktreeinclude`
+# 2. List template/example files your team needs
+# 3. Ensure listed files don't contain real secrets
+# 4. Commit to git
+#
+# NOTES
+# =====
+#
+# - These are TEMPLATES, not real config files
+# - Developers copy and customize them in each worktree
+# - This ensures templates exist everywhere they're needed
+# - Real .env files stay gitignored and NOT copied

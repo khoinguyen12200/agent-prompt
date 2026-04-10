@@ -1,0 +1,205 @@
+# Rules File Template
+
+## Purpose
+
+Rules are modular instruction files that can be loaded conditionally based on file paths.
+They live in `.claude/rules/` and are automatically discovered by Claude Code.
+
+## Location
+
+Place rule files in: `.claude/rules/*.md`
+
+## When to Use Rules vs CLAUDE.md
+
+Use CLAUDE.md for:
+- Project-wide instructions
+- Universal build commands
+- General architecture
+
+Use Rules for:
+- Topic-specific instructions (testing, security, API, etc.)
+- Path-specific guidelines (only for certain files)
+- Large instruction sets you want to modularize
+- Team-specific guidelines
+
+## File Naming
+
+Name files descriptively:
+- `testing.md` - Testing standards
+- `security.md` - Security guidelines
+- `api-design.md` - API conventions
+- `frontend.md` - Frontend-specific rules
+- `database.md` - Database guidelines
+
+## Path Scoping (Optional)
+
+Add YAML frontmatter to limit when a rule applies:
+
+```markdown
+---
+paths:
+  - "src/api/**/*.ts"
+  - "src/routes/**/*.js"
+---
+
+# API Rules
+...
+```
+
+### Path Pattern Syntax
+
+| Pattern | Matches |
+|---------|---------|
+| `**/*.ts` | All TypeScript files |
+| `src/**/*` | All files under src/ |
+| `src/components/*.tsx` | TSX files in one directory |
+| `src/**/*.{ts,tsx}` | Multiple extensions |
+| `tests/**/*.test.js` | Test files |
+| `**/*.{spec,test}.{js,ts}` | Multiple patterns |
+
+### When to Use Path Scoping
+
+Use path scoping when:
+- Rules only apply to certain file types
+- Different directories have different standards
+- You want to reduce context usage (unscoped rules load always)
+
+Don't use path scoping when:
+- Rules apply project-wide
+- You want the rules always available
+
+## What to Include
+
+### 1. Rule Purpose
+
+Explain what this rule covers and why it exists.
+
+### 2. Standards/Requirements
+
+Document specific requirements:
+- Mandatory practices
+- Prohibited patterns
+- Required checks
+
+### 3. Examples
+
+Show good and bad examples when helpful.
+
+### 4. Rationale
+
+Explain WHY these rules exist (helps with adoption).
+
+## Example Rule Types
+
+### Testing Rule
+
+```markdown
+---
+paths:
+  - "src/**/*.ts"
+  - "tests/**/*.ts"
+---
+
+# Testing Requirements
+
+## Required Coverage
+- All new functions must have unit tests
+- API endpoints must have integration tests
+- UI components should have basic render tests
+
+## Test Organization
+- Co-locate tests: Component.test.ts next to Component.ts
+- Integration tests in tests/integration/
+- E2E tests in tests/e2e/
+
+## Running Tests
+- Full suite: npm test
+- Single file: npm test -- Component.test.ts
+- Watch mode: npm run test:watch
+```
+
+### Security Rule
+
+```markdown
+---
+paths:
+  - "src/api/**/*"
+  - "src/auth/**/*"
+---
+
+# Security Requirements
+
+## Input Validation
+- Validate ALL user inputs at API boundaries
+- Use parameterized queries (never string concatenation)
+- Sanitize HTML before rendering
+
+## Authentication
+- Verify JWT tokens on protected routes
+- Check user permissions before actions
+- Use HTTPS in production
+
+## Secrets
+- Never commit secrets to git
+- Use environment variables
+- Validate env vars at startup
+```
+
+### API Design Rule
+
+```markdown
+---
+paths:
+  - "src/api/**/*.ts"
+---
+
+# API Design Standards
+
+## Endpoints
+- Use kebab-case: /user-orders
+- Use nouns: /users not /getUsers
+- Use plural: /users not /user
+
+## Responses
+Standard envelope:
+```json
+{
+  "data": {},
+  "meta": {},
+  "error": null
+}
+```
+
+## Errors
+- 400: Bad request
+- 401: Unauthorized
+- 403: Forbidden
+- 404: Not found
+- 500: Server error
+```
+
+## How Rules Load
+
+1. All `.md` files in `.claude/rules/` are discovered
+2. Files without `paths` frontmatter load at startup
+3. Files with `paths` load when you work with matching files
+4. Rules are cumulative - they add to CLAUDE.md, don't replace it
+
+## Organization Tips
+
+- One concern per file
+- Use descriptive filenames
+- Group related rules in subdirectories if needed
+- Keep rules focused and specific
+- Use examples liberally
+
+## Symlinks
+
+Rules support symlinks! You can maintain shared rules elsewhere
+and symlink them into projects:
+
+```bash
+ln -s ~/shared-claude-rules/testing.md .claude/rules/testing.md
+```
+
+This is great for organizations with standard rule sets.

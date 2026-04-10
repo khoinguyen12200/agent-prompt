@@ -1,2 +1,3 @@
-node_modules/
-yarn.lock
+# Ignore local Claude Code files
+CLAUDE.local.md
+.claude/settings.local.json

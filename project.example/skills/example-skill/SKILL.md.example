@@ -1,0 +1,255 @@
+# SKILL.md Template
+
+## Purpose
+
+Skills are reusable workflows invoked with `/skill-name`. They provide
+step-by-step instructions for common tasks.
+
+## Location
+
+Place skills in: `.claude/skills/<skill-name>/SKILL.md`
+
+## Directory Structure
+
+```
+.claude/skills/<skill-name>/
+├── SKILL.md          # Main instructions (REQUIRED)
+├── template.md       # Template for Claude to fill (optional)
+├── examples/         # Example outputs (optional)
+└── scripts/          # Utility scripts (optional)
+```
+
+## File Format
+
+Skills have two parts:
+1. YAML frontmatter (configuration)
+2. Markdown content (instructions)
+
+## Frontmatter Options
+
+### name (optional)
+Display name for the skill. Defaults to directory name.
+
+```yaml
+name: deploy-app
+```
+
+### description (recommended)
+What this skill does. Used by Claude to decide when to use it.
+Keep under 250 characters.
+
+```yaml
+description: Deploy the application to production after running tests
+```
+
+### disable-model-invocation (optional)
+Set to `true` to prevent Claude from auto-triggering this skill.
+Use for workflows you want to control manually.
+
+```yaml
+disable-model-invocation: true
+```
+
+When true:
+- Only you can invoke it with `/skill-name`
+- Claude won't auto-trigger it
+- Use for: deployments, commits, external notifications
+
+### user-invocable (optional)
+Set to `false` to hide from `/` menu. Only Claude can invoke it.
+
+```yaml
+user-invocable: false
+```
+
+When false:
+- You can't type `/skill-name`
+- Claude loads it automatically when relevant
+- Use for: background knowledge, reference material
+
+### allowed-tools (optional)
+Pre-approve tools for this skill.
+
+```yaml
+allowed-tools: Bash(git *) Bash(docker *) Read
+```
+
+Claude can use these tools without asking permission while the skill is active.
+
+### context (optional)
+Set to `fork` to run in isolated subagent.
+
+```yaml
+context: fork
+```
+
+When forked:
+- Runs in separate context (no conversation history)
+- Skill content becomes the subagent's task
+- Good for: complex analysis, research, exploration
+
+### agent (optional)
+Specify subagent type when using `context: fork`.
+
+```yaml
+context: fork
+agent: Explore
+```
+
+Options:
+- `Explore` - Read-only tools, good for research
+- `Plan` - Planning and architecture
+- `general-purpose` - Default, all tools
+- Custom agents from `.claude/agents/`
+
+### paths (optional)
+Auto-load when working with matching files.
+
+```yaml
+paths:
+  - "src/api/**/*.ts"
+```
+
+### model (optional)
+Override model for this skill.
+
+```yaml
+model: claude-opus-4-6
+```
+
+### effort (optional)
+Set effort level.
+
+```yaml
+effort: high
+```
+
+Options: low, medium, high
+
+## Content Section
+
+The markdown content is the actual instructions. Use:
+
+### Argument Substitution
+
+- `$ARGUMENTS` - All arguments passed
+- `$ARGUMENTS[0]` or `$0` - First argument
+- `$ARGUMENTS[1]` or `$1` - Second argument
+
+Example:
+```markdown
+Deploy $ARGUMENTS to production.
+```
+
+### Shell Injection
+
+Dynamic content from commands:
+
+```markdown
+Current branch: !`git branch --show-current`
+```
+
+Multi-line:
+````markdown
+```!
+git status
+git log --oneline -3
+```
+````
+
+Commands run before Claude sees the content, and output replaces the command.
+
+## Example Skills
+
+### Simple Skill (Manual Trigger)
+
+```markdown
+---
+name: commit
+description: Stage and commit changes
+disable-model-invocation: true
+---
+
+# Commit Changes
+
+Stage all changes and commit with message: $ARGUMENTS
+
+1. Run `git add -A`
+2. Run `git commit -m "$ARGUMENTS"`
+3. Show commit summary
+```
+
+### Research Skill (Forked)
+
+```markdown
+---
+name: deep-research
+description: Research a topic thoroughly
+context: fork
+agent: Explore
+---
+
+# Research Task
+
+Research $ARGUMENTS thoroughly:
+
+1. Find relevant files using Glob and Grep
+2. Read and analyze the code
+3. Identify patterns and relationships
+4. Summarize findings with specific file references
+
+Focus on:
+- Implementation details
+- Edge cases
+- Related functionality
+```
+
+### Dynamic Context Skill
+
+```markdown
+---
+name: pr-summary
+description: Summarize a pull request
+context: fork
+agent: Explore
+---
+
+# PR Summary
+
+## Context
+PR: $ARGUMENTS
+
+## Data
+- Diff: !`gh pr diff $ARGUMENTS`
+- Files: !`gh pr diff --name-only $ARGUMENTS`
+- Comments: !`gh pr view --comments $ARGUMENTS`
+
+## Task
+Summarize this PR focusing on:
+1. What changed
+2. Why it changed
+3. Potential issues
+4. Testing considerations
+```
+
+## When to Create a Skill
+
+Create a skill when:
+- You repeat the same workflow multiple times
+- A process has multiple steps
+- You want to standardize a procedure
+- You want to delegate a task to a subagent
+
+Don't create a skill when:
+- It's a one-time task
+- It's simple enough to type directly
+- It changes frequently
+
+## Tips
+
+- Write clear descriptions for discoverability
+- Use disable-model-invocation for destructive operations
+- Pre-approve tools to reduce prompts
+- Use fork for complex or isolated tasks
+- Include error handling steps
+- Reference project conventions from CLAUDE.md

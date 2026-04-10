@@ -1,0 +1,240 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json"
+}
+
+/*
+SETTINGS.JSON - Project Configuration
+=====================================
+
+Location: .claude/settings.json
+Purpose: Team-shared configuration (permissions, env vars, hooks, model defaults)
+Commit: YES - This is shared with the entire team
+
+IMPORTANT: This file configures what Claude Code can do in this project.
+Review permissions carefully for security.
+
+CONFIGURATION SECTIONS
+======================
+
+1. PERMISSIONS (REQUIRED)
+-------------------------
+Control what tools and commands Claude can use.
+
+permissions: {
+  "allow": [...],  // Auto-approved without asking
+  "ask": [...],    // Prompt for confirmation each time
+  "deny": [...]    // Explicitly blocked
+}
+
+HOW TO CONFIGURE ALLOW LIST:
+- What commands do developers run frequently?
+- What is safe to run without review?
+- What read operations are low-risk?
+
+Common patterns to allow:
+- Git status/read operations: "Bash(git status)", "Bash(git log *)", "Bash(git diff *)"
+- Build commands: "Bash(npm run build)", "Bash(make)", "Bash(cargo build)"
+- Test commands: "Bash(npm test)", "Bash(pytest)", "Bash(cargo test)"
+- Lint commands: "Bash(npm run lint)", "Bash(flake8)", "Bash(cargo clippy)"
+
+HOW TO CONFIGURE DENY LIST:
+- What files contain secrets?
+- What operations are dangerous?
+- What should never be accessed?
+
+Common patterns to deny:
+- Credential files: "Read(./.env)", "Read(./.env.*)", "Read(./secrets/**)"
+- Config with API keys: "Read(./config/credentials.json)"
+- Destructive commands: "Bash(rm -rf /)", "Bash(dd *)"
+
+HOW TO CONFIGURE ASK LIST:
+- What has side effects?
+- What should be reviewed before running?
+- What might be destructive?
+
+Common patterns to ask:
+- Git push: "Bash(git push *)"
+- File deletion: "Bash(rm *)", "Bash(rmdir *)"
+- Network requests: "WebFetch", "Bash(curl *)"
+- Database modifications: "Bash(psql *)"
+
+PATTERN SYNTAX:
+- "Tool" - All uses of that tool
+- "Tool(pattern)" - Specific pattern match
+- "Tool(pattern *)" - Prefix match
+- "*" wildcard matches any characters
+- Read/Edit paths can use relative paths
+
+EXAMPLES:
+"Bash" - All bash commands
+"Bash(git *)" - All git commands
+"Bash(npm run *)" - All npm run commands
+"Read(./src/**)" - All files in src directory
+"Read(./.env)" - Specific file
+
+2. ENVIRONMENT VARIABLES (OPTIONAL)
+-----------------------------------
+Set environment variables for every Claude session.
+
+env: {
+  "VAR_NAME": "value",
+  "ANOTHER_VAR": "value"
+}
+
+Use for:
+- Setting NODE_ENV
+- Setting PYTHONPATH
+- Project-specific variables
+- Non-sensitive configuration
+
+NEVER put secrets here - use settings.local.json for personal env vars.
+
+3. MODEL DEFAULT (OPTIONAL)
+---------------------------
+Set the default model for this project.
+
+model: "claude-sonnet-4-6"
+
+Available models depend on your Claude Code version and account.
+Common options: claude-sonnet-4-6, claude-opus-4-6
+
+4. HOOKS (OPTIONAL)
+-------------------
+Automate workflows by running commands at lifecycle events.
+
+hooks: {
+  "preToolUse": [...],
+  "postToolUse": [...],
+  "onStart": [...]
+}
+
+Use for:
+- Running lint before commit
+- Sending notifications
+- Updating status
+
+5. OTHER SETTINGS (OPTIONAL)
+----------------------------
+- effortLevel: "low" | "medium" | "high"
+- defaultMode: Permission mode default
+- sandbox: Sandboxing configuration
+- outputStyle: Default output style
+
+See full schema: https://json.schemastore.org/claude-code-settings.json
+
+DISCOVERY PROCESS
+=================
+
+To configure for your project:
+
+1. BUILD/TEST COMMANDS:
+   - Check package.json "scripts"
+   - Check Makefile
+   - Check build configuration files
+   - Check CI/CD config
+   - Ask: What commands run daily?
+
+2. SECURITY ANALYSIS:
+   - List files that contain secrets (.env, credentials)
+   - Identify sensitive directories
+   - Consider what should never be auto-approved
+   - Think about destructive operations
+
+3. WORKFLOW ANALYSIS:
+   - What git operations are common?
+   - What file operations happen regularly?
+   - What network calls might be needed?
+
+EXAMPLE CONFIGURATIONS
+======================
+
+Node.js Project:
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(git diff *)",
+      "Bash(npm run *)",
+      "Bash(npm test)",
+      "Read(~/.npmrc)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./secrets/**)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(npm publish *)"
+    ]
+  },
+  "env": {
+    "NODE_ENV": "development"
+  }
+}
+
+Python Project:
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git log *)",
+      "Bash(python -m pytest *)",
+      "Bash(pip install *)",
+      "Read(~/.zshrc)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./instance/**)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(pip uninstall *)"
+    ]
+  },
+  "env": {
+    "PYTHONPATH": "./src"
+  }
+}
+
+Rust Project:
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(cargo build)",
+      "Bash(cargo test)",
+      "Bash(cargo clippy)",
+      "Bash(cargo check)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./secrets/**)"
+    ],
+    "ask": [
+      "Bash(git push *)",
+      "Bash(cargo publish *)"
+    ]
+  }
+}
+
+SECURITY BEST PRACTICES
+=======================
+
+1. Start restrictive, then relax
+2. Review what you're allowing
+3. Deny access to secrets
+4. Ask before destructive operations
+5. Pre-approve only safe, read-only operations
+6. Consider file permissions (don't allow reading ~/.ssh/*)
+7. Be careful with wildcards - "Bash(*)" allows ANY command
+
+SCHEMA REFERENCE
+================
+
+Always include the $schema line for IDE autocomplete:
+"$schema": "https://json.schemastore.org/claude-code-settings.json"
+
+This enables validation and autocomplete in VS Code, Cursor, etc.
+*/

@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json"
+}
+
+/*
+SETTINGS.LOCAL.JSON - Personal Project Settings
+===============================================
+
+Location: .claude/settings.local.json
+Purpose: Personal overrides for this specific project
+Commit: NO - This file is automatically gitignored by Claude Code
+
+WHAT THIS FILE IS FOR
+=====================
+
+This is YOUR personal configuration for this project. It overrides
+the team-shared settings.json with your preferences.
+
+Use this for:
+1. Personal permission overrides
+2. Local environment variables
+3. Personal tool preferences
+4. Machine-specific settings
+
+WHAT TO PUT HERE
+================
+
+PERSONAL PERMISSIONS:
+- Commands you personally want auto-approved
+- Overrides to team permission settings
+- Personal shortcuts and aliases
+
+Example:
+{
+  "permissions": {
+    "allow": [
+      "Bash(my-personal-script *)",
+      "Bash(my-alias *)"
+    ]
+  }
+}
+
+PERSONAL ENVIRONMENT VARIABLES:
+- API keys for local development
+- Personal access tokens
+- Local database URLs
+- Personal configuration
+
+Example:
+{
+  "env": {
+    "MY_API_KEY": "your-key-here",
+    "LOCAL_DB_URL": "postgresql://localhost:5433/mydb"
+  }
+}
+
+PERSONAL TOOL PREFERENCES:
+- Editor settings
+- Shell preferences
+- Tool-specific config
+
+Example:
+{
+  "env": {
+    "EDITOR": "vim",
+    "MY_PREFERRED_SHELL": "zsh"
+  }
+}
+
+SECURITY NOTE
+=============
+
+This file is gitignored by default, so it's safe to put secrets here.
+However, be careful:
+- Don't share this file
+- Keep backups if needed
+- Don't commit it accidentally
+
+DIFFERENCE FROM SETTINGS.JSON
+=============================
+
+settings.json (shared):
+- Team-wide permissions
+- Project-wide env vars
+- Shared configuration
+- Committed to git
+
+settings.local.json (personal):
+- Your personal permissions
+- Your personal env vars
+- Your machine-specific settings
+- Not committed (gitignored)
+
+PRECEDENCE
+==========
+
+Settings are merged in this order (later overrides earlier):
+1. settings.json (team defaults)
+2. settings.local.json (your overrides)
+3. Command line arguments
+
+So your settings.local.json values take precedence over team settings.
+
+EXAMPLE COMPLETE CONFIG
+=======================
+
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(my-custom-build-script)"
+    ]
+  },
+  "env": {
+    "MY_PERSONAL_API_KEY": "xxx",
+    "LOCAL_TEST_DB": "postgresql://localhost:5433/test"
+  }
+}
+
+CREATING THIS FILE
+==================
+
+1. Copy this template to .claude/settings.local.json
+2. Add your personal settings
+3. That's it - it's automatically gitignored
+
+The file will be loaded automatically on next Claude Code start.
+*/

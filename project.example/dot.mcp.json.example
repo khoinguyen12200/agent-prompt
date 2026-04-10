@@ -1,0 +1,202 @@
+{
+  "$schema": "https://json.schemastore.org/mcp-server.json"
+}
+
+/*
+.MCP.JSON - MCP Server Configuration
+====================================
+
+Location: Project root as `.mcp.json`
+Purpose: Team-shared MCP (Model Context Protocol) server configurations
+Commit: YES - Share with team
+
+WHAT ARE MCP SERVERS?
+=====================
+
+MCP servers extend Claude Code with additional tools and capabilities.
+They run as separate processes that Claude communicates with via the
+Model Context Protocol.
+
+Think of them as plugins that add new capabilities to Claude Code.
+
+COMMON USE CASES
+================
+
+- GitHub integration (read repos, create PRs, manage issues)
+- File system operations (beyond what Claude's tools provide)
+- Database access (query PostgreSQL, MySQL, etc.)
+- Web search capabilities
+- Custom business logic tools
+- Third-party service integrations
+
+AVAILABLE SERVERS
+=================
+
+Official MCP servers (Anthropic):
+- @modelcontextprotocol/server-github - GitHub integration
+- @modelcontextprotocol/server-filesystem - Enhanced file operations
+- @modelcontextprotocol/server-postgres - PostgreSQL access
+- @modelcontextprotocol/server-sqlite - SQLite access
+
+Community servers:
+- Search npm for "mcp-server" 
+- Check: https://github.com/modelcontextprotocol/servers
+
+CONFIGURATION FORMAT
+====================
+
+{
+  "mcpServers": {
+    "server-name": {
+      "command": "executable",
+      "args": ["arg1", "arg2", ...],
+      "env": {
+        "ENV_VAR": "value"
+      }
+    }
+  }
+}
+
+ENVIRONMENT VARIABLES
+=====================
+
+Use ${VAR_NAME} syntax for sensitive values:
+
+{
+  "env": {
+    "GITHUB_TOKEN": "${GITHUB_TOKEN}",
+    "API_KEY": "${MY_API_KEY}"
+  }
+}
+
+The values are resolved from environment variables at runtime,
+keeping secrets out of your committed configuration file.
+
+HOW TO DISCOVER WHAT YOU NEED
+=============================
+
+Consider what integrations your project uses:
+
+1. VERSION CONTROL:
+   - Using GitHub? Add github server
+   - Using GitLab? Look for gitlab MCP server
+
+2. DATABASES:
+   - PostgreSQL? Add postgres server
+   - MySQL? Look for mysql server
+   - SQLite? Add sqlite server
+
+3. FILE OPERATIONS:
+   - Need enhanced file watching?
+   - Need remote file access?
+
+4. CUSTOM TOOLS:
+   - Internal APIs?
+   - Business-specific operations?
+
+EXAMPLE CONFIGURATIONS
+======================
+
+GitHub Integration:
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    }
+  }
+}
+
+Required: Set GITHUB_TOKEN environment variable
+
+File System:
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/allow"]
+    }
+  }
+}
+
+PostgreSQL:
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://localhost/mydb"]
+    }
+  }
+}
+
+Multiple Servers:
+{
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_TOKEN}"
+      }
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "."]
+    }
+  }
+}
+
+SETUP INSTRUCTIONS
+==================
+
+1. Copy this template to `.mcp.json`
+2. Identify which MCP servers your team needs
+3. Configure each server with appropriate command/args/env
+4. Set required environment variables locally
+5. Share env var requirements with team (not the values!)
+6. Test with `/mcp` command in Claude Code
+
+SECURITY CONSIDERATIONS
+=======================
+
+- Review what each server can access
+- Use minimal required permissions
+- Keep tokens in env vars, not in the file
+- Only add servers you trust
+- Consider network access implications
+
+VERIFYING SETUP
+===============
+
+After configuring:
+1. Restart Claude Code
+2. Run `/mcp` to see connected servers
+3. Try using a tool from the server
+4. Check for connection errors
+
+TROUBLESHOOTING
+===============
+
+Server not connecting:
+- Check command is installed (npx, docker, etc.)
+- Verify environment variables are set
+- Check server output for errors
+- Try running the command manually
+
+Permission errors:
+- Verify env vars have correct values
+- Check token/API key permissions
+- Ensure network access is allowed
+
+FINDING MORE SERVERS
+====================
+
+- GitHub: github.com/modelcontextprotocol/servers
+- npm: search "mcp-server"
+- Community: Various sources online
+
+You can also build custom MCP servers for your organization's needs.
+*/

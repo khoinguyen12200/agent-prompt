@@ -1,132 +1,99 @@
-# Claude Bootstrap 🚀
+# 🚀 Agent Prompt - Claude Code Bootstrap
 
-> One command to give Claude Code a brain for your repo.
+A bootstrap template for setting up `.claude/` directories with AI-assisted development workflows.
 
-Installs skill libraries and **makes them actually work** with proper linking and configuration.
+## What This Project Does
 
----
+This repository provides a `project.example/` folder containing detailed templates for AI agents to create project-specific Claude Code configurations.
 
-## ✨ What It Does
-
-```
-1. Detect project type
-2. Categorize skills by relevance (High/Medium/Low potential)
-3. User selects skills
-4. Install with CORRECT linking:
-   - gstack: Links all 23 sub-skills individually
-   - superpowers: Installs 12 workflow skills
-   - Others: Copy to proper location
-5. Generate CLAUDE.md with HOW to use each skill
-6. Create dynamic settings.json
-```
-
-**Key Difference:** We don't just clone repos. We ensure skills are discoverable and usable.
-
----
-
-## 🚀 Quick Start
+## Quick Start
 
 **Step 1:** Clone this repo to temp:
 
-```
-!rm -rf /tmp/claude-bootstrap && git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
+```bash
+rm -rf /tmp/claude-bootstrap && \
+  git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
 ```
 
-**Step 2:** Tell Claude to install:
+**Step 2:** Tell Claude to set up the project:
 
 ```
-Read /tmp/claude-bootstrap/install.md and bootstrap .claude/ in this project.
+Read /tmp/claude-bootstrap/GUIDE.md and follow the instructions to create the .claude/ directory structure for this project.
 ```
 
 **Step 3:** Restart Claude Code when done.
 
----
+## How It Works
 
-## 🎯 How to Use Installed Skills
+1. **GUIDE.md** is the main entry point - it explains everything
+2. AI reads GUIDE.md first to understand the structure
+3. GUIDE.md instructs AI to read all templates in `project.example/`
+4. AI discovers project specifics (tech stack, build commands, etc.)
+5. AI creates adapted `.claude/` configuration for this project
 
-After install, **you must type the command** to invoke a skill:
+## Template Files
 
-```
-/office-hours     ← Product planning
-/review           ← Code review
-/qa               ← Browser testing
-/ship             ← Release workflow
-/cso              ← Security audit
-/systematic-debugging  ← Debug issues
-```
+All templates are in `project.example/`:
 
-Or type `/` to see all available skills.
+| Template | Creates | Purpose |
+|----------|---------|---------|
+| `CLAUDE.md.example` | `CLAUDE.md` | Main project instructions |
+| `settings.json.example` | `.claude/settings.json` | Team-shared configuration |
+| `settings.local.json.example` | `.claude/settings.local.json` | Personal overrides |
+| `CLAUDE.local.md.example` | `CLAUDE.local.md` | Private preferences |
+| `dot.mcp.json.example` | `.mcp.json` | MCP server configurations |
+| `dot.worktreeinclude.example` | `.worktreeinclude` | Worktree inclusions |
+| `rules/example-rule.md.example` | `.claude/rules/*.md` | Topic/path-scoped rules |
+| `skills/example-skill/SKILL.md.example` | `.claude/skills/<name>/SKILL.md` | Reusable workflows |
+| `commands/example-command.md.example` | `.claude/commands/*.md` | Quick commands |
+| `agents/example-agent.md.example` | `.claude/agents/*.md` | Subagent definitions |
+| `agent-memory/example-agent/MEMORY.md.example` | `.claude/agent-memory/<name>/MEMORY.md` | Agent memory |
+| `output-styles/example-style.md.example` | `.claude/output-styles/*.md` | Output styles |
 
----
-
-## 📦 What Gets Installed
-
-### Foundation (Highly Recommended)
-
-| Skill | Commands | Count |
-|-------|----------|-------|
-| **gstack** | `/office-hours`, `/review`, `/qa`, `/ship`, `/cso`, `/browse`, etc. | 23 |
-| **superpowers** | `/systematic-debugging`, `/tdd`, `/subagent-development`, etc. | 12 |
-| **claude-mem** | `/mem` | 1 |
-
-### By Category
-
-| Category | Examples |
-|----------|----------|
-| **Build** | `/react-components`, `/api-design`, `/prisma`, `/playwright` |
-| **Data** | `/csv-data-summarizer`, `/deep-research` |
-| **Create** | `/docx`, `/creative-art`, `/imagen` |
-| **Secure** | `/ffuf-web-fuzzing`, `/threat-hunting` |
-| **Integrate** | `/github-automation`, `/slack-automation`, `/notion-automation` |
-
----
-
-## 📁 Project Structure After
+## What Gets Created
 
 ```
-.claude/
-├── CLAUDE.md              # HOW to use installed skills (reference)
-├── context.md             # Project knowledge
-├── settings.json          # Dynamic config from skills
-├── rules/                 # Path-scoped auto-load rules
-└── skills/
-    ├── gstack/            # Main gstack repo
-    │   ├── setup          # Setup script
-    │   ├── bin/           # Utilities
-    │   └── office-hours/  # Sub-skill
-    │   └── review/        # Sub-skill
-    │   └── qa/            # Sub-skill
-    │   └── ... (20 more)
-    │
-    ├── office-hours/ → gstack/office-hours/SKILL.md  # LINKED
-    ├── review/ → gstack/review/SKILL.md              # LINKED
-    ├── qa/ → gstack/qa/SKILL.md                      # LINKED
-    ├── ship/ → gstack/ship/SKILL.md                  # LINKED
-    ├── cso/ → gstack/cso/SKILL.md                    # LINKED
-    ├── ... (18 more linked skills)
-    │
-    ├── superpowers/
-    │   └── skills/
-    │       ├── systematic-debugging/SKILL.md
-    │       ├── test-driven-development/SKILL.md
-    │       └── ... (10 more)
-    │
-    └── [other skills]/
+.claude/                        # Project configuration (committed to git)
+├── CLAUDE.md                  # Main project instructions
+├── settings.json              # Team-shared settings
+├── settings.local.json        # Personal overrides (auto-gitignored)
+├── rules/                     # Topic-scoped instructions
+├── skills/                    # Reusable prompts (/skill-name)
+├── commands/                  # Quick single-file skills
+├── agents/                    # Subagent definitions
+├── agent-memory/              # Subagent persistent memory
+└── output-styles/             # Custom output styles
+
+CLAUDE.local.md                # Private preferences (gitignored)
+.mcp.json                      # MCP server configs (optional)
+.worktreeinclude               # Worktree inclusions (optional)
 ```
 
-**Why link gstack sub-skills?** Claude Code looks for `SKILL.md` one level under `.claude/skills/`. Without linking, the 23 sub-skills would be hidden inside `gstack/`.
+## Key Features
 
----
+- **Single entry point** - Just tell AI to read GUIDE.md
+- **Instructional templates** - Each template tells AI how to customize
+- **Discovery-based** - AI discovers build commands, patterns from project
+- **Security-aware** - Settings template emphasizes careful permissions
+- **Team-focused** - Clear separation of shared vs personal config
 
-## 📚 Files
+## Verification
 
-| File | Purpose |
-|------|---------|
-| `install.md` | Instructions for Claude to follow |
-| `skills/*.md` | Skill catalog with install details |
+After installation, verify with:
 
----
+```
+/memory      # See loaded CLAUDE.md and rules
+/skills      # See available skills
+/agents      # See configured subagents
+/permissions # See current permission rules
+/mcp         # See connected MCP servers
+```
+
+## Documentation
+
+- **GUIDE.md** - Main guide for AI agents (the entry point)
+- **project.example/** - Template files with detailed instructions
 
 ## License
 
-MIT © 2024
+MIT

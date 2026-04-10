@@ -1,0 +1,136 @@
+# Command File Template
+
+## Purpose
+
+Commands are single-file skills - simpler than the full skills/ directory structure.
+They live in `.claude/commands/` and work like quick shortcuts.
+
+## Location
+
+Place command files in: `.claude/commands/*.md`
+
+## Difference from Skills
+
+| Skills | Commands |
+|--------|----------|
+| Directory structure | Single file |
+| Can have supporting files | Just the .md file |
+| Complex workflows | Quick actions |
+| `.claude/skills/name/SKILL.md` | `.claude/commands/name.md` |
+
+Use commands for simple, single-purpose actions.
+Use skills for complex workflows that might need templates/examples/scripts.
+
+## File Format
+
+Commands have the same format as skills:
+1. YAML frontmatter (configuration)
+2. Markdown content (instructions)
+
+## Frontmatter Options
+
+Same as skills:
+- `description` - What this command does
+- `disable-model-invocation` - Manual trigger only
+- `allowed-tools` - Pre-approved tools
+- `model` - Override model
+- `effort` - Set effort level
+
+## Content Section
+
+The instructions - what to do when this command is invoked.
+
+## Example Commands
+
+### Status Command
+
+```markdown
+---
+description: Show project status
+---
+
+Show current project status:
+
+1. Git status
+2. Recent commits (last 5)
+3. Any uncommitted changes
+4. Current branch
+```
+
+### Lint Command
+
+```markdown
+---
+description: Run linter and fix issues
+disable-model-invocation: true
+---
+
+Run the linter and auto-fix issues:
+
+1. Run `npm run lint`
+2. If errors found, run `npm run lint:fix`
+3. Show summary of changes
+```
+
+### Clean Command
+
+```markdown
+---
+description: Clean build artifacts
+---
+
+Clean build artifacts and dependencies:
+
+1. Remove node_modules/.cache
+2. Remove dist/ or build/
+3. Remove .tmp files
+4. Show disk space freed
+```
+
+### Test Quick Command
+
+```markdown
+---
+description: Run tests for current file
+---
+
+Run tests for the current context:
+
+If working on a specific file:
+1. Find related test file
+2. Run tests for that file only
+
+If no specific file:
+1. Run the quick test suite
+```
+
+## When to Use Commands
+
+Use commands for:
+- Quick status checks
+- Common one-liners
+- Simple shortcuts
+- Frequently used queries
+
+Don't use commands for:
+- Complex multi-step workflows (use skills)
+- Tasks needing examples/templates (use skills)
+- Tasks needing helper scripts (use skills)
+
+## Naming Conventions
+
+Name files descriptively:
+- `status.md` - Show project status
+- `clean.md` - Clean build artifacts
+- `lint.md` - Run linter
+- `test-quick.md` - Run quick tests
+- `deps-check.md` - Check dependencies
+
+## Tips
+
+- Keep instructions concise
+- Use for frequently run actions
+- Name clearly for discoverability
+- Consider disabling auto-invocation for side effects
+- Use argument substitution if needed ($ARGUMENTS)
+- Reference CLAUDE.md for project-specific details
