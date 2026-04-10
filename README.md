@@ -11,8 +11,7 @@ This repository provides a `project.example/` folder containing detailed templat
 **Step 1:** Clone this repo to temp:
 
 ```bash
-rm -rf /tmp/claude-bootstrap && \
-  git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
+!rm -rf /tmp/claude-bootstrap && git clone --depth 1 https://github.com/khoinguyen12200/agent-prompt.git /tmp/claude-bootstrap
 ```
 
 **Step 2:** Tell Claude to set up the project:
