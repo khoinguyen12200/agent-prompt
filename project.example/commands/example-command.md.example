@@ -40,6 +40,93 @@ Same as skills:
 
 The instructions - what to do when this command is invoked.
 
+---
+
+## HOW TO DECIDE WHICH COMMANDS TO CREATE
+
+Analyze the codebase and identify frequently-needed quick actions:
+
+### 1. Discover Common Commands
+
+Look for patterns in:
+- **package.json scripts** - Which scripts run most often?
+- **Makefile targets** - Common development tasks?
+- **Developer workflow** - What do developers type repeatedly?
+- **Documentation** - README mentions common commands?
+
+### 2. Identify Quick Status Needs
+
+What status information would be useful?
+- Git status overview
+- Build status
+- Test status
+- Dependency status
+- Server health
+
+### 3. Identify Quick Action Needs
+
+What simple actions happen frequently?
+- Clean build artifacts
+- Reset database
+- Restart server
+- Run quick checks
+
+### 4. Command Ideas by Project Type
+
+**Node.js Projects:**
+- `status.md` - Git status + npm outdated
+- `clean.md` - Clean node_modules/.cache
+- `lint.md` - Run linter with auto-fix
+- `test-changed.md` - Test only changed files
+- `deps-check.md` - Check for outdated dependencies
+
+**Python Projects:**
+- `status.md` - Git status + pip list outdated
+- `clean.md` - Clean __pycache__, .pyc files
+- `lint.md` - Run flake8/black
+- `test.md` - Run pytest with coverage
+- `venv-check.md` - Verify virtualenv status
+
+**Rust Projects:**
+- `status.md` - Git status + cargo tree overview
+- `clean.md` - Cargo clean
+- `check.md` - Cargo check (fast compilation check)
+- `fmt.md` - Cargo fmt
+- `clippy.md` - Run clippy lints
+
+**Docker Projects:**
+- `status.md` - Container status
+- `clean.md` - Remove stopped containers, dangling images
+- `rebuild.md` - Rebuild containers
+- `logs.md` - Show recent logs
+
+**Any Project:**
+- `status.md` - Overall project status
+- `todo.md` - Find TODOs in code
+- `stats.md` - Project statistics (lines of code, files, etc.)
+- `pr-ready.md` - Check if branch is ready for PR
+
+### 5. Naming Conventions
+
+Name files descriptively:
+- `status.md` - Show project status
+- `clean.md` - Clean build artifacts
+- `lint.md` - Run linter
+- `test-quick.md` - Run quick tests
+- `deps-check.md` - Check dependencies
+- `setup-check.md` - Verify local setup
+
+### 6. Command Content Guidelines
+
+Each command should:
+- Do ONE thing well
+- Be immediately useful
+- Save typing/common operations
+- Have a clear, descriptive name
+- Include helpful output formatting
+
+---
+
 ## Example Commands
 
 ### Status Command
@@ -87,44 +174,7 @@ Clean build artifacts and dependencies:
 4. Show disk space freed
 ```
 
-### Test Quick Command
-
-```markdown
 ---
-description: Run tests for current file
----
-
-Run tests for the current context:
-
-If working on a specific file:
-1. Find related test file
-2. Run tests for that file only
-
-If no specific file:
-1. Run the quick test suite
-```
-
-## When to Use Commands
-
-Use commands for:
-- Quick status checks
-- Common one-liners
-- Simple shortcuts
-- Frequently used queries
-
-Don't use commands for:
-- Complex multi-step workflows (use skills)
-- Tasks needing examples/templates (use skills)
-- Tasks needing helper scripts (use skills)
-
-## Naming Conventions
-
-Name files descriptively:
-- `status.md` - Show project status
-- `clean.md` - Clean build artifacts
-- `lint.md` - Run linter
-- `test-quick.md` - Run quick tests
-- `deps-check.md` - Check dependencies
 
 ## Tips
 

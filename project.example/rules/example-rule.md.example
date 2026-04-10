@@ -29,6 +29,7 @@ Name files descriptively:
 - `security.md` - Security guidelines
 - `api-design.md` - API conventions
 - `frontend.md` - Frontend-specific rules
+- `backend.md` - Backend-specific rules
 - `database.md` - Database guidelines
 
 ## Path Scoping (Optional)
@@ -68,26 +69,117 @@ Don't use path scoping when:
 - Rules apply project-wide
 - You want the rules always available
 
-## What to Include
+---
 
-### 1. Rule Purpose
+## HOW TO DECIDE WHICH RULES TO CREATE
 
-Explain what this rule covers and why it exists.
+Analyze the codebase and identify areas needing specific guidelines:
 
-### 2. Standards/Requirements
+### 1. Analyze Code Organization
 
-Document specific requirements:
-- Mandatory practices
-- Prohibited patterns
-- Required checks
+What domains exist in the project?
+- **Frontend** - UI components, styles, client-side logic
+- **Backend** - API endpoints, services, business logic
+- **Database** - Models, migrations, queries
+- **Testing** - Test files, coverage requirements
+- **Infrastructure** - DevOps, deployment, configuration
 
-### 3. Examples
+### 2. Identify Standards Gaps
 
-Show good and bad examples when helpful.
+Where would specific guidelines help?
+- Inconsistent code patterns → Style/convention rules
+- Testing gaps → Testing requirements rules
+- Security concerns → Security guidelines rules
+- API inconsistencies → API design rules
+- Performance issues → Performance guidelines
 
-### 4. Rationale
+### 3. Rule Ideas by Project Type
 
-Explain WHY these rules exist (helps with adoption).
+**Web Applications:**
+- `frontend.md` - Component patterns, styling
+- `api-design.md` - REST/GraphQL conventions
+- `authentication.md` - Auth patterns
+- `database.md` - Query patterns, migrations
+- `security.md` - XSS, CSRF prevention
+- `testing.md` - Unit, integration, e2e standards
+
+**APIs/Backend Services:**
+- `api-design.md` - Endpoint conventions, versioning
+- `authentication.md` - JWT, OAuth patterns
+- `database.md` - ORM usage, query optimization
+- `security.md` - Input validation, rate limiting
+- `testing.md` - API testing, mocking
+- `documentation.md` - OpenAPI, README standards
+
+**Data Processing:**
+- `data-pipeline.md` - ETL patterns
+- `database.md` - Schema design, indexing
+- `performance.md` - Efficiency guidelines
+- `testing.md` - Data validation tests
+- `monitoring.md` - Logging, metrics
+
+**Mobile Apps:**
+- `ui-components.md` - Component patterns
+- `state-management.md` - State patterns
+- `navigation.md` - Routing conventions
+- `testing.md` - Unit, integration tests
+- `performance.md` - Bundle size, rendering
+
+**Any Project:**
+- `testing.md` - Testing standards
+- `security.md` - Security guidelines
+- `documentation.md` - Doc standards
+- `git-workflow.md` - Commit, branch conventions
+- `code-style.md` - Language-specific styles
+
+### 4. Path-Scoped Rule Examples
+
+**API Endpoints Only:**
+```yaml
+---
+paths:
+  - "src/api/**/*.ts"
+  - "src/routes/**/*.ts"
+---
+```
+
+**React Components Only:**
+```yaml
+---
+paths:
+  - "src/components/**/*.tsx"
+  - "src/pages/**/*.tsx"
+---
+```
+
+**Test Files Only:**
+```yaml
+---
+paths:
+  - "**/*.test.ts"
+  - "**/*.spec.ts"
+  - "tests/**/*.ts"
+---
+```
+
+**Configuration Files:**
+```yaml
+---
+paths:
+  - "*.config.*"
+  - "config/**"
+---
+```
+
+### 5. Rule Content Guidelines
+
+Each rule should include:
+- **Purpose** - Why this rule exists
+- **Standards** - What must be followed
+- **Examples** - Good and bad examples
+- **Rationale** - Why these standards matter
+
+---
 
 ## Example Rule Types
 
@@ -177,6 +269,8 @@ Standard envelope:
 - 404: Not found
 - 500: Server error
 ```
+
+---
 
 ## How Rules Load
 

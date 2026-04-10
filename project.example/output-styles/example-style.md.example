@@ -46,6 +46,73 @@ description: Minimal, concise responses
 
 Instructions defining the output style. These are added to the system prompt.
 
+---
+
+## HOW TO DECIDE WHICH STYLES TO CREATE
+
+Analyze team preferences and project needs:
+
+### 1. Identify Communication Needs
+
+What response styles would be helpful?
+- **Quick answers** - Terse, to-the-point
+- **Learning** - Explanatory, educational
+- **Professional** - Formal, polished
+- **Technical** - Precise, detailed
+- **Collaborative** - Casual, conversational
+
+### 2. Consider Team Preferences
+
+What does the team prefer?
+- Do they want detailed explanations or quick answers?
+- Is this a professional/client-facing project?
+- Are team members learning or experienced?
+- Do they prefer examples or just facts?
+
+### 3. Style Ideas by Use Case
+
+**For Fast-Paced Development:**
+- `terse.md` - Quick, minimal responses
+- `action.md` - Focus on what to do
+
+**For Learning/Onboarding:**
+- `explanatory.md` - Detailed explanations
+- `tutorial.md` - Teaching style
+
+**For Professional/Client Work:**
+- `formal.md` - Professional tone
+- `polished.md` - Well-structured responses
+
+**For Technical Deep Dives:**
+- `technical.md` - Precise terminology
+- `detailed.md` - Comprehensive coverage
+
+**For Collaboration:**
+- `casual.md` - Conversational
+- `friendly.md` - Approachable tone
+
+### 4. Default vs Optional Styles
+
+**Consider creating by default:**
+- `terse.md` - Always useful for quick answers
+- `explanatory.md` - Good for complex explanations
+
+**Create if team needs:**
+- `formal.md` - Client-facing projects
+- `technical.md` - Deep technical work
+- `step-by-step.md` - Procedure-heavy projects
+
+### 5. Style Content Guidelines
+
+Each style should define:
+- **Length preference** - Short vs long responses
+- **Tone** - Formal vs casual
+- **Formatting** - Bullets vs paragraphs
+- **Examples** - When to include them
+- **Explanations** - How much detail
+
+---
+
 ## Example Styles
 
 ### Terse
@@ -123,6 +190,8 @@ Be explicit about each action. Include expected outcomes.
 Warn about common pitfalls. Verify each step completed successfully.
 ```
 
+---
+
 ## How to Apply Styles
 
 ### Via Settings
@@ -137,6 +206,8 @@ Warn about common pitfalls. Verify each step completed successfully.
 
 Run `/config` and select output style.
 
+---
+
 ## When to Create a Style
 
 Create a style when:
@@ -147,6 +218,8 @@ Create a style when:
 Don't create a style when:
 - You just want a one-off change (ask directly)
 - The default style works fine
+
+---
 
 ## Tips
 

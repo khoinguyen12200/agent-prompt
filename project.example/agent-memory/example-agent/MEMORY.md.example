@@ -41,6 +41,78 @@ The MEMORY.md file acts as an index. It should include:
 4. **Reference Info** - Useful reference material
 5. **File Index** - Links to other memory files
 
+---
+
+## HOW TO DECIDE WHICH AGENTS NEED MEMORY
+
+Analyze which agents would benefit from persistence:
+
+### 1. Identify Learning Agents
+
+Which agents should remember things?
+- **Code Reviewer** - Common issues, team patterns
+- **Security Auditor** - Vulnerabilities found, patterns
+- **Documentation Writer** - Style preferences, templates
+- **Architecture Advisor** - Design decisions, patterns
+
+### 2. Identify Reference Needs
+
+Which agents need reference material?
+- **Complex domains** - Business logic, domain terms
+- **Large codebases** - Architecture overview, key files
+- **Evolving projects** - Recent changes, migrations
+
+### 3. Agent Memory Ideas by Type
+
+**Code Reviewer Agent:**
+- Common mistakes in this codebase
+- Team-specific patterns
+- User preferences for feedback style
+- Reference to style guides
+
+**Security Auditor Agent:**
+- Previously found vulnerabilities
+- Security-sensitive files
+- Compliance requirements
+- Security patterns used
+
+**Documentation Writer Agent:**
+- Documentation templates
+- Style preferences
+- Glossary of terms
+- Common sections needed
+
+**Performance Expert Agent:**
+- Known bottlenecks
+- Performance patterns
+- Benchmark baselines
+- Optimization history
+
+**Architecture Advisor Agent:**
+- Design decisions
+- Architecture patterns
+- Tech stack rationale
+- Migration plans
+
+### 4. When NOT to Create Memory
+
+Don't create memory for:
+- Simple agents that don't need persistence
+- One-time use agents
+- Agents where CLAUDE.md suffices
+- Temporary or experimental agents
+
+### 5. Memory Content Guidelines
+
+Memory should include:
+- **Index** - Overview of what's in memory
+- **Learnings** - Things discovered over time
+- **Preferences** - User preferences
+- **Reference** - Useful links and context
+- **Notes** - Additional detail files
+
+---
+
 ## Example MEMORY.md
 
 ```markdown
@@ -75,18 +147,7 @@ This agent specializes in code review for this codebase.
 - Security checklist: security.md
 ```
 
-## When to Use Agent Memory
-
-Use agent memory when:
-- An agent needs to remember things across sessions
-- You want an agent to learn and improve
-- An agent needs reference material
-- Different agents need different contexts
-
-Don't use agent memory when:
-- Regular CLAUDE.md would suffice
-- The information is temporary
-- All agents should see the information
+---
 
 ## How It Works
 
@@ -95,6 +156,8 @@ Don't use agent memory when:
 3. Claude also loads `.claude/agent-memory/code-reviewer/MEMORY.md`
 4. The memory provides additional context specific to that agent
 5. The agent can write updates to its memory during the session
+
+---
 
 ## Creating Initial Memory
 
@@ -106,6 +169,8 @@ When setting up agent memory:
 4. Add any known patterns or preferences
 5. Leave room for the agent to add learnings
 
+---
+
 ## Maintenance
 
 Agent memory evolves:
@@ -114,6 +179,8 @@ Agent memory evolves:
 - Review periodically for outdated information
 - Keep it organized as it grows
 
+---
+
 ## Tips
 
 - Start with basic structure, let agent fill in details
@@ -121,3 +188,4 @@ Agent memory evolves:
 - Keep it focused on what that specific agent needs
 - Use it to capture institutional knowledge
 - Cross-reference other documentation
+- Only create for agents that truly need persistence

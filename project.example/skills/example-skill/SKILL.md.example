@@ -50,22 +50,12 @@ Use for workflows you want to control manually.
 disable-model-invocation: true
 ```
 
-When true:
-- Only you can invoke it with `/skill-name`
-- Claude won't auto-trigger it
-- Use for: deployments, commits, external notifications
-
 ### user-invocable (optional)
 Set to `false` to hide from `/` menu. Only Claude can invoke it.
 
 ```yaml
 user-invocable: false
 ```
-
-When false:
-- You can't type `/skill-name`
-- Claude loads it automatically when relevant
-- Use for: background knowledge, reference material
 
 ### allowed-tools (optional)
 Pre-approve tools for this skill.
@@ -74,19 +64,12 @@ Pre-approve tools for this skill.
 allowed-tools: Bash(git *) Bash(docker *) Read
 ```
 
-Claude can use these tools without asking permission while the skill is active.
-
 ### context (optional)
 Set to `fork` to run in isolated subagent.
 
 ```yaml
 context: fork
 ```
-
-When forked:
-- Runs in separate context (no conversation history)
-- Skill content becomes the subagent's task
-- Good for: complex analysis, research, exploration
 
 ### agent (optional)
 Specify subagent type when using `context: fork`.
@@ -95,12 +78,6 @@ Specify subagent type when using `context: fork`.
 context: fork
 agent: Explore
 ```
-
-Options:
-- `Explore` - Read-only tools, good for research
-- `Plan` - Planning and architecture
-- `general-purpose` - Default, all tools
-- Custom agents from `.claude/agents/`
 
 ### paths (optional)
 Auto-load when working with matching files.
@@ -123,8 +100,6 @@ Set effort level.
 ```yaml
 effort: high
 ```
-
-Options: low, medium, high
 
 ## Content Section
 
@@ -157,7 +132,92 @@ git log --oneline -3
 ```
 ````
 
-Commands run before Claude sees the content, and output replaces the command.
+---
+
+## HOW TO DECIDE WHICH SKILLS TO CREATE
+
+Analyze the codebase and identify repetitive workflows:
+
+### 1. Identify Repetitive Workflows
+
+Look for tasks that happen repeatedly:
+- **Deployment** - Steps to deploy to staging/production
+- **Code review** - PR review process
+- **Testing** - Running specific test suites
+- **Refactoring** - Common refactoring patterns
+- **Setup** - Onboarding new developers
+- **Release** - Release process steps
+
+### 2. Analyze Project Lifecycle
+
+What workflows exist in different phases?
+- **Development** - Starting new features, debugging
+- **Testing** - Running tests, checking coverage
+- **Review** - PR preparation, code review
+- **Deployment** - Staging deploy, production deploy
+- **Maintenance** - Dependency updates, cleanup
+
+### 3. Skill Ideas by Project Type
+
+**Node.js Projects:**
+- `commit` - Commit with pre-commit checks
+- `deploy` - Deploy to Vercel/Netlify/AWS
+- `release` - Version bump, changelog, tag
+- `pr` - Create PR with template
+- `test-e2e` - Run end-to-end tests
+- `update-deps` - Update dependencies safely
+
+**Python Projects:**
+- `commit` - Commit with linting
+- `deploy` - Deploy to production
+- `migrate` - Database migration workflow
+- `test-coverage` - Run tests with coverage report
+- `release` - Build and publish to PyPI
+- `setup-env` - Setup virtual environment
+
+**Rust Projects:**
+- `commit` - Commit with cargo check
+- `release` - Build release binaries
+- `publish` - Publish to crates.io
+- `bench` - Run benchmarks
+- `audit` - Run security audit
+
+**Mobile Apps:**
+- `build-ios` - Build iOS app
+- `build-android` - Build Android app
+- `deploy-beta` - Deploy to TestFlight/Play Console
+- `screenshots` - Generate app screenshots
+
+**Any Project:**
+- `commit` - Smart commit workflow
+- `pr-review` - Review pull request
+- `fix-issue` - Fix GitHub issue
+- `add-feature` - Add new feature template
+- `refactor` - Refactoring workflow
+
+### 4. Determine Invocation Style
+
+**Manual-only** (disable-model-invocation: true):
+- Deployment
+- Commits
+- Destructive operations
+- External notifications
+
+**Auto-invocation** (default):
+- Code explanation
+- Reference lookups
+- Background assistance
+
+### 5. Skill Content Guidelines
+
+Each skill should have:
+- Clear purpose statement
+- Step-by-step workflow
+- Error handling
+- Expected outcomes
+- Prerequisites (if any)
+
+---
 
 ## Example Skills
 
@@ -232,6 +292,8 @@ Summarize this PR focusing on:
 4. Testing considerations
 ```
 
+---
+
 ## When to Create a Skill
 
 Create a skill when:
@@ -244,6 +306,8 @@ Don't create a skill when:
 - It's a one-time task
 - It's simple enough to type directly
 - It changes frequently
+
+---
 
 ## Tips
 

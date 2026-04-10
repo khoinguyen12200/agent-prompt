@@ -55,25 +55,12 @@ tools:
   - Glob
 ```
 
-Available tools:
-- Read - Read files
-- Edit - Edit files
-- Grep - Search code
-- Glob - Find files
-- Bash - Run commands
-- Agent - Create subagents
-- And more...
-
-Limiting tools focuses the agent on its specialty.
-
 ### effort (optional)
 Effort level for this agent.
 
 ```yaml
 effort: high
 ```
-
-Options: low, medium, high
 
 ## Content Section
 
@@ -83,6 +70,108 @@ The system prompt for the agent. Define:
 - Focus and priorities
 - Output format
 - Working style
+
+---
+
+## HOW TO DECIDE WHICH AGENTS TO CREATE
+
+Analyze the codebase and team needs to identify specialized roles:
+
+### 1. Analyze Project Characteristics
+
+**Code Complexity:**
+- Large codebase → Code Reviewer agent
+- Complex architecture → Architecture Reviewer agent
+- Performance-critical → Performance Expert agent
+
+**Security Requirements:**
+- User-facing app → Security Auditor agent
+- Handles sensitive data → Security Reviewer agent
+- Compliance requirements → Compliance Checker agent
+
+**Documentation Needs:**
+- Public API → API Documentation Writer agent
+- Complex logic → Technical Documentation agent
+- Onboarding docs → Onboarding Guide agent
+
+### 2. Identify Team Pain Points
+
+What specialized reviews would help?
+- Code quality inconsistencies → Code Reviewer
+- Security vulnerabilities → Security Auditor
+- Performance issues → Performance Expert
+- Documentation gaps → Documentation Writer
+- Testing gaps → Test Coverage Reviewer
+
+### 3. Agent Ideas by Project Type
+
+**Web Applications:**
+- `code-reviewer.md` - General code quality
+- `security-auditor.md` - Security review
+- `frontend-expert.md` - UI/UX code review
+- `api-reviewer.md` - API endpoint review
+
+**APIs/Backend Services:**
+- `api-reviewer.md` - API design and implementation
+- `security-auditor.md` - Input validation, auth
+- `performance-expert.md` - Query optimization, caching
+- `test-reviewer.md` - Test quality and coverage
+
+**Data Processing:**
+- `data-reviewer.md` - Data pipeline review
+- `performance-expert.md` - Efficiency optimization
+- `schema-reviewer.md` - Database schema review
+
+**Mobile Apps:**
+- `mobile-reviewer.md` - Mobile-specific patterns
+- `security-auditor.md` - Mobile security
+- `ux-reviewer.md` - User experience
+
+**Any Project:**
+- `code-reviewer.md` - Standard code review
+- `security-auditor.md` - Security focus
+- `documentation-writer.md` - Doc generation
+- `refactoring-expert.md` - Refactoring help
+
+### 4. Tool Selection by Agent Purpose
+
+**Code Reviewer:**
+```yaml
+tools:
+  - Read
+  - Grep
+  - Glob
+  # No Edit - reviewer shouldn't modify
+```
+
+**Documentation Writer:**
+```yaml
+tools:
+  - Read
+  - Glob
+  - Edit
+  # Can write docs
+```
+
+**Security Auditor:**
+```yaml
+tools:
+  - Read
+  - Grep
+  - Bash(grep *)  # For searching patterns
+  # Read-only security analysis
+```
+
+### 5. Agent Persona Guidelines
+
+Define the agent's:
+- **Role** - What specialist are they?
+- **Expertise** - What do they know deeply?
+- **Focus** - What do they prioritize?
+- **Tone** - How do they communicate?
+- **Output** - What format do they use?
+
+---
 
 ## Example Agents
 
@@ -230,6 +319,8 @@ Create documentation that is:
 - Use formatting for readability
 ```
 
+---
+
 ## How to Use Agents
 
 ### Direct Invocation
@@ -251,18 +342,7 @@ agent: code-reviewer
 
 Commands don't directly use agents, but can suggest using them.
 
-## When to Create an Agent
-
-Create an agent when:
-- You need specialized expertise
-- You want to limit tool access
-- You want different behavior than default Claude
-- You have recurring specialized tasks
-
-Don't create an agent when:
-- A skill would suffice
-- The task is simple
-- You don't need tool restrictions
+---
 
 ## Tips
 
