@@ -26,9 +26,9 @@ All templates are in `project.example/`:
 project.example/
 ├── CLAUDE.example.md                    # Main project instructions
 ├── CLAUDE.local.example.md              # Private preferences template
-├── settings.json.example                # Team-shared configuration
-├── settings.local.json.example          # Personal overrides
-├── dot.mcp.json.example                 # MCP server configurations
+├── settings.example.json                # Team-shared configuration
+├── settings.local.example.json          # Personal overrides
+├── dot.mcp.example.json                 # MCP server configurations
 ├── dot.worktreeinclude.example          # Worktree inclusions
 ├── rules/
 │   └── example-rule.example.md          # Topic-scoped rules
@@ -157,7 +157,7 @@ CLAUDE.local.md                # Private preferences (add to .gitignore!)
 
 - **env**: Project environment variables
 
-**Read template**: `project.example/settings.json.example`
+**Read template**: `project.example/settings.example.json`
 
 **Security**: Be conservative. Start restrictive.
 
@@ -170,7 +170,7 @@ CLAUDE.local.md                # Private preferences (add to .gitignore!)
 
 **What to include**: Empty template for personal overrides
 
-**Read template**: `project.example/settings.local.json.example`
+**Read template**: `project.example/settings.local.example.json`
 
 ---
 
@@ -314,7 +314,7 @@ of available MCP integrations and can be populated as needed.
 **If no MCP servers needed yet**: Create with empty `mcpServers` object
 and comments explaining what can be added.
 
-**Read template**: `project.example/dot.mcp.json.example`
+**Read template**: `project.example/dot.mcp.example.json`
 
 ---
 

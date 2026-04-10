@@ -37,10 +37,10 @@ All templates are in `project.example/`:
 | Template | Creates | Purpose |
 |----------|---------|---------|
 | `CLAUDE.example.md` | `CLAUDE.md` | Main project instructions |
-| `settings.json.example` | `.claude/settings.json` | Team-shared configuration |
-| `settings.local.json.example` | `.claude/settings.local.json` | Personal overrides |
+| `settings.example.json` | `.claude/settings.json` | Team-shared configuration |
+| `settings.local.example.json` | `.claude/settings.local.json` | Personal overrides |
 | `CLAUDE.local.example.md` | `CLAUDE.local.md` | Private preferences |
-| `dot.mcp.json.example` | `.mcp.json` | MCP server configurations (always create) |
+| `dot.mcp.example.json` | `.mcp.json` | MCP server configurations (always create) |
 | `dot.worktreeinclude.example` | `.worktreeinclude` | Worktree inclusions (always create) |
 | `rules/example-rule.example.md` | `.claude/rules/*.md` | Topic/path-scoped rules |
 | `skills/example-skill/SKILL.example.md` | `.claude/skills/<name>/SKILL.md` | Reusable workflows |
